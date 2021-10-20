@@ -1,10 +1,12 @@
+
 <nav class="navUser navUser--storeInfo">
     <ul class="navUser-section">
         {{#if theme_settings.show_welcome_text}}
         <li class="navUser-item">
-            <span class="navUser-welcome">{{{lang 'emthemesmodez.top_nav.welcome_text' store_name=settings.store_name}}}</span>
+            <span class="font-bold"><i class="fas fa-shield-alt"></i> {{{lang 'emthemesmodez.top_nav.welcome_text' store_name=settings.store_name}}}</span>
         </li>
         {{/if}}
+
         {{#if theme_settings.topHeader_banner1}}
         <li class="navUser-item">
             <div data-emthemesmodez-remote-banner="emthemesModezBannersBlockTopHeaderBanner01"></div>
@@ -12,7 +14,24 @@
         {{/if}}
     </ul>
 </nav>
+<nav class="navUser">
+    <li class="navUser-item font-bold">
+        <i class="fas fa-shipping-fast"></i> Free Shipping on all orders over $40
+    </li>
+</nav>
+<nav class="navUser">
+    <li class="navUser-item">
+        <a href="#" class="navUser-action">About Us</a>
+    </li>
+    <li class="navUser-item">
+        <a href="#" class="navUser-action">Gift Certificates</a>
+    </li>
+    <li class="navUser-item">
+        <a href="#" class="navUser-action">Wishlist</a>
+    </li>
+</nav>
 
+<!--
 <nav class="navUser">
 
     {{#if theme_settings.topHeader_banner2}}
@@ -68,3 +87,4 @@
     </ul>
     {{/or}}
 </nav>
+-->

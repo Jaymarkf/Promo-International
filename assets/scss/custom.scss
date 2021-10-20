@@ -1,0 +1,128 @@
+:root{
+         --bg-zblock:#da0731;
+         --bg-header:#ff1744;
+}
+/*font global styles*/
+.font-bold{
+         font-weight: bold;
+}
+.font-bolder{
+         font-weight:bolder;
+}
+/*font-sizes class from tailwindcss*/
+.text-xs	{
+         font-size: 0.75rem;
+         line-height: 1rem;
+}
+.text-sm	{
+         font-size: 0.875rem;
+         line-height: 1.25rem;
+}
+.text-base{
+         font-size: 1rem;
+         line-height: 1.5rem;
+}
+.text-lg{
+         font-size: 1.125rem;
+         line-height: 1.75rem;
+}
+.text-xl{
+         font-size: 1.25rem;
+         line-height: 1.75rem;
+}
+.text-2xl{
+         font-size: 1.5rem;
+         line-height: 2rem;
+}
+.text-3xl{
+         font-size: 1.875rem;
+         line-height: 2.25rem;
+}
+.text-4xl{
+         font-size: 2.25rem;
+         line-height: 2.5rem;
+}
+.text-5xl{
+         font-size: 3rem;
+         line-height: 1;
+}
+.text-6xl{
+         font-size: 3.75rem;
+         line-height: 1;
+}
+.text-7xl{
+         font-size: 4.5rem;
+         line-height: 1;
+}
+.text-8xl{	
+         font-size: 6rem;
+         line-height: 1;
+}
+.text-9xl{
+         font-size: 8rem;
+         line-height: 1;
+}
+.text-center{
+         text-align:center;
+}
+.text-white{
+         color:#ffffff;
+}
+
+
+/*carousel in home page*/
+.heroCarousel-content{
+         text-align:left;
+         margin:0 7%;
+         .heroCarousel-title{
+                  font-size:28px;
+                  color:white;
+                  font-weight:500;
+         }
+         .heroCarousel-description{
+                  color:white;
+                  font-size:24px;
+         }
+         .heroCarousel-action{
+                  border-radius:5px;
+         }
+}
+/*global header */
+header.header{
+         background-color:var(--bg-header);
+         .navUser-item{
+                  .navUser-action{
+                           margin-top:0;
+                           padding:5px;
+                  }
+         }
+         
+         .emthemesModez-header-topSection{
+                  background-color:var(--bg-zblock);
+         }
+         .emthemesModez-header-userSection{
+                  padding-top:0.75rem;
+         }
+         .navPages-container{
+                 .container{
+                          .navPages{
+                                   background-color:var(--bg-header);
+                          }
+                 }
+         }
+         .phone-call-us{
+                  border:1px solid white;
+                  border-radius:5px;
+                  padding:4px 8px;
+                  margin-right:30px;
+
+         }
+         /*over ride search icon */
+         .emthemesModez-quickSearch .form-field:before{
+                  height:100%;
+                  line-height:4rem;
+         }
+         .emthemesModez-quickSearch .form-input{
+                  padding:2rem 2rem;
+         }
+}
