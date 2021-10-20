@@ -47,11 +47,20 @@
     
     {{#unless theme_settings.hide_content_navigation}}
         {{#unless theme_settings.manual_content_nav}}
-        <ul class="navPages-list">
-            {{#each pages}}
+        <ul class="navPages-list header-nav">
+            {{#each categories}}
+                {{#any (if name '===' 'BRANDS & PRODUCTS') (if name '===' 'SHOP BY CATEGORY') (if name '===' 'ON SALE') (if name '===' 'NEW ARRIVALS') (if name '===' 'BEST SELLERS') (if name '===' 'BRAND INFORMATION')}}
                 <li class="navPages-item">
                     {{> components/common/navigation-page-list index=@index}}
                 </li>
+                {{/any}}
+            {{/each}}
+            {{#each pages}}
+               {{#if name '===' 'Contact Us'}}
+                <li class="navPages-item">
+                    {{> components/common/navigation-page-list index=@index}}
+                </li>
+               {{/if}}
             {{/each}}
         </ul>
         {{else}}

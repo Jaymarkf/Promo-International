@@ -283,17 +283,26 @@
 }
 
 .emthemesModez-header-userSection--logo-left > .container {
+  .account-container{
+    @media(max-width:800px){
+        display:none;
+    }
+  }
     @include breakpoint("medium") {
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         .navUser {
-            order: 4;
+            order: 5;
             padding-right: 0;
         }
         .phone-call-us{
-            order:2
+            order:2;
+        }
+        .account-container{
+            order:4;
+           
         }
 
         .header-logo {
