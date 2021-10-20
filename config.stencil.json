@@ -6,6 +6,6 @@
     "product": {}
   },
   "apiHost": "https://api.bigcommerce.com",
-  "normalStoreUrl": "https://promo-international-b2b.mybigcommerce.com",
+  "normalStoreUrl": "https://promo-international-b2b.mybigcommerce.com/",
   "port": 3000
 }
