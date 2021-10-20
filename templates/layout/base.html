@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        <script>window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+        
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+
+        {{#if theme_settings.csspreload '===' 'performance'}}
+            <script>document.write('{{{ getFontsCollection }}}'.replace('rel="stylesheet"', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"'));</script>
+            <noscript>{{ getFontsCollection }}</noscript>
+
+            {{{stylesheet '/assets/css/theme.css'}}}
+
+            <script>
+                window.lazySizesConfig.loadHidden = false;
+                window.lazySizesConfig.expand = 0;
+            </script>
+            {{> components/papa-supermarket/common/cssrelpreload}}
+
+        {{else if theme_settings.csspreload '===' 'speedtest'}}
+            <meta class="foundation-data-attribute-namespace">
+            <style id="themeCSSPreload">
+                meta.foundation-data-attribute-namespace { font-family: false }
+                body { visibility: hidden !important }
+                .emthemesModez-header-userSection > .container { transition: none !important }
+            </style>
+
+            {{! stylesheet '/assets/css/theme.css' rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';setTimeout(function() {var el = document.getElementById('themeCSSPreload');el.parentNode.removeChild(el); }, 10);" }}
+            {{{stylesheet '/assets/css/theme.css' rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';var el = document.getElementById('themeCSSPreload');el.parentNode.removeChild(el);window.themeCSSLoaded"}}}
+            <noscript>{{{stylesheet '/assets/css/theme.css'}}}</noscript>
+
+            <script>document.write('{{{ getFontsCollection }}}'.replace('rel="stylesheet"', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"'));</script>
+            <noscript>{{ getFontsCollection }}</noscript>
+            
+            <script>
+                window.lazySizesConfig.loadHidden = false;
+                window.lazySizesConfig.expand = 0;
+            </script>
+            {{> components/papa-supermarket/common/cssrelpreload}}
+
+        {{else}}
+            <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+            <script>
+                WebFont.load({
+                    custom: {
+                        families: ['Karla', 'Roboto', 'Source Sans Pro', 'Poppins', 'Barlow', 'Rubik', 'Libre Baskerville', 'Quicksand', 'Montserrat', 'Open Sans', 'Volkhov', 'Caveat']
+                    },
+                    classes: false
+                });
+            </script>
+            
+            {{ getFontsCollection }}
+            {{{stylesheet '/assets/css/theme.css'}}}
+        {{/if}}
+        
+        {{{head.scripts}}}
+
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}" as="script">
+
+        {{~inject 'themeSettings' theme_settings}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'maintenanceMode' settings.maintenance}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'template' template}}
+        {{~inject 'pageType' page_type}}
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+        {{~inject 'ajaxAddToCartEnterQty' (lang 'bulk_order.validate.enter_qty')}}
+        {{~inject 'bulkOrderEnterQty' (lang 'bulk_order.validate.enter_qty')}}
+        {{~inject 'compareAddonLang_compare' (lang 'common.compare')}}
+        {{~inject 'compareAddonLang_quick_view' (lang 'products.quick_view')}}
+        {{~inject 'compareAddonLang_remove' (lang 'compare.remove')}}
+        {{~inject 'compareAddonLang_clear_all' (lang 'compare.clear_all')}}
+        {{~inject 'categoryId' category.id}}
+        {{#if theme_settings.navPages_autoFit}}
+            {{~inject 'txtNavMore' (lang 'common.nav_more')}}
+        {{/if}}
+        {{{snippet 'htmlhead'}}}
+    </head>
+    <body class="csscolumns papaSupermarket-layout--{{theme_settings.layout}} 
+        papaSupermarket-style--{{theme_settings.style}}
+        papaSupermarket-pageType--{{dashcase page_type}} 
+        papaSupermarket-page--{{dashcase template}} 
+        {{#if theme_settings.product_uniform}}emthemesModez-productUniform{{/if}}
+        {{#if theme_settings.hide_loading_bar}}papaSupermarket--hideLoadingBar{{/if}}
+        {{#if theme_settings.hide_content_navigation}}papaSupermarket--hideContentNav{{/if}}
+        {{#if theme_settings.show_allcategories_menu}}papaSupermarket--showAllCategoriesMenu{{/if}}
+        {{#if theme_settings.show_subcategories_menu}}papaSupermarket--showSubcategoriesMenu{{/if}}
+        {{#if product_results.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if category.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if brands.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if brand.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if result_count '>' 0}}has-result{{/if}}
+        " id="topOfPage">
+
+        {{#if theme_settings.fb_page '!==' ''}}
+        <!-- Facebook SDK -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=378187145615477&autoLogAppEvents=1" nonce="VinhY3Lb"></script>
+        {{/if}}
+
+        {{{snippet 'header'}}}
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+        <script src="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}"></script>
+        <script>
+            {{!-- Exported in app.js --}}
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+        </script>
+
+        {{{footer.scripts}}}
+        {{{snippet 'footer'}}}
+    </body>
+</html>
