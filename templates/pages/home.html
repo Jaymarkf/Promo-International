@@ -52,5 +52,8 @@ shop_by_brand:
 <script>
 
     AOS.init();
-
+    $(document).ready(function(){
+        var featured = $('a[href="#tab-featured-products"]');
+        featured.text("FEATURED PRODUCTS");
+    });
 </script>

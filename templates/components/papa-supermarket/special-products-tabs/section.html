@@ -1,5 +1,5 @@
 {{inject 'hasSpecialProductsTabs' true}}
-<div class="emthemesModez-specialProductsTabs emthemesModez-specialProductsTabs--supermarket1" data-special-products-tabs>
+<div class="emthemesModez-specialProductsTabs emthemesModez-specialProductsTabs--supermarket1 featured-prod" data-special-products-tabs>
     <ul class="tabs" id="emthemesModez-specialProductsTabs-tabs" data-tab role="tablist">
         {{#if theme_settings.specialProductsTab_show_featured}}
             {{#or (unless theme_settings.specialProductsTab_init_count) products.featured}}
@@ -28,7 +28,7 @@
                 <div class="emthemesModez-specialProductsTabs-viewportCheck" data-viewport-check="featured"></div>
             {{/if}}
         </section>
-        <section role="tabpanel" aria-hidden="{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}}false{{else}}true{{/if}}" class="tab-content{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}} is-active{{/if}}" id="tab-bestselling-products" data-product-type="top">
+      <section role="tabpanel" aria-hidden="{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}}false{{else}}true{{/if}}" class="tab-content{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}} is-active{{/if}}" id="tab-bestselling-products" data-product-type="top">
             {{> components/products/top 
                 products=products.top_sellers
                 columns=4 

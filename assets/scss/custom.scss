@@ -3,6 +3,9 @@
          --bg-header:#ff1744;
 }
 /*font global styles*/
+body{
+        background-color:#f1f1f2;
+}
 .font-bold{
          font-weight: bold;
 }
@@ -126,5 +129,32 @@ header.header{
                 .card-text--brand,.card-text--price,.card-title{
                         text-align:center;
                 }
+                .card-title a{
+                        text-decoration: none !important;
+                        /* font-size: 15px; */
+                        text-transform: uppercase !important;
+                        color: #5e5e5e !important;
+                
+                }
+                
+
         }
+    
+   
 }
+/*tabs*/
+
+        .emthemesModez-specialProductsTabs ul li.tab.is-active{
+                width:100% !important;
+                border-bottom:0;
+            
+                a{
+                        border-bottom:unset;
+                        background-color:var(--bg-header) !important;
+                        text-align:center;
+                        color:white !important;
+                        border-radius:8px !important;
+                }
+         }
+
+
