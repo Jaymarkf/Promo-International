@@ -16,6 +16,7 @@ customer:
 shop_by_brand:
     limit: {{theme_settings.max_shop_by_brand}}
 ---
+
 {{#if theme_settings.layout '===' 'left-sidebar'}}
     {{#partial "page"}}
         <div class="page">
@@ -25,7 +26,7 @@ shop_by_brand:
             <main class="page-content">
                 {{{region name="home_below_menu"}}}
                 {{> components/papa-supermarket/home/hero}}
-            
+                {{{region name="home_below_carousel"}}}
                 {{> components/papa-supermarket/home/content}}
             </main>
         </div>
@@ -46,3 +47,10 @@ shop_by_brand:
 {{else}}
     {{> layout/base}}
 {{/and}}
+
+
+<script>
+
+    AOS.init();
+
+</script>
