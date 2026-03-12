@@ -1,0 +1,137 @@
+---
+products:
+    new:
+        limit: {{theme_settings.specialProductsTab_init_count}}
+    featured:
+        limit: {{theme_settings.specialProductsTab_init_count}}
+    top_sellers:
+        limit: {{theme_settings.specialProductsTab_init_count}}
+carousel: {{theme_settings.homepage_show_carousel}}
+blog:
+    recent_posts:
+        limit: {{theme_settings.homepage_blog_posts_count}}
+customer:
+    recently_viewed_products:
+        limit: {{theme_settings.product_recently_viewed}}
+shop_by_brand:
+    limit: {{theme_settings.max_shop_by_brand}}
+
+
+---
+
+{{#if theme_settings.layout '===' 'left-sidebar'}}
+    {{#partial "page"}}
+        <div class="page">
+            <div class="homepage--categories-section">
+                <div class="categories--container">
+                    <div class="categ-column">
+                        <a href="/groceries/" target="_blank"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-groceries.png" alt="groceries"></a>
+                        <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
+                            <h2><a href="/groceries/" target="_blank">Groceries</a></h2>
+                        </div>
+
+                        <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
+                            <a href="/groceries/" target="_blank">Shop Now</a>
+                        </div>
+
+                    </div>
+                    <div class="categ-column">
+                       <a href="/health-beauty/" target="_blank"> <img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-health-beauty.png" alt="health-beauty"> </a>
+                        <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
+                            <h2><a href="/health-beauty/" target="_blank">Health and Beauty</a></h2>
+                        </div>
+
+                        <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
+                            <a href="/health-beauty/" target="_blank">Shop Now</a>
+                        </div>
+                    </div>
+                    <div class="categ-column">
+                        <a href="/wines-spirits-beer/" target="_blank"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-wines-spirit-beer.png" alt="wines-spirits-beer"></a>
+                        <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
+                            <h2><a href="/wines-spirits-beer/" target="_blank">Wines, Spirits, & Beer</a></h2>
+                        </div>
+
+                        <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
+                            <a href="/wines-spirits-beer/" target="_blank">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {{> components/papa-supermarket/home/hero}}
+            
+        
+            
+            <div class="homepage-about-promointernational mt-12">
+                <div class="homepage-about-container pb-12">
+                    <div class="about-title">
+                        <div class="line"></div>
+                        <h2>About Promo International, Inc.</h2>
+                        <div class="line"></div>
+                     </div>
+
+                     <div class="text-section">
+                        <p class="about-p">With experience at all levels of distribution and management of supermarket products, our aim to provide quality products and support to our customers worldwide through exceptional customer service. Offering also a complete line of grocery items under the brand PROMOS, which consists of over 200 different items which cover just about every isle of a supermarket in its respective category while giving the customer a competitive advantage with newly designed packaging that draws consumers to the shelf with its bright modern colors and appetizing products photos.</p>
+                        <p class="about-p2">Our vision is to develop a brand with long term equity that creates partnerships while being recognized as consistent to its national brand peers in quality and presentation.</p>
+                     </div>
+
+                     <div class="video-section">
+                        <video width="320" height="240" style="width:100%" controls="controls" autoplay="autoplay" muted="" loop="loop">
+                            <source src="https://store-defdxib8co.mybigcommerce.com/content/about-us-video/video-corporate-promo.mp4" type="video/mp4"><object width="320" height="240" data="https://store-defdxib8co.mybigcommerce.com/javascript/tinymce/plugins/media/moxieplayer.swf" type="application/x-shockwave-flash"><param name="src" value="https://store-defdxib8co.mybigcommerce.com/javascript/tinymce/plugins/media/moxieplayer.swf"><param name="flashvars" value="url=https://store-defdxib8co.mybigcommerce.com/content/about-us-video/video-corporate-promo.mp4&amp;poster=/"><param name="allowfullscreen" value="true"><param name="allowscriptaccess" value="true"></object>
+                         </video>
+                     </div>
+
+                </div>
+
+            </div>
+
+            <div style="display:none;">
+                <div class="page-sidebar">
+                    {{> components/papa-supermarket/home/sidebar}}
+                </div>
+                <main class="page-content">
+                    {{{region name="home_below_menu"}}}
+                    {{> components/papa-supermarket/home/hero}}
+                    {{{region name="home_below_carousel"}}}
+                    {{> components/papa-supermarket/home/content}}
+                </main>           
+            </div>
+
+        </div>
+    {{/partial}}
+{{else}}
+    {{#partial "hero"}}
+        {{{region name="home_below_menu"}}}
+        {{> components/papa-supermarket/home/hero}}
+        {{{region name="home_below_carousel"}}}
+    {{/partial}}
+
+    {{#partial "page"}}
+        {{> components/papa-supermarket/home/content}}
+
+    {{/partial}}
+{{/if}}
+{{#and theme_settings.instantload is_ajax}}
+    {{> layout/instantload-base}}
+{{else}}
+    {{> layout/base}}
+{{/and}}
+
+<script>
+    AOS.init();
+    $(document).ready(function(){
+        var featured = $('a[href="#tab-featured-products"]');
+        featured.text("FEATURED PRODUCTS");
+       $('emthemesModez-productsByCategoryTabs').find('ul.tabs').remove();
+       //remove tabs
+       $('.css-10z1g2q').remove();
+       $('.copy-right').css("margin",'0px !important');
+    });
+    
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('.heroCarousel').attr('data-slick','{"autoplay":true, "autoplaySpeed": 5000}');
+    });
+</script>

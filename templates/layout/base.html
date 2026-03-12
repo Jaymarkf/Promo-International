@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+
+        {{#if theme_settings.csspreload '===' 'performance'}}
+            <script>document.write('{{{ getFontsCollection }}}'.replace('rel="stylesheet"', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"'));</script>
+            <noscript>{{ getFontsCollection }}</noscript>
+
+            {{{stylesheet '/assets/css/theme.css'}}}
+
+            <script>
+                window.lazySizesConfig.loadHidden = false;
+                window.lazySizesConfig.expand = 0;
+            </script>
+            <script src="{{cdn 'assets/vendor/loadcss/cssrelpreload.min.js'}}" async></script>
+
+        {{else if theme_settings.csspreload '===' 'speedtest'}}
+            <meta class="foundation-data-attribute-namespace">
+            <style id="themeCSSPreload">
+                meta.foundation-data-attribute-namespace { font-family: false }
+                body { visibility: hidden !important }
+                .emthemesModez-header-userSection > .container { transition: none !important }
+            </style>
+
+            {{! stylesheet '/assets/css/theme.css' rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';setTimeout(function() {var el = document.getElementById('themeCSSPreload');el.parentNode.removeChild(el); }, 10);" }}
+            {{{stylesheet '/assets/css/theme.css' rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet';var el = document.getElementById('themeCSSPreload');el.parentNode.removeChild(el);window.themeCSSLoaded"}}}
+            <noscript>{{{stylesheet '/assets/css/theme.css'}}}</noscript>
+
+            <script>document.write('{{{ getFontsCollection }}}'.replace('rel="stylesheet"', 'rel="preload" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"'));</script>
+            <noscript>{{ getFontsCollection }}</noscript>
+            
+            <script>
+                window.lazySizesConfig.loadHidden = false;
+                window.lazySizesConfig.expand = 0;
+            </script>
+            <script src="{{cdn 'assets/vendor/loadcss/cssrelpreload.min.js'}}" async></script>
+
+        {{else}}
+            <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+            <script>
+                WebFont.load({
+                    custom: {
+                        families: ['Karla', 'Roboto', 'Source Sans Pro', 'Poppins', 'Barlow', 'Rubik', 'Libre Baskerville', 'Quicksand', 'Montserrat', 'Open Sans', 'Volkhov', 'Caveat']
+                    },
+                    classes: false
+                });
+            </script>
+            
+            {{ getFontsCollection }}
+            {{{stylesheet '/assets/css/theme.css'}}}
+        {{/if}}
+        
+        {{{head.scripts}}}
+
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
+        <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}" as="script">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-10/css/all.css" integrity="sha512-Dj9pt3sZROOuTTs9S89ykGZeu1XQgWKg3DVpu5tZALApsrWdd3tnVjTclUuVONaHM4O8GgCnjSbHlTKXrd2OWg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>   
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
+
+        {{~inject 'themeSettings' theme_settings}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'maintenanceMode' settings.maintenance}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'template' template}}
+        {{~inject 'pageType' page_type}}
+        {{~inject 'ajaxAddToCartEnterQty' (lang 'bulk_order.validate.enter_qty')}}
+        {{~inject 'bulkOrderEnterQty' (lang 'bulk_order.validate.enter_qty')}}
+        {{~inject 'compareAddonLang_compare' (lang 'common.compare')}}
+        {{~inject 'compareAddonLang_quick_view' (lang 'products.quick_view')}}
+        {{~inject 'compareAddonLang_remove' (lang 'compare.remove')}}
+        {{~inject 'compareAddonLang_clear_all' (lang 'compare.clear_all')}}
+        {{~inject 'categoryId' category.id}}
+        {{#if theme_settings.navPages_autoFit}}
+            {{~inject 'txtNavMore' (lang 'common.nav_more')}}
+        {{/if}}
+        {{{snippet 'htmlhead'}}}
+
+        {{!-- BundleB2B --}}
+        {{~inject "customer" customer}}
+        {{~inject 'store_hash' settings.store_hash}}
+        {{~inject "settings" settings}}
+        {{~inject "page_type" page_type}}
+        {{~inject "currency_selector" currency_selector}}
+        {{!-- BundleB2B --}}
+    </head>
+    <body class="csscolumns papaSupermarket-layout--{{theme_settings.layout}} 
+        url-key_{{dashcase settings.request.absolute_path}}
+        papaSupermarket-style--{{theme_settings.style}}
+        papaSupermarket-pageType--{{dashcase page_type}} 
+        papaSupermarket-page--{{dashcase template}} 
+        {{#if theme_settings.product_uniform}}emthemesModez-productUniform{{/if}}
+        {{#if theme_settings.hide_loading_bar}}papaSupermarket--hideLoadingBar{{/if}}
+        {{#if theme_settings.hide_content_navigation}}papaSupermarket--hideContentNav{{/if}}
+        {{#if theme_settings.show_subcategories_menu}}papaSupermarket--showSubcategoriesMenu{{/if}}
+        {{#if product_results.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if category.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if brands.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if brand.faceted_search_enabled}}has-faceted{{/if}}
+        {{#if result_count '>' 0}}has-result{{/if}}
+        " id="topOfPage">
+
+        {{#if theme_settings.fb_page '!==' ''}}
+        <!-- Facebook SDK -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=378187145615477&autoLogAppEvents=1" nonce="VinhY3Lb"></script>
+        {{/if}}
+
+        {{{snippet 'header'}}}
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+        <script src="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}"></script>
+        <script>
+            {{!-- Exported in app.js --}}
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+
+            {{!-- BundleB2B --}}
+            window.jsContext = JSON.parse({{jsContext}})
+            {{!-- BundleB2B --}}
+        </script>
+
+        {{{footer.scripts}}}
+        {{{snippet 'footer'}}}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            {{#if template_file '==' 'pages/category' }}
+            <script>
+                $(document).ready(function(){
+                    //Featured Products 
+                    $('#categ-top-feature .productGrid>.product.group:nth-child(n+9)').hide();
+                    $('#showLess').hide();
+
+                    $('#loadMore').click(function () {
+                        $('#categ-top-feature .productGrid>.product.group:nth-child(n+9)').show();
+                        $('#showLess').show();
+                        $('#loadMore').hide();
+
+                    });
+                    $('#showLess').click(function () {
+                        $('#categ-top-feature .productGrid>.product.group:nth-child(n+9)').hide();
+                        $('#loadMore').show();
+                        $('#showLess').hide();
+                    });
+                    // End of Script 
+                    // Script for Best Selling
+                    $('#categ-top-feature .productGrid>.product.group2:nth-child(n+9)').hide();
+                    $('#showLess2').hide();
+
+                    $('#loadMore2').click(function () {
+                        $('#categ-top-feature .productGrid>.product.group2:nth-child(n+9)').show();
+                        $('#showLess2').show();
+                        $('#loadMore2').hide();
+
+                    });
+                    $('#showLess2').click(function () {
+                        $('#categ-top-feature .productGrid>.product.group2:nth-child(n+9)').hide();
+                        $('#loadMore2').show();
+                        $('#showLess2').hide();
+                    });
+                    // End of Script
+
+                    featured_size_li = $("#categ-top-feature .productGrid>.product.group").length;
+                    top_size_li = $("#categ-top-feature .productGrid>.product.group2").length;
+                    if(featured_size_li <= 8){
+                        $('#loadMore').hide();
+                    }else{}
+
+                    if(top_size_li <= 8){
+                            $('#loadMore2').hide()
+                    }else{}
+   
+                })
+            </script>
+
+            <script>
+                var inner = [];
+                $('#brandName li').each( function(index, Element){
+                    if (jQuery.inArray(this.innerHTML, inner) == -1){
+                        inner.push(this.innerHTML);
+                    }
+                    else {
+                        $(this).remove();
+                    }
+                });
+                $('.sidebarBlock ul.navList li.navList-item .navList-action[href="//"]').parent().remove();    
+                
+                if($(".best-selling-con .productGrid li" ).length > 0 && $("#categ-top-feature .productGrid li" ).length > 0){
+                    
+                }else{ 
+                    // $(".best-selling-con").remove();  
+                     $(".best-selling-con").append("<p id='none'></p>");
+                }
+                
+            </script>
+            
+            <style>
+                #none{ margin: 1rem 0;text-align: center; padding: 1rem; }
+            </style>
+        {{/if}}
+
+        <script>
+            $(document).ready(function(){
+                setTimeout(function() {
+                    $("#my-quote-entry").insertAfter($("nav.navUser .navUser-item.quote-add"));
+                }, 3000)
+            })
+        </script>
+    </body>
+</html>
+
+
+
+{{!-- BundleB2B --}}
+<script>
+    const inPages = () => {
+        const urlArray = [          
+            '/buy-again/',
+            '/address-book/',
+            '/create-quote/',
+            '/quote-detail/',
+            '/quote/',
+            '/quote-edit/',
+            '/quote-list/',
+            '/quotes-list/',
+            '/dashboard/',
+            '/order-detail/',
+            '/quick-order-pad/',
+            '/shopping-list/',
+            '/shopping-lists/',
+            '/user-management/',
+            '/invoices/',
+            '/invoice-payment/',
+            '/invoice-details/',
+            '/invoice-payment-receipt/',
+            '/account.php',
+        ];
+        const current = window.location.pathname;
+        return urlArray.includes(current);
+    };
+    if(!inPages()) {
+        document.querySelector('.body').style.display = "block";
+    }
+    if (inPages()) {
+        const style = document.createElement('style');
+        style.innerHTML = '.page-sidebar{display:none;} .page .page-content {width: 100% !important;}';
+        document.querySelector('head').append(style);
+    }
+</script>
+{{!-- BundleB2B --}}

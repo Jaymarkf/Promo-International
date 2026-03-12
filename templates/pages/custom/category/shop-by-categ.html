@@ -1,0 +1,256 @@
+---
+products:
+    new:
+        limit: {{theme_settings.specialProductsTab_init_count}}
+    featured:
+        limit: 24
+    top_sellers:
+        limit: 24
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{pagination.category.previous}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{pagination.category.next}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<main class="page">
+
+    {{#if theme_settings.layout '===' 'left-sidebar'}}
+    <div class="page-sidebar">
+        {{> components/papa-supermarket/home/sidebar}}
+    </div>
+    {{/if}}
+
+    <div class="page-content">
+        <div class="categ-breadcrumbs" style="display: none;">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        </div>
+
+        <!-- <div class="banner-feature mb-0 py-4"><h2>Shop By Category</h2></div> -->
+
+        <div class="fullWidth">
+            <img src="{{cdn (concat 'https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/' (concat  (lowercase (dashcase category.name)) '.png'))}}" alt='{{category.name}}'>
+        </div>
+        
+        {{{region name="brands_below_header--global"}}}
+        {{{region name="brands_below_header"}}}
+
+        {{#if theme_settings.brandspage_layout '===' 'aztable'}}
+            <ul id="azBrandsTable" class="azBrands-table"></ul>
+            <div id="azBrands" class="azBrands"></div>
+        {{/if}}
+        <ul class="brandGrid{{#if theme_settings.brandspage_layout '===' 'newest'}} brandGrid--newest{{/if}} productGrid" data-brands-list data-brands-list-next="{{pagination.brands.next}}" data-azbrands="azBrands">
+            {{#if category.subcategories}}
+                {{#each category.subcategories}}
+                <li class="product" data-brand-code="{{dashcase name}}"{{#if ../theme_settings.brandspage_layout '===' 'newest'}} style="order: -{{id}};"{{/if}}>
+                    <article class="card {{#if alternate}}card--alternate{{/if}}">
+                        {{#unless ../theme_settings.brandspage_layout '===' 'aztable'}}
+                        <figure class="card-figure">
+                            <a href="{{url}}" data-instantload>
+                                <div class="card-img-container">
+                                    {{> components/common/responsive-img
+                                        image=image
+                                        class="card-image"
+                                        fallback_size=../../theme_settings.brand_size
+                                        lazyload=../../theme_settings.lazyload_mode
+                                        default_image=../../theme_settings.default_image_brand
+                                    }}
+                                </div>
+                            </a>
+                        </figure>
+                        {{/unless}}
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                <a href="{{url}}" data-instantload>{{name}}</a>
+                            </h4>
+                        </div>
+                    </article>
+                </li>
+                {{/each}}
+                {{/if}}
+
+        </ul>
+
+        {{> components/common/paginator pagination.brands instantload=true}}
+        {{{region name="brands_below_content"}}}
+        {{{region name="brands_below_content--global"}}}
+
+        <div id="categ-top-feature">
+            {{#if products.featured}}
+                {{#inArray (split "shop-by-category," ",") (lowercase (dashcase category.name)) }} 
+
+                {{assignVar "categ" category.name}}
+                <div class="emthemesModez-section {{#if index}}emthemesModez-section--index{{index}}{{/if}} emthemesModez-section--featuredProducts emthemesModez-section--displayType-grid">
+                <div class="emthemesModez-section-inner">
+                   
+                    {{assignVar "categ" "Wines, Spirits, & Beer"}}
+                    {{assignVar "categ2" "Health & Beauty"}}
+
+                    <h2 class="page-heading">Featured products</h2>
+                    <ul class="productGrid productGrid--maxCol4" >
+                        {{#each products.featured}}
+
+                            {{#inArray (split (join category '/') '/') (getVar "categ")}}
+
+                            {{else}}
+                                {{#inArray (split (join category '/') '/') (getVar "categ2")}}
+
+                                {{else}}
+                                    <li class="product group" data-product-id="{{id}}">
+                                    {{> components/products/card 
+                                        settings=../../settings 
+                                        show_compare=../../show_compare 
+                                        show_rating=../../settings.show_product_rating 
+                                        theme_settings=../../theme_settings 
+                                        customer=../../customer 
+                                        event=../../event 
+                                        x_product_price=price.without_tax.value
+                                        position=(add @index 1)}}
+                                        </li>
+            
+                                {{/inArray}}
+                            {{/inArray}}
+                        {{/each}}
+                    </ul>	
+                </div>
+                </div>
+
+                {{/inArray}}
+                <div class="d-flex justify-content-center gap-3">
+                    <button id="loadMore">Show more</button>
+                    <button id="showLess">Show less</button>
+                </div>
+            {{/if}}
+            {{#if products.top_sellers}}
+                    {{assignVar "categ" category.name}}
+                    <div class="emthemesModez-section {{#if index}}emthemesModez-section--index{{index}}{{/if}} emthemesModez-section--featuredProducts emthemesModez-section--displayType-grid">
+                    <div class="emthemesModez-section-inner">
+                    
+                        {{assignVar "categ" "Wines, Spirits, & Beer"}}
+                        {{assignVar "categ2" "Health & Beauty"}}
+
+                        <h2 class="page-heading">Best Selling</h2>
+                        <ul class="productGrid productGrid--maxCol4" >
+                            {{#each products.top_sellers}}
+
+                                {{#inArray (split (join category '/') '/') (getVar "categ")}}
+
+                                {{else}}
+                                    {{#inArray (split (join category '/') '/') (getVar "categ2")}}
+
+                                    {{else}}
+                                        <li class="product group2" data-product-id="{{id}}">
+                                        {{> components/products/card 
+                                            settings=../../settings 
+                                            show_compare=../../show_compare 
+                                            show_rating=../../settings.show_product_rating 
+                                            theme_settings=../../theme_settings 
+                                            customer=../../customer 
+                                            event=../../event 
+                                            x_product_price=price.without_tax.value
+                                            position=(add @index 1)}}
+                                            </li>
+                
+                                    {{/inArray}}
+                                {{/inArray}}
+                            {{/each}}
+                        </ul>	
+                    </div>
+                    </div>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button id="loadMore2">Show more</button>
+                        <button id="showLess2">Show less</button>
+                    </div>
+            {{/if}}
+        </div>
+
+    </div>
+</main>
+{{/partial}}
+{{#and theme_settings.instantload is_ajax}}
+    {{> layout/instantload-base}}
+{{else}}
+    {{> layout/base}}
+{{/and}}
+
+
+<style>
+    .breadcrumb {
+        float: left;
+    }
+    div#categ-top-feature {
+        margin: 2rem 0 0;
+    }
+    #categ-top-feature .tab-title {
+        text-transform: uppercase;
+    }
+
+    ul.productGrid.productGrid--maxCol4 .card {
+        margin: 0;
+    }
+    ul.brandGrid.productGrid .product.px-0 .card {
+        border-radius: 0;
+        margin: 0;
+    }
+    ul.brandGrid.productGrid{
+        /*justify-content: space-between;*/
+        /*row-gap: 0.8rem;*/
+    }
+
+    .sidebarBlock.sidebarBlock--banner.emthemesModezBannersBlockSidebar01 {
+        background: transparent;
+    }
+    .fullWidth {
+        margin: 0 0 1rem;
+    }
+    div#categ-top-feature .page-heading {
+        border-bottom: unset;
+        background-color: var(--bg-header) !important;
+        text-align: center;
+        color: white !important;
+        border-radius: 8px !important;
+        display: block;
+        padding: 0.5rem 0;
+        text-transform: uppercase;
+    }
+    .emthemesModez-specialProductsTabs ul li.tab.is-active a {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+    .papaSupermarket-subcategories-grid{
+        margin: 1.5rem 0 0 -1.125rem;
+    }
+    .papaSupermarket-subcategories-grid-item{
+        padding-right: 0;
+    }
+    .papaSupermarket-subcategories-name {
+        background: #fff;
+        width: 100%;
+        display: block;
+        border-radius: 5px;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 19px;
+        padding: 0.4rem 0;
+    }
+    .papaSupermarket-subcategories-name:hover {
+        background-color: var(--bg-header);
+        color: #fff !important;
+    }
+    ul.brandGrid.productGrid{
+        background: transparent;
+    }
+
+    @media (min-width: 801px){
+        ul.brandGrid.productGrid .product {
+            -ms-flex-preferred-size: 25%;
+            flex-basis: 25%;
+        }
+    }
+</style>

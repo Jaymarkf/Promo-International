@@ -1,0 +1,61 @@
+{{#if products.featured}}
+    {{#inArray (split "wines-spirits-beer,health-beauty" ",") (lowercase (dashcase category.name)) }} 
+    {{assignVar "categ" category.name}}
+    <div id="categ-top-feature">
+        <h2 class="page-heading">Featured products</h2>
+        <ul class="productGrid productGrid--maxCol4" >
+            {{#each products.featured}}
+                    {{#inArray (split (join category '/') '/') (getVar "categ")}}
+                    <li class="product group" data-product-id="{{id}}">
+                    {{> components/products/card 
+                        settings=../../settings 
+                        show_compare=../../show_compare 
+                        show_rating=../../settings.show_product_rating 
+                        theme_settings=../../theme_settings 
+                        customer=../../customer 
+                        event=../../event 
+                        x_product_price=price.without_tax.value
+                        position=(add @index 1)}}
+                        </li>
+
+                    {{/inArray}}
+            {{/each}}
+        </ul>			
+    </div>
+    {{/inArray}}
+    <div class="d-flex justify-content-center gap-3">
+        <button id="loadMore">Show more</button>
+        <button id="showLess">Show less</button>
+    </div>
+{{/if}}
+
+{{#if products.top_sellers}}
+    {{#inArray (split "wines-spirits-beer,health-beauty" ",") (lowercase (dashcase category.name)) }} 
+    {{assignVar "categ" category.name}}
+    <div id="categ-top-feature" class="best-selling-con">
+        <h2 class="page-heading">Best Selling</h2>
+        <ul class="productGrid productGrid--maxCol4" >
+            {{#each products.top_sellers}}
+                    {{#inArray (split (join category '/') '/') (getVar "categ")}}
+                    <li class="product group" data-product-id="{{id}}">
+                    {{> components/products/card 
+                        settings=../../settings 
+                        show_compare=../../show_compare 
+                        show_rating=../../settings.show_product_rating 
+                        theme_settings=../../theme_settings 
+                        customer=../../customer 
+                        event=../../event 
+                        x_product_price=price.without_tax.value
+                        position=(add @index 1)}}
+                        </li>
+
+                    {{/inArray}}
+            {{/each}}
+        </ul>			
+    </div>
+    {{/inArray}}
+    <div class="d-flex justify-content-center gap-3">
+        <button id="loadMore2">Show more</button>
+        <button id="showLess2">Show less</button>
+    </div>
+{{/if}}
