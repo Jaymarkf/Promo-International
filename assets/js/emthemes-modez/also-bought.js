@@ -62,6 +62,7 @@ export default class AlsoBought {
         const $productEls = $('[data-product-id]', this.$alsoBoughtEl);
 
         if ($productEls.length > 0) {
+            this.$alsoBoughtEl.before('<div><!-- Fix Safari --></div>'); // Fix Also Bought displays overlapping the product image on Safari
             this.$alsoBoughtEl.removeClass('u-hiddenVisually');
         }
 
@@ -83,15 +84,33 @@ export default class AlsoBought {
                     $productEl.remove();
                 } else {
                     // init foundation collapsible
-                    collapsibleFactory('[data-options-collapsible]', { $context: $productEl });
+                    const collapsibleArray = collapsibleFactory('[data-options-collapsible]', { $context: $productEl });
+
+                    collapsibleArray.forEach(collapsible => {
+                        this.fixCollapsibleADA(collapsible);
+                        collapsible.$toggle.on('toggle.collapsible', () => this.fixCollapsibleADA(collapsible));
+                    });
 
                     // bind events
                     $('[data-also-bought-checkbox]', $productEl).on('change', this.onAlsoBoughtCheckboxChange.bind(this, $productEl));
 
                     this.products.push(new ProductDetails($productEl, _.extend(this.parentProductDetails.context, { enableAlsoBought: false })));
                 }
+
+                // Hide Also Bought block if all products are not purchasable
+                if (this.$alsoBoughtEl.find('[data-product-id]').length === 0) {
+                    this.$alsoBoughtEl.addClass('u-hiddenVisually');
+                }
             });
         });
+    }
+
+    fixCollapsibleADA(collapsible) {
+        if (collapsible.isCollapsed) {
+            collapsible.$target.find('form, input, select, textarea, button').attr('tabindex', '-1');
+        } else {
+            collapsible.$target.find('form, input, select, textarea, button').removeAttr('tabindex');
+        }
     }
 
     onAddAllButtonClick(e) {

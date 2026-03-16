@@ -1,8 +1,6 @@
-<h5 class="footer-info-heading text-3xl">{{lang 'newsletter.subscribe'}}</h5>
-{{#if theme_settings.subscribe_intro '!==' ''}}
-    <p class="text-base">{{theme_settings.subscribe_intro}}</p>
-{{else if settings.show_newsletter_summary}}
-    <p class="text-base">{{settings.newsletter_summary}}</p>
+<h3 class="footer-info-heading">{{lang 'newsletter.subscribe'}}</h3>
+{{#if settings.show_newsletter_summary}}
+    <p>{{settings.newsletter_summary}}</p>
 {{/if}}
 
 <form class="form" action="{{urls.subscribe.action}}" method="post">
@@ -13,8 +11,8 @@
         <div class="form-field">
             <label class="form-label is-srOnly" for="nl_email">{{lang 'common.email_address'}}</label>
             <div class="form-prefixPostfix wrap">
-                <input class="form-input form-prefixPostfix-input subscribe-input" id="nl_email" name="nl_email" type="email" value="{{customer.email}}" placeholder="{{lang 'newsletter.email_placeholder'}}">
-                <button class="button form-prefixPostfix-button--postfix " type="submit" value="{{lang 'newsletter.subscribe_submit'}}"> <i class="fas fa-paper-plane" ></i> </button>
+                <input class="form-input form-prefixPostfix-input" id="nl_email" name="nl_email" type="email" value="{{customer.email}}" placeholder="{{lang 'newsletter.email_placeholder'}}" aria-required="true" required>
+                <input class="button form-prefixPostfix-button--postfix" type="submit" value="{{lang 'newsletter.subscribe_submit'}}">
             </div>
         </div>
     </fieldset>

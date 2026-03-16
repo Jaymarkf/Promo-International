@@ -2,7 +2,7 @@
     order: 3;
     margin-bottom: spacing("single");
     padding: 0 $container-padding / 2;
-	
+
     @include breakpoint("medium") {
         margin-bottom: spacing("double");
         clear: both;
@@ -42,30 +42,31 @@
     font-size: fontSize("small");
     font-weight: fontWeight("bold");
     text-transform: uppercase;
-    padding: spacing("third") spacing("single");
+    padding: spacing("half") $container-padding / 2;
     margin: 0 (-$container-padding / 2);
-    background-color: container("fill", "dark");
     line-height: 1.25;
     color: stencilColor("color-textHeading");
     margin-bottom: spacing("single");
+    border-top: 5px solid container("borderColor");
 
     @include breakpoint("medium") {
         padding: spacing("single") 0 0;
-        background-color: transparent;
+        background: none;
         font-size: fontSize("base");
         margin: 0 0 spacing("single");
         border-top: container("border");
     }
 
     .papaSupermarket-style--modern & {
-        background-color: transparent;
-        margin: 0 0 spacing("half");
-        padding: 0;
+        background: none;
+        margin: 0 (-(spacing("half"))) spacing("half");
+        border-color: container("fill", "dark");
+        padding: spacing("half");
         font-size: fontSize("smaller");
 
         @include breakpoint("medium") {
-            margin-bottom: spacing("base");
-            padding-top: spacing("base");
+            margin: 0 0 spacing("base");
+            padding: spacing("base") 0 0;
             font-size: fontSize("base");
         }
     }
@@ -111,6 +112,16 @@
     display: inline;
     margin-right: spacing("half");
     font-weight: fontWeight("bold");
+
+    a {
+        color: inherit;
+        text-decoration: none;
+
+        &:hover {
+            color: $color-textLink-hover;
+            text-decoration: underline;
+        }
+    }
 }
 
 .productView-alsoBought-item-price {
@@ -145,6 +156,7 @@
 
     a {
         text-decoration: none;
+
         &.is-open .icon {
             transform: rotate(180deg);
         }
@@ -163,7 +175,6 @@
 }
 
 .productView-alsoBought-item-form {
-
     .form {
         margin-bottom: 0;
     }
@@ -221,8 +232,9 @@
 
     &:not(:last-child) {
         padding-right: 30px;
-        &:before {
-            content: '\f067';
+
+        &::before {
+            content: "\f067";
             font-family: FontAwesome;
             font-size: 18px;
             position: absolute;
@@ -234,12 +246,12 @@
 }
 
 .productView-alsoBought-item-image {
-	img {
+    img {
         @include object-fit(contain);
-        width: get-width(stencilString('productthumb_size'));
+        width: get-width(stencilString("productthumb_size"));
         max-width: 100%;
-        max-height: get-height(stencilString('productthumb_size'));
-	}
+        max-height: get-height(stencilString("productthumb_size"));
+    }
 }
 
 .productView-alsoBought-thumbnail-label {
@@ -247,9 +259,60 @@
     display: block;
     padding: 2px;
     cursor: pointer;
+    position: relative;
 
     &.is-checked {
         border-color: container("borderColor", "dark");
+    }
+
+    @include breakpoint("medium") {
+        &:hover .productView-alsoBought-thumbnail-link {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.productView-alsoBought-thumbnail-link {
+    position: absolute;
+    bottom: spacing("eighth");
+    right: spacing("eighth");
+    width: 32px;
+    height: 32px;
+    background-color: rgba($color-secondary, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba($color-black, 0.1);
+    z-index: 10;
+
+    @include breakpoint("medium") {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .icon {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            fill: $color-textLink;
+            transition: fill 0.3s ease;
+        }
+    }
+
+    &:hover {
+        background-color: $color-textLink;
+        box-shadow: 0 4px 8px rgba($color-black, 0.2);
+
+        svg {
+            fill: $color-white;
+        }
     }
 }
 

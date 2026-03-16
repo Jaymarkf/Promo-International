@@ -9,7 +9,9 @@ customer:
 shop_by_brand:
     limit: {{theme_settings.max_shop_by_brand}}
 ---
+{{inject 'cancelButtonText' (lang 'common.cancel')}}
 {{#partial "page"}}
+{{inject 'invalidEntryMessage' (lang 'cart.invalid_entry_message')}}
 <div class="page">
 
     {{#if theme_settings.layout '===' 'left-sidebar'}}

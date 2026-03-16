@@ -13,6 +13,10 @@
 .suggestion-title {
     margin-top: 0;
     text-transform: inherit;
+
+    // papathemes-supermarket:
+    font-size: fontSize("base");
+    font-weight: $header-font-weight;
 }
 
 .advancedSearch-form {

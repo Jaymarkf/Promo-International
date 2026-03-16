@@ -1,6 +1,5 @@
 import mediaQueryListFactory from '../theme/common/media-query-list';
 
-let mediumMediaQuery;
 let uid = 1;
 
 class YoutubeSlick {
@@ -29,20 +28,18 @@ class YoutubeSlick {
         // store player object for use later
         $(event.target.getIframe()).closest('.slick-slide').data('youtube-player', event.target);
 
-        // On desktop: Play video if first slide is video
-        if (mediumMediaQuery.matches) {
-            setTimeout(() => {
-                if ($(event.target.getIframe()).closest('.slick-slide').hasClass('slick-active')) {
-                    if (this.$slick.is('[data-youtube-mute]')) {
-                        event.target.mute();
-                    }
-                    if (this.$slick.is('[data-youtube-autoplay]')) {
-                        this.$slick.slick('slickPause');
-                        event.target.playVideo();
-                    }
+        this.$slick.addClass('slick-video-playing');
+        setTimeout(() => {
+            if ($(event.target.getIframe()).closest('.slick-slide').hasClass('slick-active')) {
+                if (this.$slick.is('[data-youtube-mute]')) {
+                    event.target.mute();
                 }
-            }, 200);
-        }
+                if (this.$slick.is('[data-youtube-autoplay]')) {
+                    this.$slick.slick('slickPause');
+                    event.target.playVideo();
+                }
+            }
+        }, 200);
     }
 
     onPlayerStateChange(event) {
@@ -86,6 +83,8 @@ class YoutubeSlick {
                     iv_load_policy: 3,
                     modestbranding: 1,
                     wmode: 'transparent',
+                    // autoplay: 1,
+                    playsinline: 1,
                 },
                 events: {
                     onReady: this.onPlayerReady,
@@ -109,16 +108,14 @@ class YoutubeSlick {
         // On desktop:
         // - Auto play video when open next slide
         // - Stop auto slide
-        if (mediumMediaQuery.matches) {
-            const player = this.$slick.find('.slick-slide.slick-active').data('youtube-player');
-            if (player) {
-                if (this.$slick.is('[data-youtube-mute]')) {
-                    player.mute();
-                }
-                if (this.$slick.is('[data-youtube-autoplay]')) {
-                    this.$slick.slick('slickPause');
-                    player.playVideo();
-                }
+        const player = this.$slick.find('.slick-slide.slick-active').data('youtube-player');
+        if (player) {
+            if (this.$slick.is('[data-youtube-mute]')) {
+                player.mute();
+            }
+            if (this.$slick.is('[data-youtube-autoplay]')) {
+                this.$slick.slick('slickPause');
+                player.playVideo();
             }
         }
     }
@@ -136,13 +133,12 @@ function initCarousel($carousel) {
 
 export default function youtubeCarouselFactory($carousel) {
     if ($carousel.find('[data-youtube]').length > 0) {
-        mediumMediaQuery = mediaQueryListFactory('medium');
-
         if (typeof window.onYouTubeIframeAPIReady === 'undefined') {
             window.onYouTubeIframeAPIReady = initCarousel.bind(window, $carousel);
 
             // Load the IFrame Player API code asynchronously.
             const tag = document.createElement('script');
+            tag.nonce = window.__webpack_nonce__;
             tag.src = 'https://www.youtube.com/player_api';
             const firstScriptTag = document.getElementsByTagName('script')[0];
             firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);

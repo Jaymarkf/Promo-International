@@ -23,13 +23,22 @@
     .banner {
         padding: spacing("half") + spacing("eighth") 0;
 
+        @media (max-width: (screenSize("medium") - 1px)) {
+            padding: spacing("quarter") spacing("half");
+        }
+
         .papaSupermarket-style--modern & {
             max-width: none;
         }
     }
 
     a {
-        color: stencilColor("color-textLink");
+        color: inherit;
+        text-underline-offset: 3px;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 }
 
@@ -45,7 +54,7 @@
 }
 
 .papaThemesFeatureBanner {
-    display:  flex;
+    display: flex;
     flex-flow: row wrap;
     justify-content: center;
     padding: spacing("quarter");
@@ -59,8 +68,10 @@
     }
     @include breakpoint("medium") {
         width: 33.3333%;
+
         + .papaThemesFeatureBanner-item {
             border-left: 1px solid stencilColor("container-border-global-color-base");
+
             &:nth-child(3n + 1) {
                 border-left: 0;
             }

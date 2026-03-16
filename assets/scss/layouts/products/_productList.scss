@@ -2,7 +2,6 @@
 // PRODUCT LIST (CSS)
 // =============================================================================
 
-
 // Product list
 // -----------------------------------------------------------------------------
 
@@ -17,12 +16,10 @@
     }
 }
 
-
 // Product list item
 // -----------------------------------------------------------------------------
 
 .listItem {
-
     @include breakpoint("small") {
         @include grid-row($behavior: "nest");
         display: table;
@@ -31,7 +28,6 @@
 
 .listItem-figure,
 .listItem-body {
-
     @include breakpoint("small") {
         display: table-cell;
         vertical-align: top;
@@ -41,7 +37,6 @@
         vertical-align: middle;
     }
 }
-
 
 // List figure
 // -----------------------------------------------------------------------------
@@ -65,7 +60,6 @@
 }
 
 .listItem-body {
-
     @include breakpoint("small") {
         padding-left: spacing("base") + spacing("sixth");
         padding-right: spacing("half");
@@ -73,12 +67,10 @@
     }
 }
 
-
 // List content
 // -----------------------------------------------------------------------------
 
 .listItem-content {
-
     @include breakpoint("large") {
         display: table;
     }
@@ -86,19 +78,16 @@
 
 .listItem-details,
 .listItem-actions {
-
     @include breakpoint("large") {
         display: table-cell;
         vertical-align: top;
     }
 }
 
-
 // List details
 // -----------------------------------------------------------------------------
 
 .listItem-details {
-
     @include breakpoint("large") {
         padding-right: spacing("double") * 2;
 
@@ -113,7 +102,7 @@
 }
 
 .listItem-brand {
-    color: color("greys", "light");
+    color: $color-textSecondary; // papathemes
     font-size: fontSize("base");
     margin: 0 0 spacing("eighth");
 
@@ -144,7 +133,6 @@
     }
 }
 
-
 // List actions
 // -----------------------------------------------------------------------------
 //
@@ -153,7 +141,6 @@
 // -----------------------------------------------------------------------------
 
 .listItem-actions {
-
     @include breakpoint("large") {
         vertical-align: middle;
         width: 22%; // 1
@@ -177,24 +164,19 @@
     }
 }
 
-
 // Product list when sidebar is present
 // -----------------------------------------------------------------------------
 
 .page-sidebar + .page-content {
-
     .productList {
-
         // scss-lint:disable SelectorDepth, NestingDepth
         .listItem-details {
-
             @include breakpoint("large") {
                 padding-right: spacing("double");
             }
         }
 
         .listItem-actions {
-
             @include breakpoint("large") {
                 width: 30%;
             }

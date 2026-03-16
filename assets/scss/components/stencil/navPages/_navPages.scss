@@ -107,7 +107,7 @@
     }
 
     + .navPages-list {
-        border-top: 1px solid $navPages-list--user-borderColor;
+        border-top: 1px solid rgba($navPages-list--user-borderColor, 0.3); // papathemes-supermarket edited
         margin-top: spacing("half");
         padding-top: spacing("half");
     }
@@ -137,7 +137,8 @@
         }
     }
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: stencilColor("navPages-color-hover");
 
         // scss-lint:disable NestingDepth
@@ -262,11 +263,6 @@
 //
 // Child pages of sub pages navigation lists
 // -----------------------------------------------------------------------------
-
-.navPage-childList-item {
-    @include breakpoint("medium") {
-    }
-}
 
 .navPage-childList-action {
     font-weight: fontWeight("normal");

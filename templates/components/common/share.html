@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
 {{#or settings.add_this.buttons settings.facebook_like_button.enabled}}
     {{assignVar 'encodedUrl' (encodeURI url)}}
     {{assignVar 'encodedTitle' (encodeURI head.title)}}
@@ -17,7 +20,7 @@
                         >
                             <span class="aria-description--hidden">{{{capitalize service}}}</span>
                             <svg>
-                                <use xlink:href="#icon-facebook"/>
+                                <use href="#icon-facebook"/>
                             </svg>
                         </a>
                         {{else if service '===' 'email'}}
@@ -30,7 +33,7 @@
                         >
                             <span class="aria-description--hidden">{{{capitalize service}}}</span>
                             <svg>
-                                <use xlink:href="#icon-envelope"/>
+                                <use href="#icon-envelope"/>
                             </svg>
                         </a>
                         {{else if service '===' 'print'}}
@@ -41,20 +44,20 @@
                         >
                             <span class="aria-description--hidden">{{{capitalize service}}}</span>
                             <svg>
-                                <use xlink:href="#icon-print"/>
+                                <use href="#icon-print"/>
                             </svg>
                         </a>
                         {{else if service '===' 'twitter'}}
-                        <a class="socialLinks__link icon icon--{{service}}"
-                        href="https://twitter.com/intent/tweet/?text={{getVar 'encodedTitle'}}&amp;url={{getVar 'encodedUrl'}}"
+                        <a class="socialLinks__link icon icon--x"
+                        href="https://x.com/intent/tweet/?text={{getVar 'encodedTitle'}}&amp;url={{getVar 'encodedUrl'}}"
                         target="_blank"
                         rel="noopener"
-                        title="{{{capitalize service}}}"
+                        title="X"
                         {{{annotation}}}
                         >
-                            <span class="aria-description--hidden">{{{capitalize service}}}</span>
+                            <span class="aria-description--hidden">X</span>
                             <svg>
-                                <use xlink:href="#icon-twitter"/>
+                                <use href="#icon-x"/>
                             </svg>
                         </a>
                         {{else if service '===' 'linkedin'}}
@@ -67,7 +70,7 @@
                         >
                             <span class="aria-description--hidden">{{{capitalize service}}}</span>
                             <svg>
-                                <use xlink:href="#icon-linkedin"/>
+                                <use href="#icon-linkedin"/>
                             </svg>
                         </a>
                         {{else if service '===' 'pinterest'}}
@@ -80,7 +83,7 @@
                         >
                             <span class="aria-description--hidden">{{{capitalize service}}}</span>
                             <svg>
-                                <use xlink:href="#icon-pinterest"/>
+                                <use href="#icon-pinterest"/>
                             </svg>
                         </a>
                         {{/if}}
@@ -90,6 +93,7 @@
         {{/if}}
         {{#if settings.facebook_like_button.enabled}}
             <iframe
+                title="{{#if settings.facebook_like_button.verb '===' 'recommend'}}Recommend{{else}}Like{{/if}}"
                 class="facebook{{#if settings.facebook_like_button.verb '===' 'recommend'}}Recommend{{else}}Like{{/if}}Btn"
                 style="border:none; overflow:hidden; margin: 0; padding: 0; height: 20px; margin-top: .75rem; max-width: 100%"
                 src="https://www.facebook.com/plugins/like.php?href={{settings.facebook_like_button.href}}&amp;layout=button_count{{#if settings.facebook_like_button.verb '===' 'recommend'}}&amp;action=recommend{{/if}}&amp;colorscheme=light&amp;height=20"
@@ -100,4 +104,3 @@
         {{/if}}
     </div>
 {{/or}}
-

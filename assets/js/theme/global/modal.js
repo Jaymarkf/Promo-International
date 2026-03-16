@@ -206,6 +206,8 @@ export class Modal {
 
     onModalClose() {
         $('body').removeClass(bodyActiveClass);
+
+        this.clearContent();
     }
 
     onModalClosed() {

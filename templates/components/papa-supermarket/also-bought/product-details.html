@@ -4,12 +4,22 @@
         <div class="form-field">
             <input class="form-checkbox" type="checkbox" name="productView-alsoBought-item-checkbox" id="productView-alsoBought-item-checkbox-{{product.id}}" value="{{product.id}}" data-also-bought-checkbox>
             <label class="form-label" for="productView-alsoBought-item-checkbox-{{product.id}}">
+<<<<<<< HEAD
                 <div class="productView-alsoBought-item-title">{{product.title}}</div>
+=======
+                <div class="productView-alsoBought-item-title">
+                    <a href="{{product.url}}" target="_blank" title="{{product.title}}">{{product.title}}</a>
+                </div>
+>>>>>>> upstream/main
                 <div class="productView-alsoBought-item-price">
                     {{#if product.call_for_price}}
                         <span class="price--call">{{product.call_for_price}}</span>
                     {{else}}
+<<<<<<< HEAD
                         {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+=======
+                        {{#or customer (unless settings.hide_price_from_guests)}}
+>>>>>>> upstream/main
                             {{> components/products/price price=product.price schema_org=schema}}
                         {{else}}
                             {{> components/common/login-for-pricing}}
@@ -18,12 +28,20 @@
                 </div>
 
                 {{#if product.options}}
+<<<<<<< HEAD
                     <div class="productView-alsoBought-item-formToggle"><a href="#productView-alsoBought-item-form-{{product.id}}" data-options-collapsible>{{lang 'products.choose_options'}} <i aria-hidden="true" class="icon"><svg><use xlink:href="#icon-chevron-down"></use></svg></i></a></div>
+=======
+                    <div class="productView-alsoBought-item-formToggle"><a href="#productView-alsoBought-item-form-{{product.id}}" data-options-collapsible>{{lang 'products.choose_options'}} <i aria-hidden="true" class="icon"><svg><use href="#icon-chevron-down"></use></svg></i></a></div>
+>>>>>>> upstream/main
                 {{/if}}
             </label>
         </div>
     </div>
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> upstream/main
     <div class="productView-alsoBought-item-form" id="productView-alsoBought-item-form-{{product.id}}">
         <div class="alertBox alertBox--error u-hiddenVisually" data-error-box>
             <div class="alertBox-column alertBox-icon">
@@ -33,7 +51,11 @@
                 <span data-error-message></span>
             </p>
         </div>
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> upstream/main
         <form class="form form--addToCart" method="post" action="{{product.cart_url}}" enctype="multipart/form-data" data-cart-item-add>
             <input type="hidden" name="action" value="add">
             <input type="hidden" name="product_id" value="{{product.id}}"/>
@@ -54,6 +76,7 @@
                 </div>
 
                 {{#if product.can_purchase}}
+<<<<<<< HEAD
                 {{#if theme_settings.show_product_quantity_box}}
                     <div class="form-field form-field--increments">
                         <label class="form-label form-label--alternate"
@@ -65,11 +88,28 @@
                                 <i class="icon" aria-hidden="true">
                                     <svg>
                                         <use xlink:href="#icon-keyboard-arrow-down"/>
+=======
+                {{#if product.show_quantity_input}}
+                    <div class="form-field form-field--increments">
+                        <label class="form-label form-label--alternate"
+                                for="qty[]-{{product.id}}">{{lang 'products.quantity'}}</label>
+
+                        <div class="form-increment" data-quantity-change>
+                            <button class="button button--icon" data-action="dec">
+                                <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
+                                <i class="icon" aria-hidden="true">
+                                    <svg>
+                                        <use href="#icon-keyboard-arrow-down"/>
+>>>>>>> upstream/main
                                     </svg>
                                 </i>
                             </button>
                             <input class="form-input form-input--incrementTotal"
+<<<<<<< HEAD
                                     id="qty[]"
+=======
+                                    id="qty[]-{{product.id}}"
+>>>>>>> upstream/main
                                     name="qty[]"
                                     type="tel"
                                     value="{{#if product.min_purchase_quantity}}{{product.min_purchase_quantity}}{{else}}1{{/if}}"
@@ -79,10 +119,17 @@
                                     pattern="[0-9]*"
                                     aria-live="polite">
                             <button class="button button--icon" data-action="inc">
+<<<<<<< HEAD
                                 <span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
                                 <i class="icon" aria-hidden="true">
                                     <svg>
                                         <use xlink:href="#icon-keyboard-arrow-up"/>
+=======
+                                <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
+                                <i class="icon" aria-hidden="true">
+                                    <svg>
+                                        <use href="#icon-keyboard-arrow-up"/>
+>>>>>>> upstream/main
                                     </svg>
                                 </i>
                             </button>
@@ -111,4 +158,8 @@
         </form>
     </div>
 </div>
+<<<<<<< HEAD
 {{/if}}
+=======
+{{/if}}
+>>>>>>> upstream/main

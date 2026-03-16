@@ -1,10 +1,10 @@
 import { hooks, api } from '@bigcommerce/stencil-utils';
 import _ from 'lodash';
 import Url from 'url';
-import urlUtils from './url-utils';
+import urlUtils from './utils/url-utils';
 import modalFactory from '../global/modal';
 import collapsibleFactory from './collapsible';
-import { Validators } from './form-utils';
+import { Validators } from './utils/form-utils';
 import nod from './nod';
 import actionBarFactory from '../../emthemes-modez/action-bar'; // Papathemes - Supermarket
 
@@ -172,7 +172,7 @@ class FacetedSearch {
         const id = $navList.attr('id');
 
         // Toggle depending on `collapsed` flag
-        if (_.includes(this.collapsedFacetItems, id)) {
+        if (this.collapsedFacetItems.includes(id)) {
             this.getMoreFacetResults($navList);
 
             return true;
@@ -270,7 +270,7 @@ class FacetedSearch {
             minPriceSelector: this.options.priceRangeMinPriceSelector,
         };
 
-        Validators.setMinMaxPriceValidation(validator, selectors);
+        Validators.setMinMaxPriceValidation(validator, selectors, this.options.validationErrorMessages);
 
         this.priceRangeValidator = validator;
     }
@@ -282,7 +282,7 @@ class FacetedSearch {
         $navLists.each((index, navList) => {
             const $navList = $(navList);
             const id = $navList.attr('id');
-            const shouldCollapse = _.includes(this.collapsedFacetItems, id);
+            const shouldCollapse = this.collapsedFacetItems.includes(id);
 
             if (shouldCollapse) {
                 this.collapseFacetItems($navList);
@@ -299,7 +299,7 @@ class FacetedSearch {
             const $accordionToggle = $(accordionToggle);
             const collapsible = $accordionToggle.data('collapsibleInstance');
             const id = collapsible.targetId;
-            const shouldCollapse = _.includes(this.collapsedFacets, id);
+            const shouldCollapse = this.collapsedFacets.includes(id);
 
             if (shouldCollapse) {
                 this.collapseFacet($accordionToggle);
@@ -426,6 +426,7 @@ class FacetedSearch {
         delete url.query.page;
 
         event.preventDefault();
+        // eslint-disable-next-line no-param-reassign
         event.isDefaultPrevented = true; // papathemes-supermarket: quick-fixed stencil-utils for sorting ajax request
 
         urlUtils.goToUrl(Url.format({ pathname: url.pathname, search: urlUtils.buildQueryString(url.query) }));
@@ -462,6 +463,7 @@ class FacetedSearch {
     onAccordionToggle(event) {
         const $accordionToggle = $(event.currentTarget);
         const collapsible = $accordionToggle.data('collapsibleInstance');
+        if (!collapsible) return; // papathemes-supermarket: fix issue when adding disabled-breakpoint to #facetedSearch-navList
         const id = collapsible.targetId;
 
         if (collapsible.isCollapsed) {

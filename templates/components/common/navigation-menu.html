@@ -99,11 +99,11 @@
         <div data-emthemesmodez-remote-banner="emthemesModezBannersBlockStaticNavPages"></div>
         {{/unless}}
     {{/unless}}
-    <ul class="navPages-list navPages-list--user">
+    <ul class="navPages-list navPages-list--user {{#unless theme_settings.topHeader_show}}_showTopHeader{{/unless}}">
         {{#if currency_selector.currencies.length '>' 1}}
-            <li class="navPages-item">
+            <li class="navPages-item navPages-item--currency">
                 <a class="navPages-action has-subMenu" href="#" data-collapsible="navPages-currency" aria-controls="navPages-currency" aria-expanded="false">
-                    {{{lang 'common.currency' code=currency_selector.active_currency_code}}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-chevron-down"></use></svg></i>
+                    {{{lang 'common.currency' code=currency_selector.active_currency_code}}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-caret-down"></use></svg></i>
                 </a>
                 <div class="navPage-subMenu" id="navPages-currency" aria-hidden="true" tabindex="-1">
                     <ul class="navPage-subMenu-list">
@@ -147,7 +147,7 @@
         {{#if customer}}
             <li class="navPages-item">
                 <a class="navPages-action has-subMenu" href="{{urls.account.index}}" data-collapsible="navPages-account">
-                    {{lang 'common.account'}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+                    {{lang 'common.account'}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-caret-down" /></svg></i>
                 </a>
                 <div class="navPage-subMenu" id="navPages-account" aria-hidden="true" tabindex="-1">
                     <ul class="navPage-subMenu-list">
@@ -192,6 +192,17 @@
                     <a class="navPages-action" href="{{urls.auth.create_account}}">{{lang 'common.sign_up'}}</a>
                 {{/if}}
             </li>
+        {{/if}}
+
+        {{#if settings.phone_number}}
+        {{#if theme_settings.topHeader_phone}}
+        <li class="navPages-item navPages-item--phone">
+            <a class="navPages-action" href="tel:{{settings.phone_number}}">
+                <i class="icon"><svg><use href="#icon-phone-solid" /></svg></i>
+                <span>{{{lang 'emthemesmodez.top_nav.text2' address=settings.address phone_number=settings.phone_number}}}</span>
+            </a>
+        </li>
+        {{/if}}
         {{/if}}
     </ul>
 

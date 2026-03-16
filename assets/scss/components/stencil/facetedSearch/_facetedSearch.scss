@@ -67,12 +67,13 @@
     &.is-open {
         display: block;
 
+        // papathemes-supermarket: disabled
         // scss-lint:disable SelectorDepth, NestingDepth
-        .accordion--navList,
-        .accordion-block:first-child .accordion-navigation {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+        // .accordion--navList,
+        // .accordion-block:first-child .accordion-navigation {
+        //     border-top-left-radius: 0;
+        //     border-top-right-radius: 0;
+        // }
     }
 
     .facetedSearch-toggle + &,

@@ -29,7 +29,10 @@
         The default image to use if `image` is undefined or falsy. Should be a theme asset, usually defined as a relative
         path in the theme config. If a default image is not provided, you'll get an image tag with no image if the primary
         image is undefined.
-    
+
+    `default_alt`:
+        Default alt text if image is not set. Add by PapaThemes.
+
     `lqip_size`:
         If you want to specify a particular size for the LQIP image, you can do so with this argument. A default of 80
         pixels wide will be used otherwise. This argument has no effect if the lazyload mode is not "lazyload+lqip".
@@ -55,7 +58,7 @@
     pick the best-sized image based on its own understanding of how it will render the page.
     --}}
     {{#unless lazyload '==' 'disabled'}}data-{{/unless}}srcset="{{getImageSrcset image use_default_sizes=true }}"
-    {{else if default_image}}src="{{cdn default_image}}"{{/if}}
+    {{else if default_image}}src="{{cdn default_image}}" alt="{{default_alt}}"{{/if}}
     class="{{#unless lazyload '==' 'disabled'}}lazyload{{/unless}}{{#if class}} {{class}}{{/if}}"
     {{#if lazyload '==' 'lazyload'}}loading="lazy"{{/if}}
     {{otherAttributes}} />

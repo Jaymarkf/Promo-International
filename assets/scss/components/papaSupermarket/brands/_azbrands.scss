@@ -68,8 +68,9 @@
         &:focus {
             color: stencilColor("color-textSecondary--hover");
         }
+
         &:active {
-            color: stencilColor("color-textSecondary--active");
+            color: stencilColor("color-textSecondary--hover");
         }
     }
 }

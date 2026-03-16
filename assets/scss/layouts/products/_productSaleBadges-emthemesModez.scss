@@ -11,14 +11,14 @@
     .productView-images & {
         top: 0;
         right: $column-gutter / 2;
-        
+
         .papaSupermarket-style--modern & {
             margin-top: spacing("half");
             right: spacing("half");
         }
     }
 
-    $h: remCalc(fontSize("smallest") * lineHeight("base") + 5px)+spacing("quarter");
+    $h: remCalc(fontSize("smallest") * lineHeight("base") + 5px) + spacing("quarter");
 
     + .sale-flag-side {
         top: $h;
@@ -51,25 +51,24 @@
     }
 }
 
-
 .sale-flag-star,
-.sale-flag-star:before,
-.sale-flag-star:after {
-	left: auto;
-	right: 0;
+.sale-flag-star::before,
+.sale-flag-star::after {
+    left: auto;
+    right: 0;
 }
 
 .starwrap {
-	right: spacing("base") + remCalc(10px);
+    right: spacing("base") + remCalc(10px);
 }
 
 .sale-text-burst {
-	font-size: fontSize("smallest");
+    font-size: fontSize("smallest");
 }
 
 .sale-flag-sash {
-	left: auto;
-	right: -25px;
-	transform: rotate(45deg);
-	font-size: fontSize("smallest");
+    left: auto;
+    right: -25px;
+    transform: rotate(45deg);
+    font-size: fontSize("smallest");
 }

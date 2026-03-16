@@ -1,36 +1,35 @@
-
 // Make Add to Cart & Compare button appear on Mobile for any product items
 // ----------------------------------------------------------------------------
 
 @media (max-width: screenSize("medium") - 1px) {
-	.card-figcaption {
-		display: block;
-		opacity: 1;
-		height: auto;
+    .card-figcaption {
+        display: block;
+        opacity: 1;
+        height: auto;
         position: static;
     }
-    
+
     .card-img-container {
         position: relative;
     }
 
-	.productCarousel .card-buttons, 
-	.productGrid .card-buttons {
-		display: flex;
-		position: static;
-		opacity: 1;
-		clip: auto;
+    .productCarousel .card-buttons,
+    .productGrid .card-buttons {
+        display: flex;
+        position: static;
+        opacity: 1;
+        clip: auto;
         transform: none;
         padding: spacing("quarter") 0 0;
     }
 
-    .productCarousel .card-buttons .card-figcaption-button:not(.card-figcaption-button--compare):before, 
-    .productGrid .card-buttons .card-figcaption-button:not(.card-figcaption-button--compare):before {
+    .productCarousel .card-buttons .card-figcaption-button:not(.card-figcaption-button--compare)::before,
+    .productGrid .card-buttons .card-figcaption-button:not(.card-figcaption-button--compare)::before {
         display: none;
     }
-    
-    .productCarousel .card-buttons--alt, 
-	.productGrid .card-buttons--alt {
+
+    .productCarousel .card-buttons--alt,
+    .productGrid .card-buttons--alt {
         display: none;
     }
 
@@ -54,16 +53,15 @@
     }
 }
 
-
 // --------------------------------------------------------------------------------------
 // Category Page
 // --------------------------------------------------------------------------------------
 
 .emthemesModez-categoryPage-mainImage {
     position: relative;
-    
-    @if stencilString('category_size') != 'original' {
-        max-width: get-width(stencilString('category_size'));
+
+    @if stencilString("category_size") != "original" {
+        max-width: get-width(stencilString("category_size"));
 
         img {
             @include lazy-loaded-img;
@@ -74,6 +72,6 @@
             font-family: "object-fit: contain";
         }
 
-        @include lazy-loaded-padding('category_size');
+        @include lazy-loaded-padding("category_size");
     }
 }

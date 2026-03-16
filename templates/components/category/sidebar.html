@@ -1,14 +1,15 @@
 <nav>
+    <h2 class="is-srOnly">{{lang 'common.sidebar'}}</h2>
     {{#if theme_settings.show_subcategories_menu}}
         {{> components/papa-supermarket/sidebar/subcategories-menu}}
     {{else}}
-        {{#if theme_settings.layout '===' 'left-sidebar'}}
+        {{#if theme_settings.show_allcategories_menu}}
             {{> components/papa-supermarket/sidebar/categories-menu}}
         {{/if}}
         
         {{#if category.subcategories}}
         <div class="sidebarBlock sidebarBlock--mobileCollapsible">
-            <h5 class="sidebarBlock-heading is-open" data-collapsible="#categories-navList" data-collapsible-disabled-breakpoint="medium" aria-expanded="true">{{category.name}}</h5>
+            <h3 class="sidebarBlock-heading is-open" data-collapsible="#categories-navList" data-collapsible-disabled-breakpoint="medium" aria-expanded="true">{{category.name}}</h3>
             <ul id="categories-navList" class="navList is-open" aria-hidden="false">
                 {{#each category.subcategories}}
                 <li class="navList-item">
@@ -26,6 +27,7 @@
             pager=pagination.category
             list=category
             products_per_page=theme_settings.categorypage_products_per_page
+            id_prefix="sb"
         }}
         {{> components/faceted-search/index category}}
     {{else}}
@@ -42,6 +44,7 @@
             pager=pagination.category
             list=category
             products_per_page=theme_settings.categorypage_products_per_page
+            id_prefix="sb"
         }}
     {{/if}}
 </nav>

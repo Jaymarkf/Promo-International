@@ -39,11 +39,12 @@
 }
 
 .header-logo {
-    font-size: 0;   // 1
+    font-size: 0; // 1
     margin: 0 remCalc($header-toggle-width); // 2
     text-align: center;
 
-    @include breakpoint("small") { // 4
+    @include breakpoint("small") {
+        // 4
         margin-left: remCalc($header-toggle-width * 1.5);
         margin-right: remCalc($header-toggle-width * 1.5);
     }
@@ -118,7 +119,7 @@
 .header-logo-text {
     display: block;
     font-family: $fontFamily-hero;
-    font-size: $fontSize-logo-small;   // 1
+    font-size: $fontSize-logo-small; // 1
     font-weight: fontWeight("bold");
     letter-spacing: remCalc(2px);
     margin-left: auto;
@@ -154,13 +155,13 @@
     position: relative;
 }
 
-.header-logo-image-container:after {
-    content: '';
+.header-logo-image-container::after {
+    content: "";
     display: block;
     padding-bottom: remCalc($header-height) - $header-logo-marginVertical * 2;
 
     @include breakpoint("medium") {
-        padding-bottom: get-height(stencilString('logo_size'));
+        padding-bottom: get-height(stencilString("logo_size"));
     }
 }
 
@@ -173,7 +174,8 @@
     }
 }
 
-.header-logo-image-unknown-size { // 5
+.header-logo-image-unknown-size {
+    // 5
     max-height: remCalc($header-height) - $header-logo-marginVertical * 2;
 
     @include breakpoint("medium") {
@@ -210,7 +212,10 @@
         height: 2px;
         position: absolute;
         transform: rotate(0deg);
-        transition: transform 100ms ease-in, top 100ms ease-in 150ms, bottom 100ms ease-in 150ms; // 1
+        transition:
+            transform 100ms ease-in,
+            top 100ms ease-in 150ms,
+            bottom 100ms ease-in 150ms; // 1
         width: remCalc(20);
     }
 
@@ -237,7 +242,10 @@
             background-color: $header-font-color;
             bottom: auto;
             top: auto;
-            transition: transform 100ms ease-in 150ms, top 100ms ease-in, bottom 100ms ease-in; // Animate lines from hamburger to 'x'
+            transition:
+                transform 100ms ease-in 150ms,
+                top 100ms ease-in,
+                bottom 100ms ease-in; // Animate lines from hamburger to 'x'
         }
 
         &::before {
@@ -249,6 +257,5 @@
             bottom: 0;
             transform: rotate(-45deg);
         }
-
     }
 }

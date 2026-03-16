@@ -16,14 +16,6 @@
         margin: 0;
         text-decoration: none;
 
-        // scss-lint:disable NestingDepth, SelectorDepth
-        &:hover {
-
-            svg {
-                fill: stencilColor("icon-color-hover");
-            }
-        }
-
         svg {
             fill: stencilColor("icon-color");
             transition: all 0.15s ease;

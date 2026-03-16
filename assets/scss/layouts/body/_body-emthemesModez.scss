@@ -57,26 +57,23 @@
 .page-sidebar {
     order: 3;
     margin-top: spacing("single");
-    
 
     @include breakpoint("medium") {
         width: grid-calc(2, 10);
         color: $color-textSecondary;
-        
 
         @if $theme-style == "compact" {
             margin-top: spacing("half");
-        }
-        @else {
+        } @else {
             margin-top: spacing("single");
 
             // when layout is fixed left sidebar
             .papaSupermarket-layout--left-sidebar & {
-                @if stencilString('navPages_categoriesMenu') == 'group' {
+                @if stencilString("navPages_categoriesMenu") == "group" {
                     margin-top: -(spacing("single") + spacing("base") + spacing("half"));
                     z-index: zIndex("low"); // same header's z-index
                 }
-                @if stencilString('navPages_categoriesMenu') == 'horizontal' {
+                @if stencilString("navPages_categoriesMenu") == "horizontal" {
                     margin-top: 0;
                 }
             }
@@ -103,7 +100,6 @@
             }
         }
 
-        
         + .page-content {
             width: grid-calc(8, 10);
             float: right;
@@ -117,7 +113,7 @@
     .papaSupermarket-style--modern & {
         padding-left: $column-gutter / 2 + spacing("quarter");
         padding-right: $column-gutter / 2 + spacing("quarter");
-        
+
         @include breakpoint("medium") {
             padding-left: $column-gutter / 2;
             padding-right: 0;
@@ -154,7 +150,7 @@
 
 .page-sidebar--right {
     float: right;
-    
+
     .papaSupermarket-layout--left-sidebar & {
         margin-top: if($theme-style == "compact", spacing("half"), spacing("single"));
 
@@ -178,7 +174,6 @@
         top: 0;
     }
 }
-
 
 .page-content-body {
     .papaSupermarket-style--modern & {
@@ -204,7 +199,7 @@
     }
 }
 
-.papaSupermarket-style--modern[class*='papaSupermarket-page--pages-account-'] {
+.papaSupermarket-style--modern[class*="papaSupermarket-page--pages-account-"] {
     .body {
         @include breakpoint("medium") {
             margin-top: spacing("half");
@@ -215,5 +210,5 @@
 .papaSupermarket-categoryPage-description {
     .papaSupermarket-style--modern & {
         padding: 0 spacing("half");
-    }    
+    }
 }

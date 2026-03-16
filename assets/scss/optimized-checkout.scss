@@ -21,9 +21,8 @@
 
 .optimizedCheckout-header {
     background-color: stencilColor("optimizedCheckout-header-backgroundColor");
-    // scss-lint:disable StringQuotes
-    background-image: url(stencilImage('optimizedCheckout-backgroundImage', 'optimizedCheckout-backgroundImage-size'));
-    // scss-lint:enable StringQuotes
+    // stylelint-disable-next-line function-url-quotes
+    background-image: url(stencilImage("optimizedCheckout-backgroundImage", "optimizedCheckout-backgroundImage-size"));
     background-size: cover;
     border-color: stencilColor("optimizedCheckout-header-borderColor");
     color: stencilColor("optimizedCheckout-header-textColor");
@@ -253,7 +252,8 @@ a {
 
 $optimizedCheckout-input-boxShadow: inset 0 1px 1px stencilColor("optimizedCheckout-formField-shadowColor");
 $optimizedCheckout-input--focus-boxShadow: 0 0 3px transparentize(stencilColor("optimizedCheckout-colorFocus"), 0.4);
-$optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("optimizedCheckout-formField-errorColor"), 0.4);
+$optimizedCheckout-input--error-boxShadow: 0 0 3px
+    transparentize(stencilColor("optimizedCheckout-formField-errorColor"), 0.4);
 
 .optimizedCheckout-form-input,
 .optimizedCheckout-form-select {

@@ -1,11 +1,16 @@
 <nav class="navList navList--aside">
+<<<<<<< HEAD
 
+=======
+    <h2 class="is-srOnly">{{lang 'common.sidebar'}}</h2>
+>>>>>>> upstream/main
     {{{region name="home_sidebar_top--global"}}}
     {{{region name="home_sidebar_top"}}}
     {{#if page.sub_pages}}
         {{> components/papa-supermarket/sidebar/subpages}}
     {{/if}}
 
+<<<<<<< HEAD
     {{#inArray (split "wines-spirits-beer,health-beauty" ",") (lowercase (dashcase category.name)) }} 
         {{assignVar "categ" category.name}}
         <div id="categ-top-feature" class="mb-5">
@@ -45,6 +50,19 @@
         {{{region name="home_sidebar_below_brands--global"}}}
         {{{region name="home_sidebar_below_brands"}}}
     {{/if}}
+=======
+    {{> components/papa-supermarket/sidebar/categories-menu}}
+
+    {{{region name="home_sidebar_below_menu--global"}}}
+    {{{region name="home_sidebar_below_menu"}}}
+
+    {{#if theme_settings.max_shop_by_brand '>' 9}}
+        {{> components/papa-supermarket/sidebar/brands}}
+    {{/if}}
+
+    {{{region name="home_sidebar_below_brands--global"}}}
+    {{{region name="home_sidebar_below_brands"}}}
+>>>>>>> upstream/main
 
     <div data-emthemesmodez-remote-banner="emthemesModezBannersBlockSidebar01"></div>
 

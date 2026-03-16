@@ -1,6 +1,227 @@
+/* eslint-disable camelcase */
+
 import { throttle } from 'lodash';
 import utils from '@bigcommerce/stencil-utils';
+import mustache from 'mustache';
 import foundation from '../theme/global/foundation';
+import { SupermarketProductCardsGraphQLQuery, productCardTemplate as defaultProductCardTemplate } from './theme-utils';
+
+let isRequestingCategoryPage = 0;
+export class CategoryProductsGraphQLQuery extends SupermarketProductCardsGraphQLQuery {
+    /**
+     * Load products by category ID using GraphQL
+     * @param {Number} categoryId Category ID
+     * @param {String} afterCursor Product ID after which to load more products
+     * @param {Number} limit Number of products to load
+     * @param {A_TO_Z|BEST_REVIEWED|BEST_SELLING|DEFAULT|FEATURED|HIGHEST_PRICE|LOWEST_PRICE|NEWEST|Z_TO_A} sort Sort order
+     * @param {Boolean} hideOutOfStock Hide out of stock products
+     * @returns category
+     */
+    async load(categoryId, afterCursor = '', limit = 10, sort = 'DEFAULT', hideOutOfStock = true) {
+        const cacheKey = `${this.currencyCode}_${categoryId}_${afterCursor}_${limit}_${sort}_${hideOutOfStock}`;
+
+        if (!this.cachedProducts[cacheKey]) {
+            this.cachedProducts[cacheKey] = await new Promise(resolve => {
+                $.ajax({
+                    url: '/graphql',
+                    method: 'POST',
+                    data: JSON.stringify({
+                        query: `
+                            query categoryProducts(
+                                $entityId: Int!,
+                                $after: String,
+                                $first: Int,
+                                $hideOutOfStock: Boolean,
+                                $sortBy: CategoryProductSort
+                                $currencyCode: currencyCode!
+                            ) {
+                                site {
+                                    category(entityId: $entityId) {
+                                        name
+                                        path
+                                        products(after: $after, first: $first, hideOutOfStock: $hideOutOfStock, sortBy: $sortBy) {
+                                            edges {
+                                                node {
+                                                    entityId
+                                                    name
+                                                    sku
+                                                    path
+                                                    addToCartUrl
+                                                    minPurchaseQuantity
+                                                    maxPurchaseQuantity
+                                                    pricesWithTax: prices(includeTax: true, currencyCode: $currencyCode) {
+                                                        price {
+                                                            ...MoneyFields
+                                                        }
+                                                        basePrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        salePrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        retailPrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        priceRange {
+                                                            min {
+                                                                ...MoneyFields
+                                                            }
+                                                            max {
+                                                                ...MoneyFields
+                                                            }
+                                                        }
+                                                    }
+                                                    pricesWithoutTax: prices(includeTax: false, currencyCode: $currencyCode) {
+                                                        price {
+                                                            ...MoneyFields
+                                                        }
+                                                        basePrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        salePrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        retailPrice {
+                                                            ...MoneyFields
+                                                        }
+                                                        priceRange {
+                                                            min {
+                                                                ...MoneyFields
+                                                            }
+                                                            max {
+                                                                ...MoneyFields
+                                                            }
+                                                        }
+                                                    }
+                                                    defaultImage {
+                                                        ...ImageFields
+                                                    }
+                                                    images {
+                                                        edges {
+                                                        node {
+                                                            ...ImageFields
+                                                            isDefault
+                                                        }
+                                                        }
+                                                    }
+                                                    brand {
+                                                        name
+                                                        path
+                                                    }
+                                                    reviewSummary {
+                                                        averageRating
+                                                    }
+                                                    productOptions(first: 1) {
+                                                        edges {
+                                                            node {
+                                                                entityId
+                                                            }
+                                                        }
+                                                    }
+                                                    availabilityV2 {
+                                                        status
+                                                    }
+                                                    inventory {
+                                                        isInStock
+                                                    }
+                                                    customFields {
+                                                        edges {
+                                                            node {
+                                                                name
+                                                                value
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            pageInfo {
+                                                endCursor
+                                                hasNextPage
+                                            }
+                                        }
+                                    }
+                                    categoryTree(rootEntityId: $entityId) {
+                                        hasChildren
+                                        children {
+                                            entityId
+                                            name
+                                            path
+                                        }
+                                    }
+                                    settings {
+                                        tax {
+                                            plp
+                                        }
+                                        inventory {
+                                            defaultOutOfStockMessage
+                                        }
+                                        storefront {
+                                            catalog {
+                                                productComparisonsEnabled
+                                            }
+                                        }
+                                    }
+                                    currency(currencyCode: $currencyCode) {
+                                        display {
+                                            symbol
+                                            symbolPlacement
+                                            decimalToken
+                                            thousandsToken
+                                            decimalPlaces
+                                        }
+                                    }
+                                }
+                            }
+                            fragment MoneyFields on Money {
+                                value
+                                currencyCode
+                            }
+                            fragment ImageFields on Image {
+                                url80wide: url(width: 80)
+                                url160wide: url(width: 160)
+                                url320wide: url(width: 320)
+                                url640wide: url(width: 640)
+                            }
+                        `,
+                        variables: {
+                            entityId: categoryId,
+                            after: afterCursor,
+                            first: limit,
+                            hideOutOfStock,
+                            sortBy: sort,
+                            currencyCode: this.currencyCode,
+                        },
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.graphQLToken}`,
+                    },
+                    xhrFields: {
+                        withCredentials: true,
+                    },
+                    success: (resp) => {
+                        const category = {
+                            ...resp.data.site.category,
+                            children: resp.data.site.categoryTree[0]?.children,
+                            hasChildren: resp.data.site.categoryTree[0]?.hasChildren,
+                            products: this.mapGraphQLProducts(resp.data.site.category.products, resp.data.site.settings, resp.data.site.currency),
+                            productsInfo: {
+                                endCursor: resp.data.site.category.products.pageInfo.endCursor,
+                                hasNextPage: resp.data.site.category.products.pageInfo.hasNextPage,
+                            },
+                        };
+                        resolve(category);
+                    },
+                    error: () => {
+                        resolve('');
+                    },
+                });
+            });
+        }
+
+        return this.cachedProducts[cacheKey];
+    }
+}
 
 class ProductsByCategory {
     constructor({
@@ -9,6 +230,124 @@ class ProductsByCategory {
         sort = '',
         limit = '',
         $parent,
+        context,
+        sectionTemplate = `
+            <div class="emthemesModez-section emthemesModez-section--productsByCategorySortingTabs">
+                <div class="emthemesModez-section-inner">
+                    <div class="emthemesModez-productsByCategoryTabs emthemesModez-productsByCategoryTabs--sorting emthemesModez-productsByCategoryTabs--supermarket1">
+                        <ul class="tabs" data-tab role="tablist">
+                            <li class="li-heading" role="presentation"><h2 class="page-heading" role="tab"><a href="{{url}}">{{name}}</a></h2></li>
+
+                            {{#showBestselling}}
+                                <li class="tab{{#isBestsellingActive}} is-active{{/isBestsellingActive}}" role="presentation"><a class="tab-title" href="#tab-productsByCategoryTabs-bestselling-{{id}}" role="tab" tabindex="0" aria-selected="{{#isBestsellingActive}}true{{/isBestsellingActive}}{{^isBestsellingActive}}false{{/isBestsellingActive}}" aria-controls="tab-productsByCategoryTabs-bestselling-{{id}}">{{txtBestsellingTab}}</a></li>
+                            {{/showBestselling}}
+
+                            {{#showFeatured}}
+                                <li class="tab{{#isFeaturedActive}} is-active{{/isFeaturedActive}}" role="presentation"><a class="tab-title" href="#tab-productsByCategoryTabs-featured-{{id}}" role="tab" tabindex="0" aria-selected="{{#isFeaturedActive}}true{{/isFeaturedActive}}{{^isFeaturedActive}}false{{/isFeaturedActive}}" aria-controls="tab-productsByCategoryTabs-featured-{{id}}">{{txtFeaturedTab}}</a></li>
+                            {{/showFeatured}}
+
+                            {{#showNew}}
+                                <li class="tab{{#isNewActive}} is-active{{/isNewActive}}" role="presentation"><a class="tab-title" href="#tab-productsByCategoryTabs-newest-{{id}}" role="tab" tabindex="0" aria-selected="{{#isNewActive}}true{{/isNewActive}}{{^isNewActive}}false{{/isNewActive}}" aria-controls="tab-productsByCategoryTabs-newest-{{id}}">{{txtNewTab}}</a></li>
+                            {{/showNew}}
+
+                            {{#showReviews}}
+                                <li class="tab{{#isReviewsActive}} is-active{{/isReviewsActive}}" role="presentation"><a class="tab-title" href="#tab-productsByCategoryTabs-avgcustomerreview-{{id}}" role="tab" tabindex="0" aria-selected="{{#isReviewsActive}}true{{/isReviewsActive}}{{^isReviewsActive}}false{{/isReviewsActive}}" aria-controls="tab-productsByCategoryTabs-avgcustomerreview-{{id}}">{{txtReviewsTab}}</a></li>
+                            {{/showReviews}}
+                        </ul>
+                        {{#showBannerOrSubcategories}}
+                            <div class="emthemesModez-productsByCategoryTabs-details{{#showBanner}} emthemesModez-productsByCategoryTabs-details--hasImage{{/showBanner}}">
+                                {{#showBanner}}
+                                    <div class="emthemesModez-productsByCategoryTabs-details-image" data-banner>
+                                        <a href="{{url}}"><img alt="{{name}}" /></a>
+                                    </div>
+                                {{/showBanner}}
+                                {{#subcategories.length}}
+                                        <div class="emthemesModez-productsByCategoryTabs-details-sub">
+                                            <h3 class="emthemesModez-productsByCategoryTabs-details-sub-heading">{{txtSubHeading}}</h3>
+                                            <ul class="emthemesModez-productsByCategoryTabs-details-sub-list">
+                                            {{#subcategories}}
+                                                <li class="emthemesModez-productsByCategoryTabs-details-sub-item"><a href="{{url}}">{{name}}</a></li>
+                                            {{/subcategories}}
+                                            </ul>
+                                        </div>
+                                {{/subcategories.length}}
+                            </div>
+                        {{/showBannerOrSubcategories}}
+                        <div class="tabs-contents">
+                            {{#showBestselling}}
+                                <section role="tabpanel" aria-hidden="{{#isBestsellingActive}}false{{/isBestsellingActive}}{{^isBestsellingActive}}true{{/isBestsellingActive}}" class="tab-content {{#isBestsellingActive}}is-active{{/isBestsellingActive}}" id="tab-productsByCategoryTabs-bestselling-{{id}}" data-sort="bestselling">
+                                    {{#isBestsellingActive}}
+                                        {{&productsHtml}}
+                                    {{/isBestsellingActive}}
+                                    {{^isBestsellingActive}}
+                                        {{&productsLoadingHtml}}
+                                    {{/isBestsellingActive}}
+                                </section>
+                            {{/showBestselling}}
+
+                            {{#showFeatured}}
+                                <section role="tabpanel" aria-hidden="{{#isFeaturedActive}}false{{/isFeaturedActive}}{{^isFeaturedActive}}true{{/isFeaturedActive}}" class="tab-content {{#isFeaturedActive}}is-active{{/isFeaturedActive}}" id="tab-productsByCategoryTabs-featured-{{id}}" data-sort="featured">
+                                    {{#isFeaturedActive}}
+                                        {{&productsHtml}}
+                                    {{/isFeaturedActive}}
+                                    {{^isFeaturedActive}}
+                                        {{&productsLoadingHtml}}
+                                    {{/isFeaturedActive}}
+                                </section>
+                            {{/showFeatured}}
+
+                            {{#showNew}}
+                                <section role="tabpanel" aria-hidden="{{#isNewActive}}false{{/isNewActive}}{{^isNewActive}}true{{/isNewActive}}" class="tab-content {{#isNewActive}}is-active{{/isNewActive}}" id="tab-productsByCategoryTabs-newest-{{id}}" data-sort="newest">
+                                    {{#isNewActive}}
+                                        {{&productsHtml}}
+                                    {{/isNewActive}}
+                                    {{^isNewActive}}
+                                        {{&productsLoadingHtml}}
+                                    {{/isNewActive}}
+                                </section>
+                            {{/showNew}}
+
+                            {{#showReviews}}
+                                <section role="tabpanel" aria-hidden="{{#isReviewsActive}}false{{/isReviewsActive}}{{^isReviewsActive}}true{{/isReviewsActive}}" class="tab-content {{#isReviewsActive}}is-active{{/isReviewsActive}}" id="tab-productsByCategoryTabs-avgcustomerreview-{{id}}" data-sort="avgcustomerreview">
+                                    {{#isReviewsActive}}
+                                        {{&productsHtml}}
+                                    {{/isReviewsActive}}
+                                    {{^isReviewsActive}}
+                                        {{&productsLoadingHtml}}
+                                    {{/isReviewsActive}}
+                                </section>
+                            {{/showReviews}}
+
+                        </div>
+                        <div class="emthemesModez-productsByCategoryTabs-loader loader"></div>
+                        <div class="emthemesModez-productsByCategoryTabs-actionGroup">
+                            <a href="#" class="button button--small loadMore">{{txtLoadMore}}</a>
+                            <a href="#" class="button button--small collapse">{{txtCollapse}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        productsLoadingTemplate = `
+            <div class="emthemesModez-productLoading">
+                <div class="emthemesModez-productLoading-item"><img class="lazyload" data-sizes="auto" src="{{loadingImage}}" data-src="{{productLoadingImage}}" alt="loading" title="loading" /></div>
+                <div class="emthemesModez-productLoading-item"><img class="lazyload" data-sizes="auto" src="{{loadingImage}}" data-src="{{productLoadingImage}}" alt="loading" title="loading" /></div>
+                <div class="emthemesModez-productLoading-item"><img class="lazyload" data-sizes="auto" src="{{loadingImage}}" data-src="{{productLoadingImage}}" alt="loading" title="loading" /></div>
+                <div class="emthemesModez-productLoading-item"><img class="lazyload" data-sizes="auto" src="{{loadingImage}}" data-src="{{productLoadingImage}}" alt="loading" title="loading" /></div>
+            </div>
+        `,
+        productsTemplate = `
+            <div class="emthemesModez-productsByCategoryTabs-products" data-end-cursor="{{endCursor}}" {{#hasNextPage}}data-has-next-page="true"{{/hasNextPage}}>
+                <ul class="productGrid {{#maxColumns}}productGrid--maxCol{{maxColumns}}{{/maxColumns}}">
+                    {{#products}}
+                        <li class="product">
+                            {{&productCardHtml}}
+                        </li>
+                    {{/products}}
+                </ul>
+            </div>
+        `,
+        productCardTemplate,
     }) {
         this.onLoadMore = this.onLoadMore.bind(this);
         this.onCollapse = this.onCollapse.bind(this);
@@ -18,40 +357,272 @@ class ProductsByCategory {
         this.sort = sort;
         this.limit = limit;
         this.$parent = $parent;
+        this.context = context;
+        this.sectionTemplate = sectionTemplate;
+        this.productsLoadingTemplate = productsLoadingTemplate;
+        this.productsTemplate = productsTemplate;
+        this.productCardTemplate = productCardTemplate || defaultProductCardTemplate;
         this.$scope = $('<div class="emthemesModez-productsByCategoryTabs-loading"></div>');
         this.$loadMore = $();
         this.$collapse = $();
         this.$loader = $();
+
+        this.gql = new CategoryProductsGraphQLQuery(context);
 
         this.$parent.append(this.$scope);
 
         this.request();
     }
 
-    request() {
-        const limitQuery = this.limit ? `&limit=${this.limit}` : '';
-        const sortQuery = this.sort ? `&sort=${this.sort}` : '';
-        const template = 'papa-supermarket/products-by-category-sorting-tabs/section';
+    async request() {
+        let sort;
 
-        utils.api.getPage(`/categories.php?category=${this.id}${limitQuery}${sortQuery}`, { template }, (err, resp) => {
-            if (err || !resp || resp.error) {
-                this.$scope.remove();
-                return;
+        switch (this.sort) {
+        case 'bestselling':
+            sort = 'BEST_SELLING';
+            break;
+        case 'featured':
+            sort = 'FEATURED';
+            break;
+        case 'newest':
+            sort = 'NEWEST';
+            break;
+        case 'avgcustomerreview':
+            sort = 'BEST_REVIEWED';
+            break;
+        default:
+            sort = 'DEFAULT';
+            break;
+        }
+
+        const category = await this.gql.load(this.id, '', this.limit, sort, true);
+
+        this.categoryPath = category?.path;
+
+        // If no product returned by GraphQL, then use AJAX fetch from category page
+        if (category && !category.products?.length) {
+            return this.requestCategoryPageOnViewport();
+        }
+
+        if (!category) {
+            this.$scope.remove();
+            return;
+        }
+
+        const html = mustache.render(this.sectionTemplate, {
+            name: category.name,
+            url: category.path,
+            id: this.id,
+            showBestselling: this.context.pbcst_show_bestselling,
+            isBestsellingActive: this.sort === 'bestselling',
+            txtBestsellingTab: this.context.txtBestsellingTab,
+            showFeatured: this.context.pbcst_show_featured,
+            isFeaturedActive: this.sort === 'featured',
+            txtFeaturedTab: this.context.txtFeaturedTab,
+            showNew: this.context.pbcst_show_new,
+            isNewActive: this.sort === 'newest',
+            txtNewTab: this.context.txtNewTab,
+            showReviews: this.context.pbcst_show_reviews,
+            isReviewsActive: this.sort === 'avgcustomerreview',
+            txtReviewsTab: this.context.txtReviewsTab,
+            showBannerOrSubcategories: this.context.pbcst_show_banner || this.context.pbcst_subcategories > 0 && category.hasChildren,
+            showBanner: this.context.pbcst_show_banner,
+            txtSubHeading: this.context.txtSubcategoryHeading,
+            subcategories: category.children.slice(0, this.context.pbcst_subcategories).map(cat => ({
+                name: cat.name,
+                url: cat.path,
+            })),
+
+            productsHtml: this.generateProductsHtml(category),
+            productsLoadingHtml: mustache.render(this.productsLoadingTemplate, {
+                loadingImage: this.context.loadingImage,
+                productLoadingImage: this.context.productLoadingImage,
+            }, null),
+            txtLoadMore: this.context.txtLoadMore,
+            txtCollapse: this.context.txtCollapse,
+        }, null);
+
+        const $html = $(html);
+
+        this.$scope.replaceWith($html);
+        this.$scope = $html;
+        this.$loader = this.$scope.find('.loader');
+
+        this.initTabs();
+        this.initSlick();
+        this.initBanner();
+        this.initButtons();
+    }
+
+    requestCategoryPageOnViewport() {
+        const $sptLoading = $('[data-special-products-tabs] .loading');
+        const onCheckViewport = throttle(() => {
+            if ($sptLoading.length > 0 && $sptLoading.is(':visible')) return;
+
+            const offset = 50;
+            const elTop = this.$scope.offset().top;
+            const elBottom = elTop + this.$scope.outerHeight();
+            const winTop = $(window).scrollTop();
+            const winBottom = winTop + $(window).innerHeight();
+
+            if (elTop - offset < winBottom && elBottom + offset > winTop) {
+                $(window).off('load resize scroll', onCheckViewport);
+                this.requestCategoryPage();
             }
+        }, 100);
+        $(window).on('load resize scroll', onCheckViewport);
+        if (this.index === 0) {
+            onCheckViewport();
+        }
+    }
 
-            const $resp = $(resp);
-            this.$scope.replaceWith($resp);
-            this.$scope = $resp;
-            this.$loader = this.$scope.find('.loader');
+    requestCategoryPage() {
+        const task = () => {
+            const limitQuery = this.limit ? `&limit=${this.limit}` : '';
+            const sortQuery = this.sort ? `&sort=${this.sort}` : '';
+            const template = 'papa-supermarket/products-by-category-sorting-tabs/section';
+            const url = this.categoryPath ? `${this.categoryPath}?${limitQuery}${sortQuery}` : `/categories.php?category=${this.id}${limitQuery}${sortQuery}`;
 
-            this.initTabs();
-            this.initSlick();
-            this.initBanner();
-            this.initButtons();
+            isRequestingCategoryPage++;
+
+            utils.api.getPage(url, { template }, (err, resp) => {
+                isRequestingCategoryPage--;
+
+                if (err || !resp || resp.error) {
+                    this.$scope.remove();
+                    return;
+                }
+
+                const $resp = $(resp);
+
+                // Stop if the response contains multiple root elements (server error)
+                if ($resp.length > 1) {
+                    this.$scope.remove();
+                    return;
+                }
+
+                this.$scope.replaceWith($resp);
+                this.$scope = $resp;
+                this.$loader = this.$scope.find('.loader');
+
+                this.initTabs();
+                this.initSlick();
+                this.initBanner();
+                this.initButtons();
+            });
+        };
+
+        if (isRequestingCategoryPage <= 0) {
+            task();
+        } else {
+            const timer = setInterval(() => {
+                if (isRequestingCategoryPage <= 0) {
+                    clearInterval(timer);
+                    task();
+                }
+            }, 200);
+        }
+    }
+
+    generateProductsHtml(category) {
+        return mustache.render(this.productsTemplate, {
+            maxColumns: (() => {
+                if (this.context.pbcst_products === 5) return 5;
+                if (this.context.pbcst_products === 6) return 6;
+                if (this.context.pbcst_products === 10) return 5;
+                if (this.context.pbcst_products === 12 && this.context.pbcst_subcategories === 0) return 6;
+                if (this.context.pbcst_products === 15) return 5;
+                if (this.context.pbcst_products === 18) return 6;
+            })(),
+            products: category.products.map(product => ({
+                ...product,
+                productCardHtml: mustache.render(this.productCardTemplate, product),
+            })),
+            endCursor: category.productsInfo.endCursor,
+            hasNextPage: category.productsInfo.hasNextPage,
         });
     }
 
-    loadProducts({
+    async loadProducts({
+        sort = '',
+        afterCursor = '',
+        $content,
+    }) {
+        this.$loader.addClass('loading');
+
+        let sortParam;
+        switch (sort) {
+        case 'bestselling':
+            sortParam = 'BEST_SELLING';
+            break;
+        case 'featured':
+            sortParam = 'FEATURED';
+            break;
+        case 'newest':
+            sortParam = 'NEWEST';
+            break;
+        case 'avgcustomerreview':
+            sortParam = 'BEST_REVIEWED';
+            break;
+        default:
+            sortParam = 'DEFAULT';
+            break;
+        }
+
+        const category = await this.gql.load(this.id, afterCursor, this.limit, sortParam, true);
+
+        // If category has no product, then load products from the first subcategory
+        if (category && !category.products?.length) {
+            const catId = category.children[0]?.entityId;
+            if (catId) {
+                const sub = await this.gql.load(catId, afterCursor, this.limit, sortParam, true);
+                if (sub) {
+                    category.products = sub.products;
+                    category.productsInfo = sub.productsInfo;
+                }
+            }
+        }
+
+        const { endCursor, hasNextPage } = category.productsInfo;
+
+        this.$loader.removeClass('loading');
+
+        if (!category) {
+            return;
+        }
+
+        const html = this.generateProductsHtml(category);
+        const $html = $(html);
+
+        const $productGridContainer = $content.find('[data-end-cursor]');
+        if ($productGridContainer.length > 0) {
+            $productGridContainer.data({
+                endCursor,
+                hasNextPage,
+            });
+            $productGridContainer.find('.productGrid').append($html.find('.productGrid').children());
+        } else {
+            $content
+                .html($html)
+                .data('loaded', true);
+        }
+
+        this.initSlick();
+
+        if (hasNextPage) {
+            this.$loadMore.show();
+        } else {
+            this.$loadMore.hide();
+        }
+
+        if (endCursor) {
+            this.$collapse.show();
+        } else {
+            this.$collapse.hide();
+        }
+    }
+
+    loadProductsFromCategoryPage({
         sort = '',
         page = '',
         $content,
@@ -60,10 +631,11 @@ class ProductsByCategory {
         const sortQuery = sort ? `&sort=${sort}` : '';
         const pageQuery = page ? `&page=${page}` : '';
         const template = 'papa-supermarket/products-by-category-sorting-tabs/products';
+        const url = this.categoryPath ? `${this.categoryPath}?${limitQuery}${sortQuery}${pageQuery}` : `/categories.php?category=${this.id}${limitQuery}${sortQuery}${pageQuery}`;
 
         this.$loader.addClass('loading');
 
-        utils.api.getPage(`/categories.php?category=${this.id}${limitQuery}${sortQuery}${pageQuery}`, { template }, (err, resp) => {
+        utils.api.getPage(url, { template }, (err, resp) => {
             this.$loader.removeClass('loading');
 
             if (err || !resp) {
@@ -71,6 +643,12 @@ class ProductsByCategory {
             }
 
             const $resp = $(resp);
+
+            // Stop if the response contains multiple root elements (server error)
+            if ($resp.length > 1) {
+                return;
+            }
+
             const $currentPage = $content.find('[data-current-page]');
 
             if ($currentPage.length > 0) {
@@ -104,21 +682,21 @@ class ProductsByCategory {
     initTabs() {
         foundation(this.$scope);
 
-        this.$scope.find('.tab-content.is-active').data('loaded', true);
+        const $activeTabContent = this.$scope.find('.tab-content.is-active').data('loaded', true);
 
         $('[data-tab]', this.$scope).on('toggled', (event, tab) => {
             const $content = $($(tab).find('a').attr('href'));
 
             if ($content.data('loaded')) {
-                const $currentPage = $content.find('[data-current-page]');
+                const $productGridContainer = $content.find('[data-end-cursor], [data-current-page]');
 
-                if ($currentPage.data('hasNextPage')) {
+                if ($productGridContainer.data('hasNextPage')) {
                     this.$loadMore.show();
                 } else {
                     this.$loadMore.hide();
                 }
 
-                if (Number($currentPage.data('currentPage')) > 1) {
+                if ($productGridContainer.data('endCursor') || Number($productGridContainer.data('currentPage')) > 1) {
                     this.$collapse.show();
                 } else {
                     this.$collapse.hide();
@@ -130,10 +708,17 @@ class ProductsByCategory {
             this.$loadMore.hide();
             this.$collapse.hide();
 
-            this.loadProducts({
-                sort: $content.data('sort'),
-                $content,
-            });
+            if ($activeTabContent.find('[data-end-cursor]').length > 0) {
+                this.loadProducts({
+                    sort: $content.data('sort'),
+                    $content,
+                });
+            } else {
+                this.loadProductsFromCategoryPage({
+                    sort: $content.data('sort'),
+                    $content,
+                });
+            }
         });
     }
 
@@ -154,7 +739,7 @@ class ProductsByCategory {
 
     initBanner() {
         const $img = this.$scope.find('[data-banner] img');
-        const src = `/product_images/uploaded_images/products-by-category-${this.index + 1}.jpg?c=2`;
+        const src = `/product_images/uploaded_images/products-by-category-${this.index + 1}.jpg?c=2&t=${this.context.configurationId}`;
 
         if ($img.hasClass('lazyload')) {
             $img.attr('data-src', src);
@@ -167,7 +752,7 @@ class ProductsByCategory {
         this.$loadMore = this.$scope.find('.loadMore').hide();
         this.$collapse = this.$scope.find('.collapse').hide();
 
-        if (this.$scope.find('.tab-content.is-active [data-current-page]').data('hasNextPage')) {
+        if (this.$scope.find('.tab-content.is-active').find('[data-end-cursor], [data-current-page]').data('hasNextPage')) {
             this.$loadMore.show();
         }
 
@@ -179,27 +764,37 @@ class ProductsByCategory {
         event.preventDefault();
 
         const $content = this.$scope.find('.tab-content.is-active');
-        const $currentPage = $content.find('[data-current-page]');
+        const $productGridContainer = $content.find('[data-end-cursor], [data-current-page]');
         const $hide = $content.find('.product.hide');
 
         if ($hide.length > 0) {
             $hide.show().removeClass('hide');
             this.$collapse.show();
 
-            if (!$currentPage.data('hasNextPage')) {
+            if (!$productGridContainer.data('hasNextPage')) {
                 this.$loadMore.hide();
             }
             return;
         }
 
-        if ($currentPage.data('hasNextPage')) {
+        if ($productGridContainer.data('hasNextPage')) {
             const sort = $content.data('sort');
-            const page = Number($currentPage.data('currentPage')) + 1;
-            this.loadProducts({
-                sort,
-                page,
-                $content,
-            });
+            const afterCursor = $productGridContainer.data('endCursor');
+            const page = Number($productGridContainer.data('currentPage'));
+
+            if (afterCursor) {
+                this.loadProducts({
+                    sort,
+                    afterCursor,
+                    $content,
+                });
+            } else if (page) {
+                this.loadProductsFromCategoryPage({
+                    sort,
+                    page: page + 1,
+                    $content,
+                });
+            }
         } else {
             this.$loadMore.hide();
         }
@@ -226,9 +821,10 @@ class ProductsByCategory {
 }
 
 class ProductsByCategories {
-    constructor($scope) {
+    constructor($scope, context) {
         this.$scope = $scope;
         this.lazy = this.$scope.is('[data-lazy]');
+        this.context = context;
         this.loaded = false;
 
         this.onCheckViewport = throttle(this.onCheckViewport.bind(this), 100);
@@ -247,11 +843,12 @@ class ProductsByCategories {
         const limit = this.$scope.data('limit');
 
         String(this.$scope.data('pbcstGroup')).split(',').map((idStr, index) => new ProductsByCategory({
-            id: idStr.trim(),
+            id: Number(idStr.trim()),
             index,
             sort,
             limit,
             $parent: this.$scope,
+            context: this.context,
         }));
     }
 
@@ -289,6 +886,6 @@ class ProductsByCategories {
     }
 }
 
-export default function init(selector = '[data-pbcst-group]') {
-    $(selector).each((i, el) => new ProductsByCategories($(el)));
+export default function init(selector = '[data-pbcst-group]', context) {
+    $(selector).each((i, el) => new ProductsByCategories($(el), context));
 }

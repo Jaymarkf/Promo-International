@@ -1,4 +1,5 @@
 __webpack_public_path__ = window.__webpack_public_path__; // eslint-disable-line
+__webpack_nonce__ = window.__webpack_nonce__; // eslint-disable-line
 
 import 'regenerator-runtime/runtime';
 import Global from './theme/global';

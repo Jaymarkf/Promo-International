@@ -5,8 +5,10 @@ import foundation from '../global/foundation'; // Supermarket
 import 'slick-carousel';
 import ImageGallery from '../product/image-gallery';
 import modalFactory, { defaultModal, ModalEvents, showAlertModal } from '../global/modal';
-import _ from 'lodash';
+import { isEmpty, isPlainObject } from 'lodash';
 import Wishlist from '../wishlist';
+import bannerUtils from './utils/banner-utils';
+import currencySelector from '../global/currency-selector';
 import AlsoBought from '../../emthemes-modez/also-bought'; // Papathemes - Supermarket
 
 // Supermarket - OBPS Mod
@@ -45,6 +47,7 @@ function shake($el, settings) {
 // Supermarket: Fix Price not update when a product option is checked
 function supermarketSerialize($form) {
     const assoc = $form.serializeArray().reduce((_assoc, { name, value }) => {
+        // eslint-disable-next-line no-param-reassign
         _assoc[name] = value;
         return _assoc;
     }, {});
@@ -62,6 +65,12 @@ export default class ProductDetails {
         this.$overlay = $('[data-cart-item-add] .loadingOverlay');
         this.$scope = $scope;
         this.context = context;
+
+        // papathemes: need for bulk-order layout
+        this.$card = context.$card;
+        this.$cardBulkOrderOptions = context.$cardBulkOrderOptions;
+        this.closeQuickView = context.closeQuickView;
+
         this.imageGallery = new ImageGallery($('[data-image-gallery]', this.$scope));
         this.imageGallery.init();
         this.listenQuantityChange();
@@ -81,6 +90,12 @@ export default class ProductDetails {
         const hasOptions = ($productOptionsElement.html() || '').trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
 
+        if ($form[0].checkValidity()) {
+            this.updateProductDetailsData();
+        } else {
+            this.toggleWalletButtonsVisibility(false);
+        }
+
         // Papathemes - Supermarket: Fix click reviews link open tab
         $('a[href*="#tab-reviews"]', $scope).on('click', (event) => {
             if (!$(event.target).is('.tab-title')) {
@@ -97,16 +112,22 @@ export default class ProductDetails {
             this.addProductToCart(event, $form[0]);
         });
 
+        // papathemes: need for bulk-order layout
+        $form.find('#form-action-addToCartLater').on('click', (event) => {
+            event.preventDefault();
+            this.addProductToCartLater(event, $form[0]);
+        });
+
         // Update product attributes. Also update the initial view in case items are oos
         // or have default variant properties that change the view
-        if ((_.isEmpty(productAttributesData) || hasDefaultOptions) && hasOptions) {
+        if ((isEmpty(productAttributesData) || hasDefaultOptions) && hasOptions) {
             const $productId = $('[name="product_id"]', $form).val();
 
             utils.api.productAttributes.optionChange($productId, supermarketSerialize($form), 'products/bulk-discount-rates', (err, response) => {
                 const attributesData = response.data || {};
                 const attributesContent = response.content || {};
                 this.updateProductAttributes(attributesData);
-                if (hasDefaultOptions) {
+                if (hasDefaultOptions || context.forceUpdateView) { // papathemes: bulk-order layout edited
                     this.updateView(attributesData, attributesContent);
                 } else {
                     this.updateDefaultAttributesForOOS(attributesData);
@@ -114,6 +135,7 @@ export default class ProductDetails {
             });
         } else {
             this.updateProductAttributes(productAttributesData);
+            bannerUtils.dispatchProductBannerEvent(productAttributesData);
         }
 
         $productOptionsElement.show();
@@ -157,14 +179,10 @@ export default class ProductDetails {
     }
 
     setProductVariant() {
-        if (this.context.isAMP) {
-            return;
-        }
-
         const unsatisfiedRequiredFields = [];
         const options = [];
 
-        $.each($('[data-product-attribute]'), (index, value) => {
+        this.$scope.find('[data-product-attribute]').each((index, value) => { // papathemes: fix selector don't respect the scope
             const optionLabel = value.children[0].innerText;
             const optionTitle = optionLabel.split(':')[0].trim();
             const required = optionLabel.toLowerCase().includes('required');
@@ -257,6 +275,69 @@ export default class ProductDetails {
         }
     }
 
+    // papathemes: need for bulk-order layout
+    createSelectedOptionsHtml() {
+        const $dl = $('<dl></dl>');
+
+        this.$scope.find('[data-product-attribute]').each((index, el) => {
+            const optionTitle = el.children[0]?.childNodes[0]?.nodeValue?.split(':')[0].trim();
+            const type = el.getAttribute('data-product-attribute');
+
+            if (type === 'date') {
+                const isSatisfied = Array.from(el.querySelectorAll('select')).every((select) => select.selectedIndex !== 0);
+
+                if (isSatisfied) {
+                    const dateString = Array.from(el.querySelectorAll('select')).map((x) => x.value).join('-');
+                    $('<dt></dt>').text(optionTitle).appendTo($dl);
+                    $('<dd></dd>').text(dateString).appendTo($dl);
+                }
+            } else if (type === 'set-select') {
+                const select = el.querySelector('select');
+                const selectedIndex = select.selectedIndex;
+
+                if (selectedIndex !== 0) {
+                    $('<dt></dt>').text(optionTitle).appendTo($dl);
+                    $('<dd></dd>').text(select.options[selectedIndex].innerText).appendTo($dl);
+                }
+            } else if (type === 'set-rectangle' || type === 'set-radio' || type === 'swatch' || type === 'input-checkbox' || type === 'product-list') {
+                const checked = el.querySelector(':checked');
+                if (checked) {
+                    if (type === 'set-rectangle' || type === 'set-radio' || type === 'product-list' || type === 'input-checkbox') {
+                        const label = checked.labels ? checked.labels[0].innerText : $(`label[for=${checked.id}]`).first().text();
+                        $('<dt></dt>').text(optionTitle).appendTo($dl);
+                        $('<dd></dd>').text(label).appendTo($dl);
+                    }
+
+                    if (type === 'swatch') {
+                        const label = checked.labels ? checked.labels[0].children[0] : $(`label[for=${checked.id}]`).children().get(0);
+                        $('<dt></dt>').text(optionTitle).appendTo($dl);
+                        $('<dd></dd>').text(label.title).appendTo($dl);
+                    }
+                }
+            } else if (type === 'input-file') {
+                const input = el.querySelector('input[type="file"]');
+                if (input.files.length) {
+                    $('<dt></dt>').text(optionTitle).appendTo($dl);
+                    $('<dd></dd>').text(input.files[0].name).appendTo($dl);
+                }
+            } else if (type === 'textarea') {
+                const textarea = el.querySelector('textarea');
+                if (textarea.value) {
+                    $('<dt></dt>').text(optionTitle).appendTo($dl);
+                    $('<dd></dd>').text(textarea.value).appendTo($dl);
+                }
+            } else {
+                const input = el.querySelector('input');
+                if (input.value) {
+                    $('<dt></dt>').text(optionTitle).appendTo($dl);
+                    $('<dd></dd>').text(input.value).appendTo($dl);
+                }
+            }
+        });
+
+        return $dl.children().length > 0 ? $dl.prop('outerHTML') : '';
+    }
+
     /**
      * Since $productView can be dynamically inserted using render_with,
      * We have to retrieve the respective elements
@@ -318,6 +399,7 @@ export default class ProductDetails {
                 $input: $('[name=qty\\[\\]]', $scope),
             },
             $bulkPricing: $('.productView-info-bulkPricing', $scope),
+            $walletButtons: $('[data-add-to-cart-wallet-buttons]', $scope),
         };
     }
 
@@ -356,17 +438,18 @@ export default class ProductDetails {
                 .html($changedOption.data('productAttributeLabel'));
         }
 
-        
         utils.api.productAttributes.optionChange(productId, supermarketSerialize($form), 'products/bulk-discount-rates', (err, response) => {
             const productAttributesData = response.data || {};
             const productAttributesContent = response.content || {};
             this.updateProductAttributes(productAttributesData);
             this.updateView(productAttributesData, productAttributesContent);
+            this.updateProductDetailsData();
+            bannerUtils.dispatchProductBannerEvent(productAttributesData);
         });
     }
 
     showProductImage(image) {
-        if (_.isPlainObject(image)) {
+        if (isPlainObject(image)) {
             const zoomImageUrl = utils.tools.imageSrcset.getSrcset(
                 image.data,
                 { '1x': this.context.themeSettings.zoom_size },
@@ -446,6 +529,8 @@ export default class ProductDetails {
             viewModel.quantity.$input.val(qty);
             // update text
             viewModel.quantity.$text.text(qty);
+
+            this.updateProductDetailsData();
         });
 
         // --------------------------------------------------------------------
@@ -459,6 +544,10 @@ export default class ProductDetails {
         });
 
         // --------------------------------------------------------------------
+
+        this.$scope.on('keyup', '.form-input--incrementTotal', () => {
+            this.updateProductDetailsData();
+        });
     }
 
     /**
@@ -476,14 +565,6 @@ export default class ProductDetails {
             return;
         }
 
-        // Supermarket:
-        // Somehow Safari iOS doesn't work right with FormData,
-        // so we submit the form as normal.
-        if (this.context.isAMP) {
-            $(form).attr('target', '_top');
-            return;
-        }
-
         // Prevent default
         event.preventDefault();
 
@@ -495,6 +576,9 @@ export default class ProductDetails {
 
         // Add item to cart
         utils.api.cart.itemAdd(this.filterEmptyFilesFromForm(new FormData(form)), async (err, response) => {
+            if (response && response.data && response.data.cart_id) {
+                currencySelector(response.data.cart_id);
+            }
             const errorMessage = err || response.data.error;
 
             $addToCartBtn
@@ -537,6 +621,10 @@ export default class ProductDetails {
                     this.previewModal.open();
                 }
 
+                if (window.ApplePaySession) {
+                    this.previewModal.$modal.addClass('apple-pay-supported');
+                }
+
                 this.updateCartContent(this.previewModal, response.data.cart_item.id);
             } else {
                 this.$overlay.show();
@@ -544,6 +632,86 @@ export default class ProductDetails {
                 this.redirectTo(response.data.cart_item.cart_url || this.context.urls.cart);
             }
         });
+    }
+
+    // papathemes: need for bulk-order layout
+    addProductToCartLater(event, form) {
+        if (form.reportValidity && !form.reportValidity()) {
+            return;
+        }
+
+        if (this.$cardBulkOrderOptions) {
+            const $form = this.$scope.find('form[data-cart-item-add]');
+            $form.addClass('u-hiddenVisually');
+
+            // Update price and qty of the bulk-order item
+            if (this.$card) {
+                const viewModel = this.getViewModel(this.$scope);
+                const $cardPriceWithTax = this.$card.find('[data-product-price-with-tax]');
+                const $cardPriceWithoutTax = this.$card.find('[data-product-price-without-tax]');
+                const $boPriceFormatted = this.$card.find('[data-bulkorder-price-formatted]');
+                const $boPriceValue = this.$card.find('[data-bulkorder-price-value]');
+
+                if (viewModel.$priceWithTax.length > 0) {
+                    const priceFormatted = viewModel.$priceWithTax.html();
+                    const priceValue = viewModel.$priceWithTax.data('priceValue');
+
+                    $cardPriceWithTax.html(priceFormatted);
+
+                    if ($cardPriceWithTax.length > 0) {
+                        $boPriceFormatted.data('bulkorderPriceFormatted', priceFormatted);
+
+                        if (priceValue) {
+                            $boPriceValue.data('bulkorderPriceValue', priceValue);
+                        }
+                    }
+                }
+
+                if (viewModel.$priceWithoutTax.length > 0) {
+                    const priceFormatted = viewModel.$priceWithoutTax.html();
+                    const priceValue = viewModel.$priceWithoutTax.data('priceValue');
+
+                    $cardPriceWithoutTax.html(priceFormatted);
+
+                    if ($cardPriceWithoutTax.length > 0 && $cardPriceWithTax.length === 0) {
+                        $boPriceFormatted.data('bulkorderPriceFormatted', priceFormatted);
+
+                        if (priceValue) {
+                            $boPriceValue.data('bulkorderPriceValue', priceValue);
+                        }
+                    }
+                }
+
+                // Update card quantity box
+                const qty = viewModel.quantity.$input.val() || 1;
+                const minQty = viewModel.quantity.$input.data('quantityMin');
+                const maxQty = viewModel.quantity.$input.data('quantityMax');
+                const $cardQty = this.$card.find('[data-quantity-change] input');
+                if (minQty) {
+                    $cardQty.attr('data-quantity-min', minQty);
+                }
+                if (maxQty) {
+                    $cardQty.attr('data-quantity-max', maxQty);
+                }
+                $cardQty.val(qty).trigger('change');
+            }
+
+            // Insert the add to cart form to the bulk-order item
+            this.$cardBulkOrderOptions
+                .html(this.createSelectedOptionsHtml())
+                .append($form);
+
+            // remove ID to avoid duplicate ID in the DOM
+            $form.find('[id]').each((_index, el) => {
+                const $el = $(el);
+                $el.attr('data-last-element-id', $el.attr('id'))
+                    .removeAttr('id');
+            });
+        }
+
+        if (typeof this.closeQuickView === 'function') {
+            this.closeQuickView();
+        }
     }
 
     /**
@@ -657,11 +825,13 @@ export default class ProductDetails {
         if (price.with_tax) {
             viewModel.priceLabel.$span.show();
             viewModel.$priceWithTax.html(price.with_tax.formatted);
+            viewModel.$priceWithTax.data('priceValue', price.with_tax.value); // papathemes: need for bulk-order layout
         }
 
         if (price.without_tax) {
             viewModel.priceLabel.$span.show();
             viewModel.$priceWithoutTax.html(price.without_tax.formatted);
+            viewModel.$priceWithoutTax.data('priceValue', price.without_tax.value); // papathemes: need for bulk-order layout
         }
 
         if (price.rrp_with_tax) {
@@ -703,11 +873,11 @@ export default class ProductDetails {
 
         this.showMessageBox(data.stock_message || data.purchasing_message);
 
-        if (_.isObject(data.price)) {
+        if (data.price instanceof Object) {
             this.updatePriceView(viewModel, data.price);
         }
 
-        if (_.isObject(data.weight)) {
+        if (data.weight instanceof Object) {
             viewModel.$weight.html(data.weight.formatted);
         }
 
@@ -738,18 +908,16 @@ export default class ProductDetails {
         if (data.mpn) {
             viewModel.mpn.$value.text(data.mpn);
             viewModel.mpn.$label.show();
+        } else if (viewModel.mpn.$value.data('originalMpn')) {
+            viewModel.mpn.$value.text(viewModel.mpn.$value.data('originalMpn'));
+            viewModel.mpn.$label.show();
         } else {
-            if (viewModel.mpn.$value.data('originalMpn')) {
-                viewModel.mpn.$value.text(viewModel.mpn.$value.data('originalMpn'));
-                viewModel.mpn.$label.show();
-            } else {
-                viewModel.mpn.$label.hide();
-                viewModel.mpn.$value.text('');
-            }
+            viewModel.mpn.$label.hide();
+            viewModel.mpn.$value.text('');
         }
 
         // if stock view is on (CP settings)
-        if (viewModel.stock.$container.length && _.isNumber(data.stock)) {
+        if (viewModel.stock.$container.length && typeof data.stock === 'number') {
             // if the stock container is hidden, show
             viewModel.stock.$container.removeClass('u-hiddenVisually');
 
@@ -760,6 +928,7 @@ export default class ProductDetails {
         }
 
         this.updateDefaultAttributesForOOS(data);
+        this.updateWalletButtonsView(data);
 
         // If Bulk Pricing rendered HTML is available
         if (data.bulk_discount_rates && content) {
@@ -768,8 +937,28 @@ export default class ProductDetails {
             viewModel.$bulkPricing.html('');
         }
 
+        const addToCartWrapper = $('.add-to-cart-wrapper', this.$scope);
+
+        if (addToCartWrapper.is(':hidden') && data.purchasable) {
+            addToCartWrapper.show();
+        }
+
         if (data.purchasable) {
             this.$scope.find('._addToCartVisibility').filter(':hidden').show();
+        }
+    }
+
+    updateWalletButtonsView(data) {
+        this.toggleWalletButtonsVisibility(data.purchasable && data.instock);
+    }
+
+    toggleWalletButtonsVisibility(shouldShow) {
+        const viewModel = this.getViewModel(this.$scope);
+
+        if (shouldShow) {
+            viewModel.$walletButtons.show();
+        } else {
+            viewModel.$walletButtons.hide();
         }
     }
 
@@ -791,12 +980,19 @@ export default class ProductDetails {
     updateProductAttributes(data) {
         const behavior = data.out_of_stock_behavior;
         const inStockIds = data.in_stock_attributes;
-        const outOfStockMessage = ` (${data.out_of_stock_message})`;
+        const outOfStockDefaultMessage = this.context.outOfStockDefaultMessage;
+        let outOfStockMessage = data.out_of_stock_message;
 
         this.showProductImage(data.image);
 
         if (behavior !== 'hide_option' && behavior !== 'label_option') {
             return;
+        }
+
+        if (outOfStockMessage) {
+            outOfStockMessage = ` (${outOfStockMessage})`;
+        } else {
+            outOfStockMessage = ` (${outOfStockDefaultMessage})`;
         }
 
         $('[data-product-attribute-value]', this.$scope).each((i, attribute) => {
@@ -810,6 +1006,47 @@ export default class ProductDetails {
                 this.disableAttribute($attribute, behavior, outOfStockMessage);
             }
         });
+    }
+
+    updateProductDetailsData() {
+        // papathemes-supermarket:
+        // Stop if product is also-bought product (FBT) to prevent incorrect price from quick payment button
+        if (this.$scope.closest('[data-also-bought]').length > 0) {
+            return;
+        }
+
+        const $form = this.$scope.find('form[data-cart-item-add]'); // papathemes: fix selector don't respect the scope
+        const formDataItems = $form.serializeArray();
+
+        const productDetails = {};
+
+        for (const formDataItem of formDataItems) {
+            const { name, value } = formDataItem;
+
+            if (name === 'product_id') {
+                productDetails.productId = Number(value);
+            }
+
+            if (name === 'qty[]') {
+                productDetails.quantity = Number(value);
+            }
+
+            if (name.match(/attribute/)) {
+                const productOption = {
+                    optionId: Number(name.match(/\d+/g)[0]),
+                    optionValue: value,
+                };
+
+                productDetails.optionSelections = productDetails?.optionSelections
+                    ? [...productDetails.optionSelections, productOption]
+                    : [productOption];
+            }
+        }
+
+        document.dispatchEvent(new CustomEvent('onProductUpdate', {
+            bubbles: true,
+            detail: { productDetails },
+        }));
     }
 
     disableAttribute($attribute, behavior, outOfStockMessage) {
@@ -834,7 +1071,6 @@ export default class ProductDetails {
                 $select[0].selectedIndex = 0;
             }
         } else {
-            $attribute.attr('disabled', 'disabled');
             $attribute.html($attribute.html().replace(outOfStockMessage, '') + outOfStockMessage);
         }
     }
@@ -855,7 +1091,6 @@ export default class ProductDetails {
         if (behavior === 'hide_option') {
             $attribute.toggleOption(true);
         } else {
-            $attribute.prop('disabled', false);
             $attribute.html($attribute.html().replace(outOfStockMessage, ''));
         }
     }

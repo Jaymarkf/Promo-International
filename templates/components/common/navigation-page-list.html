@@ -5,9 +5,7 @@
     data-collapsible-disabled-breakpoint="medium"
     data-collapsible-disabled-state="open"
     data-collapsible-enabled-state="closed">
-    {{name}} 
-    <i class="fas fa-caret-down ml-2" aria-hidden="true"></i>
-    <!-- <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i> -->
+    {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-caret-down" /></svg></i>
 </a>
 <div class="navPage-subMenu navPage-subMenu--standard" id="navPages-page-{{@index}}" aria-hidden="true" tabindex="-1">
     <ul class="navPage-subMenu-list">
@@ -25,7 +23,7 @@
                         data-collapsible-disabled-breakpoint="medium"
                         data-collapsible-disabled-state="open"
                         data-collapsible-enabled-state="closed">
-                        {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+                        {{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use href="#icon-caret-down" /></svg></i>
                     </a>
                     <ul class="navPage-childList" id="navPages-page-{{../../index}}-{{@index}}">
                         <li class="navPage-childList-item">

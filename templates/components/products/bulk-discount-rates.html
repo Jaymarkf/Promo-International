@@ -7,7 +7,7 @@
                 <tbody class="table-tbody">
                     {{#each bulk_discount_rates}}
                     <tr>
-                        <td>{{lang 'products.bulk_pricing.range' min=min max=max}}</td>
+                        <td>{{#if min '==' max}}{{lang 'products.bulk_pricing.range_single' min=min}}{{else}}{{lang 'products.bulk_pricing.range' min=min max=max}}{{/if}}</td>
                         <td>
                             {{#if type '===' 'percent'}}
                                 {{lang 'products.bulk_pricing.percent' discount=discount.formatted}}
@@ -40,14 +40,15 @@
         <div id="modal-bulk-pricing" class="modal modal--small" data-reveal>
             <div class="modal-header">
                 <h2 class="modal-header-title">{{lang 'products.bulk_pricing.modal_title'}}</h2>
-                <a href="#" class="modal-close" aria-label="Close"><svg class="icon"><use xlink:href="#icon-close" /></svg></a>
+
+                <a href="#" class="modal-close" aria-label="Close"><svg class="icon"><use href="#icon-close" /></svg></a>
             </div>
             <div class="modal-body">
                 <p>{{lang 'products.bulk_pricing.instructions'}}</p>
                 <ul>
                     {{#each bulk_discount_rates}}
                     <li>
-                        {{lang 'products.bulk_pricing.range' min=min max=max}}
+                        {{#if min '==' max}}{{lang 'products.bulk_pricing.range_single' min=min}}{{else}}{{lang 'products.bulk_pricing.range' min=min max=max}}{{/if}}
                         {{#if type '===' 'percent'}}
                         {{lang 'products.bulk_pricing.percent' discount=discount.formatted}}
                         {{/if}}

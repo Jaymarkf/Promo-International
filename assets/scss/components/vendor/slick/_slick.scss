@@ -81,8 +81,7 @@
     }
 }
 
-.slick-slide img
-{
+.slick-slide img {
     display: block;
     width: 100%;
 }
@@ -170,4 +169,12 @@ div.slick-slider {
     width: 1px;
     min-width: 100%;
     *width: 100%;
+}
+
+//
+// iOS Safari fix https://github.com/kenwheeler/slick/issues/2156
+// -----------------------------------------------------------------------------
+.slick-slide .card-image,
+.slick-slide .heroCarousel-image {
+    -webkit-touch-callout: default;
 }

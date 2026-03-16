@@ -6,18 +6,40 @@
     <div class="modal-header">
         <h2 class="modal-header-title">{{lang 'products.reviews.write_a_review'}}</h2>
         <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+<<<<<<< HEAD
             <svg class="icon"><use xlink:href="#icon-close" /></svg>
+=======
+            <svg class="icon"><use href="#icon-close" /></svg>
+>>>>>>> upstream/main
         </a>
     </div>
     <div class="modal-body">
         <div class="writeReview-productDetails">
             <div class="writeReview-productImage-container">
+<<<<<<< HEAD
                 {{> components/common/responsive-img
                     image=product.main_image
                     fallback_size=theme_settings.product_size
                     lazyload=theme_settings.lazyload_mode
                     default_image=theme_settings.default_image_product
                 }}
+=======
+                {{#if theme_settings.lazyload_mode '===' 'disabled'}}
+                    {{> components/common/responsive-img
+                        image=product.main_image
+                        fallback_size=theme_settings.product_size
+                        lazyload=theme_settings.lazyload_mode
+                        default_image=theme_settings.default_image_product
+                    }}
+                {{else}}
+                    {{> components/common/responsive-img
+                        image=product.main_image
+                        fallback_size=theme_settings.product_size
+                        lazyload='lazyload'
+                        default_image=theme_settings.default_image_product
+                    }}
+                {{/if}}
+>>>>>>> upstream/main
             </div>
             <h6 class="product-brand">{{ product.brand.name }}</h6>
             <h5 class="product-title">{{ product.title }}</h5>

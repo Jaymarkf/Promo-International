@@ -7,6 +7,4 @@
 @import "navPages";
 @import "navPages-emthemesModez";
 @import "navPages-supermarket-horizontal";
-@if stencilString('navPages_categoriesMenu') == 'horizontal' {
-	@include Pages_categoriesMenu;
-}
+@import "navPages-accessibility";

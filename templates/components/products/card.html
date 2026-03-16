@@ -1,7 +1,27 @@
-<article class="card {{#if alternate}}card--alternate{{/if}}" {{#if settings.data_tag_enabled}} data-event-type="{{event}}" data-entity-id="{{id}}" data-position="{{position}}" data-name="{{name}}" data-product-category="{{#each category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{brand.name}}" data-product-price="{{#if price.with_tax}}{{price.with_tax.value}}{{else}}{{price.without_tax.value}}{{/if}}"  {{/if}}>
+<article class="card {{#if alternate}}card--alternate{{/if}}"
+    {{#if settings.data_tag_enabled}}
+        data-event-type="{{event}}"
+        data-entity-id="{{id}}"
+        data-position="{{position}}"
+        data-name="{{name}}"
+        data-product-category="{{#each category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}"
+        data-product-brand="{{brand.name}}"
+        data-product-price="
+            {{#or customer (unless settings.hide_price_from_guests)}}
+                {{#if price.with_tax}}
+                    {{price.with_tax.value}}
+                {{else}}
+                    {{price.without_tax.value}}
+                {{/if}}
+            {{else}}
+                {{lang 'common.login_for_pricing'}}
+            {{/or}}"
+        "
+    {{/if}}
+>
     <figure class="card-figure">
         {{#if theme_settings.product_outstock_badge}}
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            {{#or customer (unless settings.hide_price_from_guests)}}
                 {{#if out_of_stock_message }}
                     <div class="sale-flag-side sale-flag-side--outstock">
                         <span class="sale-text">{{out_of_stock_message}}</span>
@@ -42,6 +62,8 @@
                     fallback_size=theme_settings.productgallery_size
                     lazyload=theme_settings.lazyload_mode
                     default_image=theme_settings.default_image_product
+                    default_alt=name
+                    otherAttributes=(getVar 'productCardImageSizeAttrs')
                 }}
                 {{#if theme_settings.card_showHoverImage}}
                     {{#each (limit images 2)}}
@@ -52,6 +74,8 @@
                                 fallback_size=../../theme_settings.productgallery_size
                                 lazyload=../../theme_settings.lazyload_mode
                                 default_image=../../theme_settings.default_image_product
+                                default_alt=name
+                                otherAttributes=(getVar 'productCardImageSizeAttrs')
                             }}
                         {{/if}}
                     {{/each}}
@@ -253,7 +277,7 @@
     {{#if show_aside}}
     <div class="card-aside">
         <div class="card-text card-text--price" data-test-info-type="price">
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            {{#or customer (unless settings.hide_price_from_guests)}}
                 {{> components/products/price price=price customer=customer}}
             {{else}}
                 {{> components/common/login-for-pricing}}
@@ -344,7 +368,7 @@
             <div class="card-bulkOrder-label">{{lang 'bulk_order.price'}}: </div>
             <div class="card-bulkOrder-value">
                 <div class="card-text card-text--price" data-test-info-type="price">
-                    {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                    {{#or customer (unless settings.hide_price_from_guests)}}
                         {{#or price.with_tax price.without_tax}}
                             <span
                                 data-bulkorder-price-id="{{id}}" 

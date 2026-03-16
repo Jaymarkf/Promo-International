@@ -9,6 +9,8 @@ import scrollToElement from 'scroll-to-element';
 import mediaQueryListFactory from '../theme/common/media-query-list';
 import newsletterPopup from './newsletter-popup';
 import cartPopupRemove from './cart-popup-remove';
+import recentlyViewedProducts from './recently-viewed-products';
+import compareProducts from '../emthemes-modez/compare-products';
 
 export default function (context) {
     const mq = mediaQueryListFactory('medium');
@@ -178,7 +180,7 @@ export default function (context) {
     // ------------------------------------------------------------------------
     // Instant Load Pages
     // ------------------------------------------------------------------------
-    if (context.themeSettings.instantload) {
+    if (context.themeSettings.instantload && !window.previewSdk) {
         import('./instant-load.js').then(module => {
             module.default(context);
         });
@@ -234,4 +236,14 @@ export default function (context) {
     // Init Cart Popup remove item button
     // ------------------------------------------------------------------------
     cartPopupRemove();
+
+    // ------------------------------------------------------------------------
+    // Init Recently Viewed Products
+    // ------------------------------------------------------------------------
+    recentlyViewedProducts(context);
+
+    // ------------------------------------------------------------------------
+    // Init Compare Products
+    // ------------------------------------------------------------------------
+    compareProducts(context);
 }

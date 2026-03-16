@@ -1,4 +1,4 @@
-<script>
+<script nonce="{{nonce}}">
     {{!--
         Check for modern browser features, and load polyfills if browser does not appear to support features
         we need.
@@ -20,6 +20,7 @@
     function loadScript(src) {
         var js = document.createElement('script');
         js.src = src;
+        js.nonce = '{{nonce}}';
         js.onerror = function () {
             console.error('Failed to load polyfill script ' + src);
         };

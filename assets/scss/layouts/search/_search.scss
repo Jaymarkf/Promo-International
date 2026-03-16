@@ -1,7 +1,5 @@
-
 // Left Sidebar Layout
 .papaSupermarket-page--pages-search.papaSupermarket-layout--left-sidebar {
-
     // Show categories on header for:
     // - Has faceted & has result
     // - No faceted
@@ -10,13 +8,14 @@
         .navPages .emthemesModez-navPages-verticalCategories-container {
             @include breakpoint("medium") {
                 display: block;
-                +* {
+
+                + * {
                     margin-left: 0;
                 }
             }
         }
     }
-    
+
     // Move sidebar down when:
     // - Has faceted & Has result
     // - No faceted
@@ -32,7 +31,6 @@
 // Increase sidebar width for:
 // - NO faceted (Advanced search form)
 .page-sidebar--advancedSearch {
-
     .papaSupermarket-style--modern & {
         margin-top: spacing("half");
 
@@ -52,9 +50,9 @@
     .sidebarBlock-heading {
         position: relative;
 
-        &:after {
+        &::after {
             font-family: FontAwesome;
-            content: '\f105';
+            content: "\f105";
             position: absolute;
             top: spacing("half");
             right: spacing("single");
@@ -64,8 +62,8 @@
             }
         }
 
-        &.is-open:after {
-            content: '\f107';
+        &.is-open::after {
+            content: "\f107";
         }
     }
 }
@@ -76,11 +74,10 @@
 
     @if $theme-style == "modern" {
         padding: 0 spacing("quarter");
-    }
-    @else {
+    } @else {
         padding: 0 spacing("single");
     }
-    
+
     @include breakpoint("medium") {
         padding: 0;
     }

@@ -10,7 +10,7 @@ const tpl = `
                     <a class="navPage-subMenu-action navPages-action {{#children.length}}has-subMenu is-open{{/children.length}}" href="{{&url}}">
                         {{title}}
                         {{#children.length}}
-                            <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down"></use></svg></i>
+                            <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-caret-down"></use></svg></i>
                         {{/children.length}}
                     </a>
                     {{> childrenTpl }}
@@ -28,7 +28,7 @@ const childrenTpl = `
                     <a class="navPage-childList-action navPages-action {{#children.length}}has-subMenu is-open{{/children.length}}" href="{{&url}}">
                         {{title}}
                         {{#children.length}}
-                            <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down"></use></svg></i>
+                            <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-caret-down"></use></svg></i>
                         {{/children.length}}
                     </a>
                     {{#children.length}}
@@ -53,17 +53,23 @@ export default function (context) {
         return;
     }
 
+    // Replace new ID of elements in the fitNav menu to avoid duplicate ID
+    $list.find('[data-collapsible]').each((i, el) => $(el).attr('data-collapsible', $(el).attr('data-collapsible').concat('-fitNav')));
+    $list.find('[aria-controls]').each((i, el) => $(el).attr('aria-controls', $(el).attr('aria-controls').concat('-fitNav')));
+    $list.find('[id]').each((i, el) => $(el).attr('id', $(el).attr('id').concat('-fitNav')));
+
     if ($vertCat.length > 0) {
         $vertCat.after($list);
     } else {
         $navPages.prepend($list);
     }
-    
+
     const txtMore = context.txtNavMore || 'More';
+    const isStandardMenu = context.themeSettings.navPages_standard;
     const $more = $(`
-        <li class="navPages-item navPages-item--more">
-            <a class="navPages-action has-subMenu is-open" href="#">${txtMore} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down"></use></svg></i></a>
-            <div class="navPage-subMenu is-open"></div>
+        <li class="navPages-item ${isStandardMenu ? 'navPages-item--standard' : ''} navPages-item--more">
+            <a class="navPages-action navPages-action--fitNav-more has-subMenu is-open" href="#">${txtMore} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-caret-down"></use></svg></i></a>
+            <div class="navPage-subMenu ${isStandardMenu ? 'navPage-subMenu--standard' : ''} is-open"></div>
         </li>`);
     $list.append($more);
 
