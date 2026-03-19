@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="{{ locale_name }}">
+<html class="no-js" lang="{{ locale_name }}" template_file="{{dashcase template_file}}">
     {{> components/papa-supermarket/common/global-vars}}
     <head>
         <title>{{ head.title }}</title>
@@ -63,15 +63,13 @@
             {{{stylesheet '/assets/css/theme.css'}}}
             {{{head.scripts}}}
         {{/if}}
+        
         <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.main.js'}}" as="script">
         <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}" as="script">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-10/css/all.css" integrity="sha512-Dj9pt3sZROOuTTs9S89ykGZeu1XQgWKg3DVpu5tZALApsrWdd3tnVjTclUuVONaHM4O8GgCnjSbHlTKXrd2OWg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> 
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>   
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> 
-
-        {{~inject 'genericError' (lang 'common.generic_error')}}
-        {{~inject 'maintenanceMode' settings.maintenance}}
         {{~inject 'themeSettings' theme_settings}}
         {{~inject 'genericError' (lang 'common.generic_error')}}
         {{~inject 'urls' urls}}
@@ -146,22 +144,24 @@
         {{~inject 'configurationId' configuration_id}}
         {{{snippet 'htmlhead'}}}
 
-        {{!-- BundleB2B --}}
+        {{#block "head-last"}} {{/block}}
+
+         {{!-- BundleB2B --}}
         {{~inject "customer" customer}}
         {{~inject 'store_hash' settings.store_hash}}
         {{~inject "settings" settings}}
         {{~inject "page_type" page_type}}
         {{~inject "currency_selector" currency_selector}}
         {{!-- BundleB2B --}}
-
-        {{#block "head-last"}} {{/block}}
     </head>
     <body class="csscolumns papaSupermarket-layout--{{theme_settings.layout}}
+        url-key_{{dashcase settings.request.absolute_path}}
         papaSupermarket-style--{{theme_settings.style}}
         papaSupermarket-pageType--{{dashcase page_type}}
         papaSupermarket-page--{{dashcase template}}
         {{#if theme_settings.product_uniform}}emthemesModez-productUniform{{/if}}
         {{#if theme_settings.hide_content_navigation}}papaSupermarket--hideContentNav{{/if}}
+        {{#if theme_settings.hide_loading_bar}}papaSupermarket--hideLoadingBar{{/if}}
         {{#if theme_settings.show_allcategories_menu}}papaSupermarket--showAllCategoriesMenu{{/if}}
         {{#if theme_settings.show_subcategories_menu}}papaSupermarket--showSubcategoriesMenu{{/if}}
         {{#if product_results.faceted_search_enabled}}has-faceted{{/if}}
@@ -184,23 +184,18 @@
         {{> components/common/body }}
         {{> components/common/footer }}
 
-        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
-        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
-        <script src="{{cdn 'assets/dist/theme-bundle.chunk.vendors.js'}}"></script>
-        <script>
+        <script nonce="{{nonce}}">window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script nonce="{{nonce}}">window.__webpack_nonce__ = "{{nonce}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}" nonce="{{nonce}}"></script>
+        <script nonce="{{nonce}}">
             {{!-- Exported in app.js --}}
             window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
-
             {{!-- BundleB2B --}}
             window.jsContext = JSON.parse({{jsContext}})
             {{!-- BundleB2B --}}
         </script>
 
-        {{#if theme_settings.csspreload '===' 'speedtest'}}
-            {{> components/papa-supermarket/common/load-scripts scripts=footer.scripts}}
-        {{else}}
-            {{{footer.scripts}}}
-        {{/if}}
+        {{{footer.scripts}}}
         {{{snippet 'footer'}}}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             {{#if template_file '==' 'pages/category' }}
@@ -304,6 +299,14 @@
         }
     });
 </script>
+
+
+        {{#if theme_settings.csspreload '===' 'speedtest'}}
+            {{> components/papa-supermarket/common/load-scripts scripts=footer.scripts}}
+        {{else}}
+            {{{footer.scripts}}}
+        {{/if}}
+        {{{snippet 'footer'}}}
     </body>
 </html>
 

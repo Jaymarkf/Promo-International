@@ -1,9 +1,13 @@
 {
   "customLayouts": {
     "brand": {},
-    "category": {},
+    "category": {
+      "shop-by-categ.html" : ["/groceries","/health-beauty","/wines-spirits-beer"]
+    },
     "page": {},
-    "product": {}
+    "product": {
+
+    }
   },
   "normalStoreUrl": "https://promointernationalinc.com",
   "port": "3000",

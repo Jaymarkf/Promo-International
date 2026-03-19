@@ -763,7 +763,6 @@ li.product.px-0 .card .card-body h4 > a {
 // END OF WINE B-H CATEG
 // New Header Styles //
 .fa-phone.mr-2 {
-    transform: rotate(88deg) !important;
     margin-right: 5px !important;
     font-size: 13px !important;
 }
@@ -1033,7 +1032,6 @@ ul#navPages-page-111-12 {
     }
     .navPage-subMenu--standard .navPage-subMenu-list {
         max-height: 440px;
-        overflow-y: hidden;
         display: flex;
         justify-content: space-between;
     }
@@ -1149,4 +1147,16 @@ header.header .navPages-container .container .navPages .header-nav {
         width: max-content;
         margin: 0 auto;
     }
+}
+@media (min-width: 801px) {
+    .papaSupermarket-style--modern .navPage-subMenu--standard .navPage-subMenu-item {
+        border: 1px solid transparent;
+    }
+}
+.flex-payment .col-payment.flex-col.d-flex {
+    max-width: 260px;
+}
+
+.emthemesModez-categoryPage-mainImage {
+    background-color: white !important;
 }
