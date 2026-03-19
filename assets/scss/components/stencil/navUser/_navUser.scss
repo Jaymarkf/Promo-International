@@ -315,7 +315,7 @@
     font-weight: fontWeight("bold");
     height: 20px; // 1
     line-height: 20px; // 1
-    margin-left: spacing("eighth");
+    margin-left: spacing("eighth") !important;
     text-align: center;
     width: 20px; // 1
 }

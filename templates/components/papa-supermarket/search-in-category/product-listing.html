@@ -7,20 +7,12 @@
         id_suffix='_main'
     }}
 {{!/if}}
-<<<<<<< HEAD
 <form action="{{urls.compare}}" method='POST' {{#if settings.data_tag_enabled}} data-list-name="Search Results" {{/if}} data-product-compare>
-=======
-<div {{#if settings.data_tag_enabled}} data-list-name="Search Results" {{/if}}>
->>>>>>> upstream/main
     {{#if settings.data_tag_enabled}}
         {{> components/products/grid products=product_results.products show_compare=product_results.show_compare show_aside=true show_info=theme_settings.card_info theme_settings=theme_settings event="list"}}
     {{else}}
         {{> components/products/grid products=product_results.products show_compare=product_results.show_compare show_aside=true show_info=theme_settings.card_info theme_settings=theme_settings}}
     {{/if}}
-<<<<<<< HEAD
 </form>
-=======
-</div>
->>>>>>> upstream/main
 
 {{> components/common/paginator pagination.product_results instantload=(unless product_results.faceted_search_enabled)}}

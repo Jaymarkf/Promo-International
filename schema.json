@@ -1,5 +1,166 @@
 [
   {
+    "name": "AOC Page Builder",
+    "settings": [
+      {
+        "type": "heading",
+        "content": "Header Settings"
+      },
+      {
+        "type": "color",
+        "label": "Header & Footer Background Color",
+        "id": "aoc_header_footer_bg_color"
+      },
+      {
+        "type": "heading",
+        "content": "ARTWORK Settings"
+      },
+      {
+        "type": "text",
+        "label": "Column 1 - File name",
+        "id": "column-1-filename"
+      },
+      {
+        "type": "text",
+        "label": "Column 1 - Text",
+        "id": "column-1-text"
+      },
+      {
+        "type": "text",
+        "label": "Column 1 - Link",
+        "id": "column-1-link"
+      },
+      {
+        "type": "text",
+        "label": "Column 2 - File name",
+        "id": "column-2-filename"
+      },
+      {
+        "type": "text",
+        "label": "Column 2 - Text",
+        "id": "column-2-text"
+      },
+      {
+        "type": "text",
+        "label": "Column 2 - Link",
+        "id": "column-2-link"
+      },
+      {
+        "type": "text",
+        "label": "Column 3 - File name",
+        "id": "column-3-filename"
+      },
+      {
+        "type": "text",
+        "label": "Column 3 - Text",
+        "id": "column-3-text"
+      },
+      {
+        "type": "text",
+        "label": "Column 3 - Link",
+        "id": "column-1-link"
+      },
+      {
+        "type": "heading",
+        "content": "---------------------------------"
+      },
+      {
+        "type": "heading",
+        "content": "ARTWORK Sidebar Settings"
+      },
+      {
+        "type": "text",
+        "label": "Groceries filename 1",
+        "id": "groceries-filename-1"
+      },
+      {
+        "type": "text",
+        "label": "Groceries link 1",
+        "id": "groceries-link-1"
+      },
+      {
+        "type": "text",
+        "label": "Groceries filename 2",
+        "id": "groceries-filename-2"
+      },
+      {
+        "type": "text",
+        "label": "Groceries link 2",
+        "id": "groceries-link-2"
+      },
+      {
+        "type": "text",
+        "label": "Groceries filename 3",
+        "id": "groceries-filename-3"
+      },
+      {
+        "type": "text",
+        "label": "Groceries link 3",
+        "id": "groceries-link-3"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty filename 1",
+        "id": "health-beauty-filename-1"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty link 1",
+        "id": "health-beauty-link-1"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty filename 2",
+        "id": "health-beauty-filename-2"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty link 2",
+        "id": "health-beauty-link-2"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty filename 3",
+        "id": "health-beauty-filename-3"
+      },
+      {
+        "type": "text",
+        "label": "Health & Beauty link 3",
+        "id": "health-beauty-link-3"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer filename 1",
+        "id": "wine-beer-filename-1"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer link 1",
+        "id": "wine-beer-link-1"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer filename 2",
+        "id": "wine-beer-filename-2"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer link 2",
+        "id": "wine-beer-link-2"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer filename 3",
+        "id": "wine-beer-filename-3"
+      },
+      {
+        "type": "text",
+        "label": "Wine Beer link 3",
+        "id": "wine-beer-link-3"
+      }
+    ]
+  },
+  {
     "name": "Global",
     "settings": [
       {
@@ -163,320 +324,6 @@
     ]
   },
   {
-    "name": "Typography & Icons",
-    "settings": [
-      {
-        "type": "heading",
-        "content": "Body text"
-      },
-      {
-        "type": "font",
-        "label": "Font family",
-        "id": "body-font",
-        "options": [
-          {
-            "group": "Karla",
-            "label": "Karla",
-            "value": "Google_Karla_400"
-          },
-          {
-            "group": "Karla",
-            "label": "Karla All",
-            "value": "Google_Karla_400,400i,700,700i"
-          },
-          {
-            "group": "Roboto",
-            "label": "Roboto",
-            "value": "Google_Roboto_400"
-          },
-          {
-            "group": "Roboto",
-            "label": "Roboto All",
-            "value": "Google_Roboto_400,400i,500,500i,700,700i"
-          },
-          {
-            "group": "Source Sans Pro",
-            "label": "Source Sans Pro",
-            "value": "Google_Source+Sans+Pro_400"
-          },
-          {
-            "group": "Source Sans Pro",
-            "label": "Source Sans Pro All",
-            "value": "Google_Source+Sans+Pro_400,400i,300,300i,600,600i,700,700i"
-          },
-          {
-            "group": "Poppins",
-            "label": "Poppins",
-            "value": "Google_Poppins_400"
-          },
-          {
-            "group": "Poppins",
-            "label": "Poppins All",
-            "value": "Google_Poppins_400,300,500,600,700"
-          },
-          {
-            "group": "Barlow",
-            "label": "Barlow",
-            "value": "Google_Barlow_400"
-          },
-          {
-            "group": "Barlow",
-            "label": "Barlow All",
-            "value": "Google_Barlow_400,400i,500,500i,700,700i"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display",
-            "value": "Google_Playfair+Display_400,400i,700,700i"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display Italic",
-            "value": "Google_Playfair+Display_400i,700i"
-          },
-          {
-            "group": "Montserrat",
-            "label": "Montserrat",
-            "value": "Google_Montserrat_400,400i,700,700i"
-          },
-          {
-            "group": "Montserrat",
-            "label": "Montserrat Light",
-            "value": "Google_Montserrat_300,300i,600,600i"
-          },
-          {
-            "group": "Josefin Sans",
-            "label": "Josefin Sans",
-            "value": "Google_Josefin+Sans_400,400i,700,700i"
-          },
-          {
-            "group": "Josefin Sans",
-            "label": "Josefin Sans Light",
-            "value": "Google_Josefin+Sans_300,300i,600,600i"
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "label": "Font size",
-        "id": "fontSizeRoot"
-      },
-      {
-        "type": "heading",
-        "content": "Headings"
-      },
-      {
-        "type": "font",
-        "label": "Font family",
-        "id": "headings-font",
-        "options": [
-          {
-            "group": "Karla",
-            "label": "Karla",
-            "value": "Google_Karla_700"
-          },
-          {
-            "group": "Open Sans",
-            "label": "Open Sans",
-            "value": "Google_Open+Sans_700"
-          },
-          {
-            "group": "Roboto",
-            "label": "Roboto",
-            "value": "Google_Roboto_700"
-          },
-          {
-            "group": "Volkhov",
-            "label": "Volkhov",
-            "value": "Google_Volkhov_700"
-          },
-          {
-            "group": "Caveat",
-            "label": "Caveat",
-            "value": "Google_Caveat_700"
-          },
-          {
-            "group": "Poppins",
-            "label": "Poppins",
-            "value": "Google_Poppins_700"
-          },
-          {
-            "group": "Barlow",
-            "label": "Barlow",
-            "value": "Google_Barlow_600"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display",
-            "value": "Google_Playfair+Display_400"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display Italic",
-            "value": "Google_Playfair+Display_400i"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display Bold",
-            "value": "Google_Playfair+Display_600"
-          },
-          {
-            "group": "Playfair Display",
-            "label": "Playfair Display Bold Italic",
-            "value": "Google_Playfair+Display_600i"
-          },
-          {
-            "group": "Montserrat",
-            "label": "Montserrat",
-            "value": "Google_Montserrat_500"
-          },
-          {
-            "group": "Montserrat",
-            "label": "Montserrat Bold",
-            "value": "Google_Montserrat_700"
-          },
-          {
-            "group": "Josefin Sans",
-            "label": "Josefin Sans",
-            "value": "Google_Josefin+Sans_500"
-          },
-          {
-            "group": "Josefin Sans",
-            "label": "Josefin Sans Bold",
-            "value": "Google_Josefin+Sans_700"
-          }
-        ]
-      },
-      {
-        "type": "text",
-        "label": "Font size <h1>",
-        "id": "fontSizeH1"
-      },
-      {
-        "type": "text",
-        "label": "Font size <h2>",
-        "id": "fontSizeH2"
-      },
-      {
-        "type": "text",
-        "label": "Font size <h3>",
-        "id": "fontSizeH3"
-      },
-      {
-        "type": "text",
-        "label": "Font size <h4>",
-        "id": "fontSizeH4"
-      },
-      {
-        "type": "text",
-        "label": "Font size <h5>",
-        "id": "fontSizeH5"
-      },
-      {
-        "type": "text",
-        "label": "Font size <h6>",
-        "id": "fontSizeH6"
-      },
-      {
-        "type": "select",
-        "label": "Font smoothing",
-        "id": "font-smoothing",
-        "options": [
-          {
-            "value": "antialiased",
-            "label": "Antialiased"
-          },
-          {
-            "value": "initial",
-            "label": "No"
-          }
-        ]
-      },
-      {
-        "type": "heading",
-        "content": "Text colors"
-      },
-      {
-        "type": "color",
-        "label": "Text color",
-        "id": "color-textBase"
-      },
-      {
-        "type": "color",
-        "label": "Secondary text color",
-        "id": "color-textSecondary"
-      },
-      {
-        "type": "color",
-        "label": "Secondary text hover color",
-        "id": "color-textSecondary--hover"
-      },
-      {
-        "type": "color",
-        "label": "Headings text color",
-        "id": "color-textHeading"
-      },
-      {
-        "type": "heading",
-        "content": "Link colors"
-      },
-      {
-        "type": "color",
-        "label": "Link color",
-        "id": "color-textLink"
-      },
-      {
-        "type": "color",
-        "label": "Link hover color",
-        "id": "color-textLink--hover"
-      },
-      {
-        "type": "heading",
-        "content": "Icon colors"
-      },
-      {
-        "type": "color",
-        "label": "Color",
-        "id": "icon-color"
-      },
-      {
-        "type": "color",
-        "label": "Background",
-        "id": "icon-backgroundColor"
-      },
-      {
-        "type": "color",
-        "label": "Background hover",
-        "id": "icon-backgroundColor-hover"
-      },
-      {
-        "type": "color",
-        "label": "Alt color",
-        "id": "icon--alt-color"
-      },
-      {
-        "type": "color",
-        "label": "Alt color hover",
-        "id": "icon--alt-color-hover"
-      },
-      {
-        "type": "color",
-        "label": "Rating empty",
-        "id": "icon-ratingEmpty"
-      },
-      {
-        "type": "color",
-        "label": "Rating full",
-        "id": "icon-ratingFull"
-      },
-      {
-        "type": "color",
-        "label": "Button icon",
-        "id": "button--icon-svg-color"
-      }
-    ]
-  },
-  {
     "name": "Buttons",
     "settings": [
       {
@@ -550,87 +397,6 @@
         "type": "color",
         "label": "Border color",
         "id": "button--disabled-borderColor"
-      }
-    ]
-  },
-  {
-    "name": "Forms",
-    "settings": [
-      {
-        "type": "heading",
-        "content": "Labels"
-      },
-      {
-        "type": "color",
-        "label": "Text color",
-        "id": "form-label-font-color"
-      },
-      {
-        "type": "heading",
-        "content": "Input fields"
-      },
-      {
-        "type": "color",
-        "label": "Text color",
-        "id": "input-font-color"
-      },
-      {
-        "type": "color",
-        "label": "Background color",
-        "id": "input-bg-color"
-      },
-      {
-        "type": "color",
-        "label": "Border color",
-        "id": "input-border-color"
-      },
-      {
-        "type": "color",
-        "label": "Border active color",
-        "id": "input-border-color-active"
-      },
-      {
-        "type": "color",
-        "label": "Disabled background color",
-        "id": "input-disabled-bg"
-      },
-      {
-        "type": "text",
-        "label": "Radius (px)",
-        "id": "input-radius2"
-      },
-      {
-        "type": "heading",
-        "content": "Select boxes"
-      },
-      {
-        "type": "color",
-        "label": "Background color",
-        "id": "select-bg-color"
-      },
-      {
-        "type": "color",
-        "label": "Arrow icon color",
-        "id": "select-arrow-color"
-      },
-      {
-        "type": "heading",
-        "content": "Checkbox & Radio button"
-      },
-      {
-        "type": "color",
-        "label": "Icon color",
-        "id": "checkRadio-color"
-      },
-      {
-        "type": "color",
-        "label": "Background color",
-        "id": "checkRadio-backgroundColor"
-      },
-      {
-        "type": "color",
-        "label": "Border color",
-        "id": "checkRadio-borderColor"
       }
     ]
   },
@@ -1075,19 +841,19 @@
         "force_reload": true
       },
       {
-        "type": "input",
+        "type": "text",
         "label": "Keywords file 1",
         "id": "keywords_file1",
         "force_reload": true
       },
       {
-        "type": "input",
+        "type": "text",
         "label": "2.",
         "id": "keywords_file2",
         "force_reload": true
       },
       {
-        "type": "input",
+        "type": "text",
         "label": "3.",
         "id": "keywords_file3",
         "force_reload": true

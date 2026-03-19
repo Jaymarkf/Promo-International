@@ -82,10 +82,6 @@ shop_by_brand:
         {{#if forms.search.has_suggestions}}
             <div class="panel panel--large">
                 <div class="panel-body panel-body--searchSuggestions">
-<<<<<<< HEAD
-=======
-                    <h2 class="is-srOnly">{{lang 'forms.search.refine'}}</h2>
->>>>>>> upstream/main
                     {{#if forms.search.suggested_query}}
                         <div class="search-suggestion search-suggestion--query">
                             {{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong>
@@ -105,11 +101,7 @@ shop_by_brand:
 
                     {{#if category_results.length}}
                         <div class="search-suggestion search-suggestion--categories">
-<<<<<<< HEAD
                             <h5 class="suggestion-title">{{lang 'forms.search.categories'}}</h5>
-=======
-                            <h3 class="suggestion-title">{{lang 'forms.search.categories'}}</h3>
->>>>>>> upstream/main
                             <ul class="category-suggestion-list">
 
                                 {{#each category_results}}
@@ -128,11 +120,7 @@ shop_by_brand:
 
                     {{#if brand_results.length}}
                         <div class="search-suggestion search-suggestion--brands">
-<<<<<<< HEAD
                             <h5 class="suggestion-title">{{lang 'forms.search.brand'}}</h5>
-=======
-                            <h3 class="suggestion-title">{{lang 'forms.search.brand'}}</h3>
->>>>>>> upstream/main
                             {{#each brand_results}}
                                 <a href="{{url}}">{{name}}</a>
                                 {{#unless @last}}, {{/unless}}
@@ -142,11 +130,7 @@ shop_by_brand:
 
                     {{#if result_count '===' 0}}
                         <div class="search-suggestion search-suggestion--tips">
-<<<<<<< HEAD
                             <h5 class="suggestion-title">{{lang 'forms.search.suggestions.title'}}</h5>
-=======
-                            <h3 class="suggestion-title">{{lang 'forms.search.suggestions.title'}}</h3>
->>>>>>> upstream/main
                             <ul>
                                 <li>{{lang 'forms.search.suggestions.line1'}}</li>
                                 <li>{{lang 'forms.search.suggestions.line2'}}</li>
@@ -164,30 +148,17 @@ shop_by_brand:
         {{#if content_results}}
             <div id="search-results-content" {{#if forms.search.section '!=' 'content'}}class="u-hiddenVisually"{{/if}}>
                 {{> components/search/content-sort-box sort=pagination.content_results.sort}}
-<<<<<<< HEAD
                 <ul>
-=======
-                <div>
->>>>>>> upstream/main
                     {{#each content_results}}
                         <strong><a href="{{url}}">{{{title}}}</a></strong>({{type}})
                         <p>{{{content}}}</p>
                     {{/each}}
-<<<<<<< HEAD
                 </ul>
-=======
-                </div>
->>>>>>> upstream/main
                 {{> components/common/paginator pagination.content_results reload=true instantload=true}}
             </div>
 
         {{/if}}
 
-<<<<<<< HEAD
-=======
-        <h2 class="is-srOnly">{{lang 'search.product_results'}}</h2>
-        <h3 class="is-srOnly">{{lang 'search.product_results'}}</h3>
->>>>>>> upstream/main
         <div id="product-listing-container" class="
             {{#if theme_settings.product_list_display_mode '===' 'grid2'}}mode-2
             {{else if theme_settings.product_list_display_mode '===' 'grid3'}}mode-3

@@ -56,8 +56,6 @@
                     </div>
                 {{/unless}}
             {{/if}}
-<<<<<<< HEAD
-=======
             {{#if order.pickup_address}}
                 {{#unless order.has_multiple_shipping_addresses}}
                     <div class="ShippingAddress">
@@ -75,7 +73,6 @@
                     </div>
                 {{/unless}}
             {{/if}}
->>>>>>> upstream/main
         </div>
 
         <div class="InvoiceDetails">
@@ -109,11 +106,7 @@
                 <thead>
                 <tr>
                     {{#if order.has_multiple_shipping_addresses}}
-<<<<<<< HEAD
-                        <th class="ProductAddress">{{lang 'invoice.shipping_address'}}</th>
-=======
                         <th class="ProductAddress">{{lang 'invoice.fulfillment'}}</th>
->>>>>>> upstream/main
                     {{/if}}
                     <th class="ProductQuantity">{{lang 'invoice.qty'}}</th>
                     <th class="ProductSku">{{lang 'invoice.code'}}</th>
@@ -124,14 +117,6 @@
                 </thead>
                 <tbody class="InvoiceItemList">
                 {{#each order.items}}
-<<<<<<< HEAD
-                    <tr>
-                        {{#if ../order.has_multiple_shipping_addresses}}
-                            <td class="ProductAddress">
-                                {{#each shipping_rows}}
-                                    <div>{{address}}</div>
-                                    <div>{{city}}, {{state}} {{zip}}</div>
-=======
                     <tr {{#if new_address}}class="NewAddress"{{/if}}>
                         {{#if ../order.has_multiple_shipping_addresses}}
                             <td class="ProductAddress">
@@ -147,7 +132,6 @@
                                     {{/if}}
                                     <div>{{address}}</div>
                                     <div>{{city}} {{state}} {{zip}}</div>
->>>>>>> upstream/main
                                     <div>{{country}}</div>
                                 {{/each}}
                             </td>
@@ -157,10 +141,6 @@
                         <td class="ProductDetails">
                             {{name}}
                             <div class="ProductAttributes">
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
                                 {{#each options}}
                                     <div class="ConfigurableProductRow">
                                         <div class="Label">{{name}}:</div>
@@ -224,11 +204,7 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <script>
-=======
     <script nonce="{{nonce}}">
->>>>>>> upstream/main
         window.print();
     </script>
 {{/partial}}

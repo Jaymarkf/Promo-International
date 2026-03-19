@@ -72,7 +72,7 @@
 
         {{~inject 'genericError' (lang 'common.generic_error')}}
         {{~inject 'maintenanceMode' settings.maintenance}}
-        {{~inject 'themeSettings' theme_settings}}01
+        {{~inject 'themeSettings' theme_settings}}
         {{~inject 'genericError' (lang 'common.generic_error')}}
         {{~inject 'urls' urls}}
         {{~inject 'secureBaseUrl' settings.secure_base_url}}
@@ -278,13 +278,32 @@
             </style>
         {{/if}}
 
-        <script>
-            $(document).ready(function(){
-                setTimeout(function() {
-                    $("#my-quote-entry").insertAfter($("nav.navUser .navUser-item.quote-add"));
-                }, 3000)
-            })
-        </script>
+<script>
+    $(document).ready(function() {
+        // Function to move the element
+        function moveQuoteEntry() {
+            const quoteAdd = document.querySelector('nav.navUser .navUser-item.quote-add');
+            const myQuoteEntry = document.querySelector('#my-quote-entry');
+            if (quoteAdd && myQuoteEntry) {
+                quoteAdd.insertAdjacentElement('afterend', myQuoteEntry);
+                return true;
+            }
+            return false;
+        }
+
+        // Try moving immediately (in case it's already loaded)
+        if (!moveQuoteEntry()) {
+            // Otherwise, observe the whole body for changes
+            const observer = new MutationObserver((mutations, obs) => {
+                if (moveQuoteEntry()) {
+                    obs.disconnect(); // Stop observing once done
+                }
+            });
+
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+    });
+</script>
     </body>
 </html>
 

@@ -3,11 +3,7 @@
 <div class="emthemesModez-specialProductsTabs{{#if style}} emthemesModez-specialProductsTabs--{{style}}{{/if}}">
     <ul class="tabs" id="emthemesModez-specialProductsTabs-tabs" data-tab role="tablist">
         {{#if products.featured}}
-<<<<<<< HEAD
-        <li class="tab{{#if theme_settings.specialProductsTab_active_tab '===' 'featured'}} is-active{{/if}}" role="presentation"><a class="tab-title" style="padding-bottom:0.3rem;padding-top:0.3rem; font-size:1.3rem;" href="#tab-featured-products" role="tab" tabindex="0" aria-selected="{{#if theme_settings.specialProductsTab_active_tab '===' 'featured'}}true{{else}}false{{/if}}" aria-controls="tab-featured-products">{{lang 'products.featured' }}</a></li>
-=======
         <li class="tab{{#if theme_settings.specialProductsTab_active_tab '===' 'featured'}} is-active{{/if}}" role="presentation"><a class="tab-title" href="#tab-featured-products" role="tab" tabindex="0" aria-selected="{{#if theme_settings.specialProductsTab_active_tab '===' 'featured'}}true{{else}}false{{/if}}" aria-controls="tab-featured-products">{{lang 'products.featured' }}</a></li>
->>>>>>> upstream/main
         {{/if}}
         {{#if products.top_sellers}}
         <li class="tab{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}} is-active{{/if}}" role="presentation"><a class="tab-title" href="#tab-bestselling-products" role="tab" tabindex="0" aria-selected="{{#if theme_settings.specialProductsTab_active_tab '===' 'top'}}true{{else}}false{{/if}}" aria-controls="tab-bestselling-products">{{lang 'products.top' }}</a></li>

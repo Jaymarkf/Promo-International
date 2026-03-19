@@ -1,47 +1,27 @@
 {{#if items}}
 <div class="accordion-block">
     <div
-<<<<<<< HEAD
-        class="accordion-navigation toggleLink {{#unless ../start_collapsed }} is-open {{/unless}}"
-        role="button"
-        data-collapsible="#facetedSearch-content--{{dashcase facet}}">
-        <h5 class="accordion-title">
-            {{ title }}
-        </h5>
-=======
         class="accordion-navigation toggleLink {{#unless start_collapsed }} is-open {{/unless}}"
         role="button"
         data-collapsible="#facetedSearch-content--{{dashcase facet}}">
         <h4 class="accordion-title">
             {{ title }}
         </h4>
->>>>>>> upstream/main
 
         <div class="accordion-navigation-actions">
             {{#if selected}}
                 <a href="{{ remove_url }}" class="facetedSearch-clearLink" data-faceted-search-facet>{{lang 'search.faceted.clear'}}</a>
             {{/if}}
             <svg class="icon accordion-indicator toggleLink-text toggleLink-text--off">
-<<<<<<< HEAD
-                <use xlink:href="#icon-add" />
-            </svg>
-            <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
-                <use xlink:href="#icon-remove" />
-=======
                 <use href="#icon-add" />
             </svg>
             <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
                 <use href="#icon-remove" />
->>>>>>> upstream/main
             </svg>
         </div>
     </div>
 
-<<<<<<< HEAD
-    <div id="facetedSearch-content--{{dashcase facet}}" class="accordion-content {{#unless ../start_collapsed }} is-open {{/unless}}">
-=======
     <div id="facetedSearch-content--{{dashcase facet}}" class="accordion-content {{#unless start_collapsed }} is-open {{/unless}}">
->>>>>>> upstream/main
         <ul id="facetedSearch-navList--{{dashcase facet}}" data-facet="{{facet}}" class="navList" data-has-more-results="{{ has_more_results }}">
             {{#each items}}
                 <li class="navList-item">
@@ -57,11 +37,7 @@
 
                         <span class="navList-action-close" aria-hidden="true">
                             <svg class="icon">
-<<<<<<< HEAD
-                                <use xlink:href="#icon-close"/>
-=======
                                 <use href="#icon-close"/>
->>>>>>> upstream/main
                             </svg>
                         </span>
                     </a>

@@ -1,46 +1,26 @@
 <div class="accordion-block">
     <div
-<<<<<<< HEAD
-        class="accordion-navigation toggleLink {{#unless ../start_collapsed }} is-open {{/unless}}"
-        role="button"
-        data-collapsible="#facetedSearch-content--{{dashcase facet }}">
-        <h5 class="accordion-title">
-            {{ title }}
-        </h5>
-=======
         class="accordion-navigation toggleLink {{#unless start_collapsed }} is-open {{/unless}}"
         role="button"
         data-collapsible="#facetedSearch-content--{{dashcase facet }}">
         <h4 class="accordion-title">
             {{ title }}
         </h4>
->>>>>>> upstream/main
 
         <div class="accordion-navigation-actions">
             {{#if selected}}
                 <a href="{{ remove_url }}" class="facetedSearch-clearLink" data-faceted-search-facet>{{lang 'search.faceted.clear'}}</a>
             {{/if}}
             <svg class="icon accordion-indicator toggleLink-text toggleLink-text--off">
-<<<<<<< HEAD
-                <use xlink:href="#icon-add" />
-            </svg>
-            <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
-                <use xlink:href="#icon-remove" />
-=======
                 <use href="#icon-add" />
             </svg>
             <svg class="icon accordion-indicator toggleLink-text toggleLink-text--on">
                 <use href="#icon-remove" />
->>>>>>> upstream/main
             </svg>
         </div>
     </div>
 
-<<<<<<< HEAD
-    <div id="facetedSearch-content--{{dashcase facet }}" class="accordion-content {{#unless ../start_collapsed }} is-open {{/unless}}">
-=======
     <div id="facetedSearch-content--{{dashcase facet }}" class="accordion-content {{#unless start_collapsed }} is-open {{/unless}}">
->>>>>>> upstream/main
         <form id="facet-range-form" class="form" method="get" data-faceted-search-range novalidate>
             <input type="hidden" name="search_query" value="{{search_query}}">
             {{#if this.sort}}
@@ -73,11 +53,7 @@
                     </div>
 
                     <div class="form-field">
-<<<<<<< HEAD
-                        <button class="button button--small" type="submit">
-=======
                         <button class="button button--primary button--small" type="submit">
->>>>>>> upstream/main
                             {{lang 'search.faceted.range.update'}}
                         </button>
                     </div>

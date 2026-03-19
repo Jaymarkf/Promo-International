@@ -2,11 +2,7 @@
     <div class="emthemesModez-section-inner">
         <div class="emthemesModez-productsByCategoryTabs emthemesModez-productsByCategoryTabs--sorting emthemesModez-productsByCategoryTabs--supermarket1">
             <ul class="tabs" data-tab role="tablist">
-<<<<<<< HEAD
                 <li class="li-heading"><h2 class="page-heading"><a href="{{category.url}}">{{category.name}}</a></h2></li>
-=======
-                <li class="li-heading" role="presentation"><h2 class="page-heading" role="tab"><a href="{{category.url}}">{{category.name}}</a></h2></li>
->>>>>>> upstream/main
 
                 {{#if theme_settings.productsByCategorySortingTabs_show_bestselling}}
                     <li class="tab{{#if theme_settings.productsByCategorySortingTabs_active '===' 'bestselling'}} is-active{{/if}}" role="presentation"><a class="tab-title" href="#tab-productsByCategoryTabs-bestselling-{{category.id}}" role="tab" tabindex="0" aria-selected="{{#if theme_settings.productsByCategorySortingTabs_active '===' 'bestselling'}}true{{else}}false{{/if}}" aria-controls="tab-productsByCategoryTabs-bestselling-{{category.id}}">{{lang 'papasupermarket.products_by_category_sorting_tabs.bestselling' }}</a></li>
@@ -48,7 +44,6 @@
             {{/or}}
             {{/or}}
             <div class="tabs-contents">
-<<<<<<< HEAD
                 <div class="container-tab-banner relative">
                     {{#any (if (lowercase category.name) '==' 'snack') (if (lowercase category.name) '==' 'beauty & health') }}
                     <img id="homepagecategory_banner" class="lazyload" src="/product_images/uploaded_images/homepage-{{lowercase (dashcase category.name)}}.png" alt="">
@@ -76,8 +71,6 @@
                     </div>
                     {{/any}}  
                </div>
-=======
->>>>>>> upstream/main
                 {{#if theme_settings.productsByCategorySortingTabs_show_bestselling}}
                     <section role="tabpanel" aria-hidden="{{#if theme_settings.productsByCategorySortingTabs_active '===' 'bestselling'}}false{{else}}true{{/if}}" class="tab-content{{#if theme_settings.productsByCategorySortingTabs_active '===' 'bestselling'}} is-active{{/if}}" id="tab-productsByCategoryTabs-bestselling-{{category.id}}" data-sort="bestselling">
                         {{#if theme_settings.productsByCategorySortingTabs_active '===' 'bestselling'}}

@@ -109,11 +109,7 @@
             <strong>{{lang 'cart.checkout.grand_total'}}:</strong>
         </div>
         <div class="cart-total-value cart-total-grandTotal">
-<<<<<<< HEAD
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
-=======
             {{#or customer (unless settings.hide_price_from_guests)}}
->>>>>>> upstream/main
                 <span>{{cart.grand_total.formatted}}</span>
             {{else}}
                 {{> components/common/login-for-pricing}}

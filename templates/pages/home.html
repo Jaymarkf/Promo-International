@@ -22,46 +22,47 @@ shop_by_brand:
 {{#if theme_settings.layout '===' 'left-sidebar'}}
     {{#partial "page"}}
         <div class="page">
+            {{{region name="above_three_banners"}}}
             <div class="homepage--categories-section">
                 <div class="categories--container">
                     <div class="categ-column">
-                        <a href="/groceries/" target="_blank"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-groceries.png" alt="groceries"></a>
+                        <a href="{{theme_settings.column-1-link}}"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/{{lowercase theme_settings.column-1-filename}}" alt="{{theme_settings.column-1-text}}"></a>
                         <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
-                            <h2><a href="/groceries/" target="_blank">Groceries</a></h2>
+                            <h2><a href="{{theme_settings.column-1-link}}">{{theme_settings.column-1-text}}</a></h2>
                         </div>
 
                         <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
-                            <a href="/groceries/" target="_blank">Shop Now</a>
+                            {{{region name="button-column-1"}}}
                         </div>
 
                     </div>
                     <div class="categ-column">
-                       <a href="/health-beauty/" target="_blank"> <img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-health-beauty.png" alt="health-beauty"> </a>
+                       <a href="{{theme_settings.column-2-link}}"> <img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/{{theme_settings.column-2-filename}}" alt="{{theme_settings.column-2-text}}"> </a>
                         <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
-                            <h2><a href="/health-beauty/" target="_blank">Health and Beauty</a></h2>
+                            <h2><a href="{{theme_settings.column-2-link}}">{{theme_settings.column-2-text}}</a></h2>
                         </div>
 
                         <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
-                            <a href="/health-beauty/" target="_blank">Shop Now</a>
+                            {{{region name="button-column-2"}}}
                         </div>
                     </div>
                     <div class="categ-column">
-                        <a href="/wines-spirits-beer/" target="_blank"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/homepage-wines-spirit-beer.png" alt="wines-spirits-beer"></a>
+                        <a href="{{theme_settings.column-3-link}}"><img src="https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/{{theme_settings.column-3-filename}}" alt="{{theme_settings.column-3-text}}"></a>
                         <div class="absolute w-10/12 mx-auto left-0 right-0 text-center top-0 mt-4">
-                            <h2><a href="/wines-spirits-beer/" target="_blank">Wines, Spirits, & Beer</a></h2>
+                            <h2><a href="{{theme_settings.column-3-link}}">{{theme_settings.column-3-text}}</a></h2>
                         </div>
 
                         <div class="absolute bottom-0 w-10/12 m-auto left-0 right-0 mb-5">
-                            <a href="/wines-spirits-beer/" target="_blank">Shop Now</a>
+                            {{{region name="button-column-3"}}}
                         </div>
                     </div>
                 </div>
             </div>
-            
+            {{{region name="above_hero"}}}
+
             {{> components/papa-supermarket/home/hero}}
             
-        
-            
+            {{{region name="above_about"}}}
             <div class="homepage-about-promointernational mt-12">
                 <div class="homepage-about-container pb-12">
                     <div class="about-title">

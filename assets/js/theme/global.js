@@ -33,5 +33,25 @@ export default class Global extends PageManager {
         emthemesModez(this.context); // emthemesModez added
         accessibility(); // papathemes-supermarket
         svgInjector();
+
+
+         /* BundleB2B */
+        $('body').append('<script src="https://cdn.bundleb2b.net/bundleb2b.3.3.0.js"></script>');
+
+        window.b3themeConfig = window.b3themeConfig || {};
+
+        window.b3themeConfig.useJavaScript = {
+            login: {
+                callback() {
+                    $('.body').show();
+                },
+            },
+        };
+
+        window.b3themeConfig.useContainers = {
+            'dashboard.endMasquerade.container': '.emthemesModez-header-userSection.emthemesModez-header-userSection--logo-left',
+            'buyAgain.container': '.container .page .page-content',
+        };
+        /* BundleB2B */
     }
 }

@@ -1,39 +1,42 @@
 //bundle b2b
-// B2B Edition Theme has loading issue 
+// B2B Edition Theme has loading issue
 .body {
   display: none;
 }
 
-#shopping_list_table,.b2b-column-left{
+#shopping_list_table,
+.b2b-column-left {
   .input-text {
     padding: 0;
   }
-  .product-qty-col{
-    input{
+  .product-qty-col {
+    input {
       padding: 0;
       text-align: center;
     }
   }
 }
 .b2b-wrap.title-wrap {
-  position: inherit!important;
+  position: inherit !important;
 }
-  
-.productView-options [data-shoppinglist-add]{
-  width: 100%!important;
+
+.productView-options [data-shoppinglist-add] {
+  width: 100% !important;
   margin-top: 0;
 }
 .rfq-form-wrapper .form-container .products-container .product-list-item-container .form-input {
   min-width: 100px !important;
 }
 .rfq-button-container.rfq-cart-button-container .button {
-  margin: 1rem!important;
+  margin: 1rem !important;
 }
-.sidebarBlock .productList .listItem-buttons .button, .productList--maxCol1 .listItem-buttons .button, .productList--maxCol4 .listItem-buttons .button {
-  margin: 0!important;
+.sidebarBlock .productList .listItem-buttons .button,
+.productList--maxCol1 .listItem-buttons .button,
+.productList--maxCol4 .listItem-buttons .button {
+  margin: 0 !important;
 }
 .b2b-wrap .title-wrap {
-  position: unset!important;
+  position: unset !important;
 }
 
 // add to quote button

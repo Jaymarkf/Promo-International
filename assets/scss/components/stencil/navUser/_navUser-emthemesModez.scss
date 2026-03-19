@@ -1,35 +1,15 @@
-
-.navUser {
-    @include breakpoint("medium") {
+@include breakpoint("medium") {
+    .navUser {
         display: flex;
         align-items: center;
         position: static;
-    }
-    @media (max-width: (screenSize("medium") - 1px)) {
-        left: auto;
-        width: auto;
     }
 }
 
 .navUser-section {
     @include breakpoint("medium") {
         display: flex;
-        align-items: flex-end;
-        column-gap: spacing("half");
-
-        &::before,
-        &::after {
-            display: none;
-        }
-    }
-
-    @include breakpoint("xxlarge") {
-        @if $theme-style == "compact" {
-            column-gap: spacing("single");
-        }
-        @else {
-            column-gap: spacing("base");
-        }
+        align-items: center;
     }
 
     + .navUser-section {
@@ -37,27 +17,21 @@
     }
 }
 
-
 .navUser-action {
-    display: inline-flex;
-    align-items: flex-end;
-    line-height: 1.25;
     text-transform: none;
     vertical-align: middle;
-    padding: spacing("half");
+    padding: 0 spacing("single") 0 0;
+
+    @if $theme-style != "compact" {
+        font-weight: inherit;
+    }
 
     @include breakpoint("medium") {
-        padding: 0;
-    }
+        padding-right: spacing("single");
 
-    @if $theme-style == "compact" {
-        font-size: fontSize("large");
-    }
-    @if $theme-style == "modern" {
-        font-size: fontSize("base");
-    }
-    @else {
-        font-size: fontSize("small");
+        .navUser-item:last-child & {
+            padding-right: 0;
+        }
     }
 
     > * {
@@ -65,68 +39,17 @@
     }
 
     .icon {
-        margin-right: spacing("half");
+        margin-left: spacing("half");
     }
 }
 
 .navUser-action--cart {
-    ._rows {
-        display: flex;
-        flex-direction: column;
-    }
+    padding-right: spacing("half");
 }
-
 
 .navUser-or {
     vertical-align: middle;
     padding: 0 spacing("quarter");
-    line-height: 1.25;
-}
-
-.navUser-subtitle {
-    color: stencilColor("navUser-color");
-    font-size: fontSize("base");
-    line-height: 1.25;
-
-    .navUser-action {
-        display: inline-block;
-        vertical-align: baseline;
-        font-size: inherit;
-        font-weight: inherit;
-    }
-}
-
-.navUser-item {
-    .icon {
-        @include square(22);
-        @include breakpoint("medium") {
-            width: remCalc(32);
-            height: remCalc(32);
-        }
-    }
-
-    svg {
-        fill: stencilColor("navUser-color");
-    }
-
-    .countPill {
-        width: auto;
-        height: auto;
-        line-height: 1;
-        border-radius: 0;
-        color: stencilColor("navUser-indicator-backgroundColor");
-        background-color: transparent;
-        margin: 0;
-        text-align: inherit;
-
-        @if $theme-style == "compact" {
-            font-size: fontSize("large");
-        }
-        @else {
-            font-size: fontSize("small");
-
-        }
-    }
 }
 
 .navUser-item--compare {
@@ -157,21 +80,15 @@
     }
 }
 
-
 .navUser-item-icon {
     font-size: remCalc(26px);
-    display: inline-flex;
+    display: inline-block;
     padding-right: spacing("half");
-    vertical-align: middle;
-
-    .icon {
-        @include square(26px);
-    }
 
     @include breakpoint("medium") {
         font-size: remCalc(20px);
 
-        &::before {
+        &:before {
             vertical-align: middle;
         }
     }
@@ -182,14 +99,6 @@
 
     @include breakpoint("medium") {
         padding-right: spacing("half");
-    }
-}
-
-.navUser-item-recentlyViewedIcon,
-.navUser-item-giftCertIcon,
-.navUser-item-wishlistIcon {
-    @media (min-width: screenSize("medium")) and (max-width: screenSize("xxlarge") - 1px) {
-        padding-right: 0;
     }
 }
 
@@ -236,42 +145,8 @@
 
     .navUser-action {
         position: relative;
-
-        @media (max-width: screenSize("medium") - 1px) {
-            padding-right: spacing("half");
-        }
-    }
-
-}
-
-.navUser-item--recentlyViewed {
-    position: relative;
-
-    .dropdown-menu {
-        &.is-open {
-            top: auto !important;
-            left: auto !important;
-            right: 0;
-        }
     }
 }
-
-.navUser-item-recentlyViewedLabel,
-.navUser-item-giftCertLabel,
-.navUser-item-wishlistLabel {
-    display: flex;
-    flex-direction: column;
-
-    .firstword {
-        font-size: fontSize("base");
-        font-weight: $body-font-weight;
-    }
-
-    @media (min-width: screenSize("medium")) and (max-width: screenSize("xxlarge") - 1px) {
-        display: none;
-    }
-}
-
 .dropdown--quickSearch {
     background-color: container("fill");
     padding: 0;
@@ -314,15 +189,9 @@
         color: $color-textSecondary;
         top: 0;
         right: 0;
-        opacity: 0.8;
 
         @include breakpoint("medium") {
             right: -($container-padding);
-            opacity: 1;
-        }
-
-        .icon-label {
-            @include u-hidden("visually", !important);
         }
     }
 
@@ -336,31 +205,14 @@
             display: block;
 
             @media (max-width: screenSize("medium") - 1px) {
-                display: flex;
-                align-items: center;
                 position: fixed;
-                top: 180px;
-                left: auto;
-                right: 0;
-                width: auto;
-                height: auto;
-                padding: spacing("quarter");
-                border-radius: $button-radius;
-                box-shadow: 0 2px 10px rgba(color("blacks"), 0.15);
-                color: $color-textBase;
+                top: auto;
+                bottom: 0;
                 background-color: container("fill", "dark");
-                font-size: fontSize("base");
-                text-transform: uppercase;
-
-                .icon {
-                    @include square(30);
-                }
             }
         }
     }
 }
-
-
 
 // Register / Login Links
 // ----------------------------------------------------------------------------
@@ -369,11 +221,21 @@
         display: flex;
         align-items: flex-end;
 
-        .navUser-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            margin-left: spacing("third");
+        .navUser-action {
+            vertical-align: bottom;
+
+            &:first-child {
+                padding-right: spacing("half");
+            }
+        }
+
+        .navUser-or {
+            vertical-align: bottom;
+
+            + .navUser-action {
+                margin-left: 0.85rem;
+                padding-left: 0;
+            }
         }
     }
 }
@@ -417,7 +279,6 @@
         display: inline;
     }
 }
-
 
 // Custom banner text on header
 // ----------------------------------------------------------------------------

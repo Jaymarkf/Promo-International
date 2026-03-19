@@ -35,7 +35,8 @@ products:
         <!-- <div class="banner-feature mb-0 py-4"><h2>Shop By Category</h2></div> -->
 
         <div class="fullWidth">
-            <img src="{{cdn (concat 'https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/' (concat  (lowercase (dashcase category.name)) '.png'))}}" alt='{{category.name}}'>
+            <!-- <img src="{{cdn (concat 'https://cdn11.bigcommerce.com/s-defdxib8co/images/stencil/original/image-manager/' (concat  (lowercase (dashcase category.name)) '.png'))}}" alt='{{category.name}}'> -->
+            {{{category.description}}}
         </div>
         
         {{{region name="brands_below_header--global"}}}
@@ -181,6 +182,9 @@ products:
 
 
 <style>
+    .fullWidth{
+        width:100%;
+    }
     .breadcrumb {
         float: left;
     }
@@ -198,11 +202,6 @@ products:
         border-radius: 0;
         margin: 0;
     }
-    ul.brandGrid.productGrid{
-        /*justify-content: space-between;*/
-        /*row-gap: 0.8rem;*/
-    }
-
     .sidebarBlock.sidebarBlock--banner.emthemesModezBannersBlockSidebar01 {
         background: transparent;
     }

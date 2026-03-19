@@ -1,18 +1,11 @@
 import { hooks } from '@bigcommerce/stencil-utils';
 import CatalogPage from './catalog';
 import FacetedSearch from './common/faceted-search';
-<<<<<<< HEAD
-// Supermarket Mod
-// import compareProducts from './global/compare-products';
-import compareProducts from '../emthemes-modez/compare-products';
-import urlUtils from './common/url-utils';
-=======
 import { createTranslationDictionary } from '../theme/common/utils/translations-utils';
 // Supermarket Mod
 // import compareProducts from './global/compare-products';
 import compareProducts from '../emthemes-modez/compare-products';
 import urlUtils from './common/utils/url-utils';
->>>>>>> upstream/main
 import Url from 'url';
 import collapsibleFactory from './common/collapsible';
 import 'jstree';
