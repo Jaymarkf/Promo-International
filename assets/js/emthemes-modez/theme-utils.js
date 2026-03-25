@@ -847,7 +847,7 @@ export class SupermarketProductCardsGraphQLQuery extends ProductCardsGraphQLQuer
         card_show_swatches = false,
         show_rrp = true,
         ...context
-    }) {
+    } = {}) {
         super({
             ...context,
             card_show_brand,

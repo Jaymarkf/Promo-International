@@ -212,7 +212,8 @@ export class CategoryProductsGraphQLQuery extends SupermarketProductCardsGraphQL
                         };
                         resolve(category);
                     },
-                    error: () => {
+                    error: (xhr) => {
+                        console.error('GraphQL error:', xhr.status, xhr.responseText);
                         resolve('');
                     },
                 });
@@ -367,7 +368,11 @@ class ProductsByCategory {
         this.$collapse = $();
         this.$loader = $();
 
-        this.gql = new CategoryProductsGraphQLQuery(context);
+        this.gql = new CategoryProductsGraphQLQuery({
+            ...context,
+            graphQLToken: context?.graphQLToken,
+            currencyCode: context?.currencyCode,
+        });
 
         this.$parent.append(this.$scope);
 
@@ -887,5 +892,12 @@ class ProductsByCategories {
 }
 
 export default function init(selector = '[data-pbcst-group]', context) {
-    $(selector).each((i, el) => new ProductsByCategories($(el), context));
+    const safeContext = {
+        graphQLToken: window.jsContext?.graphQLToken,
+        currencyCode: window.jsContext?.currencyCode,
+        ...window.jsContext,
+        ...context, // context passed in takes priority
+    };
+
+    $(selector).each((i, el) => new ProductsByCategories($(el), safeContext));
 }
