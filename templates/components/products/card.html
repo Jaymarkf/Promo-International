@@ -87,7 +87,7 @@
                 <div class="card-buttons">
                    {{#if x_product_price '==' '0'}}
                    {{else}}
-                            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                            {{#or customer }}
                                     {{#if price.without_tax.value '==' '0'}}
                                     {{else}}
                                         {{#if show_cart_action}}
@@ -147,7 +147,7 @@
         {{/and}}
 
         <div class="card-text card-text--price" data-test-info-type="price">
-                {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                {{#or customer }}
                     {{#if x_product_price '==' '0'}}
                     <span class="text-sm">THIS PRODUCT IS NOT AVAILABLE FOR PURCHASE.</span>
                     {{else}}
@@ -286,7 +286,7 @@
         <div class="card-buttons">
             {{#if price.without_tax.value '==' '0'}}
             {{else}}
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            {{#or customer }}
                 {{#if show_cart_action}}
                     {{#if has_options}}
                         <a href="{{url}}" data-event-type="product-click" class="button button--small button--primary card-figcaption-button{{#unless hide_product_quick_view}}{{#if theme_settings.show_product_quick_view}}{{#if theme_settings.ajax_add_to_cart}} quickview-alt{{/if}}{{/if}}{{/unless}}" data-product-id="{{id}}">{{lang 'products.choose_options'}}</a>
@@ -328,7 +328,7 @@
             <span class="card-bulkOrder-value" data-bulkorder-cart-qty-id="{{id}}">0</span>
         </div>
         <div class="card-bulkOrder-fieldRow card-bulkOrder-qty">
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            {{#or customer }}
             {{#if add_to_cart_url}}
                 <div class="card-bulkOrder-label">{{lang 'bulk_order.qty'}}: </div>
                 <div class="card-bulkOrder-value">
@@ -394,7 +394,7 @@
                 </div>
         </div>
         <div class="card-bulkOrder-action">
-            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+            {{#or customer }}
                 {{#if show_cart_action}}
                     {{#if has_options}}
                         {{#all (unless hide_product_quick_view) theme_settings.show_product_quick_view theme_settings.ajax_add_to_cart}}

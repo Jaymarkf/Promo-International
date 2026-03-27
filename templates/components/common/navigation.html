@@ -4,17 +4,20 @@
     <ul class="navUser-section navUser-section--alt">
       
         {{#unless theme_settings.topHeader_account}}
-            <li class="navUser-item navUser-item--account">
+            <li class="navUser-item navUser-item--account {{#if customer}}has_customer{{/if}}">
                 {{#if theme_settings.style '===' 'modern'}}
-                    <span class="navUser-item-icon navUser-item-accountIcon emthemesModez-icon-linear-user"></span>
+                
+
                     <div class="navUser-actions">
                     {{#if customer}}
                         <a class="navUser-action" href="{{urls.account.index}}">
+                            <span class="navUser-item-icon navUser-item-accountIcon emthemesModez-icon-linear-user"></span>
                             <span class="navUser-item-accountLabel" >Account</span>
                         </a>
                         <a class="navUser-action" href="{{urls.auth.logout}}" >{{lang 'common.logout'}}</a>
                     {{else}}
                         <a class="navUser-action" href="{{urls.auth.login}}">
+                        <span class="navUser-item-icon navUser-item-accountIcon emthemesModez-icon-linear-user"></span>
                             <span class="navUser-item-loginLabel" >Account</span>
                         </a>
                     {{/if}}

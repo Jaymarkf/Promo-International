@@ -1,7 +1,7 @@
 <article class="card {{#if alternate}}card--alternate{{/if}}" {{#if settings.data_tag_enabled}} data-event-type="{{event}}" data-entity-id="{{id}}" data-position="{{position}}" data-name="{{name}}" data-product-category="{{#each category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{brand.name}}" data-product-price="{{#if price.with_tax}}{{price.with_tax.value}}{{else}}{{price.without_tax.value}}{{/if}}"  {{/if}}>
          <figure class="card-figure">
              {{#if theme_settings.product_outstock_badge}}
-                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                 {{#or customer }}
                      {{#if out_of_stock_message }}
                          <div class="sale-flag-side sale-flag-side--outstock">
                              <span class="sale-text">{{out_of_stock_message}}</span>
@@ -63,7 +63,7 @@
                      <div class="card-buttons">
                         {{#if x_product_price '==' '0'}}
                         {{else}}
-                                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                                 {{#or customer }}
                                          {{#if price.without_tax.value '==' '0'}}
                                          {{else}}
                                              {{#if show_cart_action}}
@@ -159,7 +159,7 @@
              {{/and}}
      
              <div class="card-text card-text--price" data-test-info-type="price">
-                     {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                     {{#or customer }}
                          {{#if x_product_price '==' '0'}}
                          <span class="text-sm">THIS PRODUCT IS NOT AVAILABLE FOR PURCHASE.</span>
                          {{else}}
@@ -289,7 +289,7 @@
          {{#if show_aside}}
          <div class="card-aside">
              <div class="card-text card-text--price" data-test-info-type="price">
-                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                 {{#or customer }}
                      {{> components/products/price price=price customer=customer}}
                  {{else}}
                      {{> components/common/login-for-pricing}}
@@ -298,7 +298,7 @@
              <div class="card-buttons">
                  {{#if price.without_tax.value '==' '0'}}
                  {{else}}
-                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                 {{#or customer }}
                      {{#if show_cart_action}}
                          {{#if has_options}}
                              <a href="{{url}}" data-event-type="product-click" class="button button--small button--primary card-figcaption-button{{#unless hide_product_quick_view}}{{#if theme_settings.show_product_quick_view}}{{#if theme_settings.ajax_add_to_cart}} quickview-alt{{/if}}{{/if}}{{/unless}}" data-product-id="{{id}}">{{lang 'products.choose_options'}}</a>
@@ -332,7 +332,7 @@
              </div>
          </div>
          {{/if}}
-         {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+         {{#or customer }}
          <div class="card-bulkOrder" style="display: block;">
              <div class="card-bulkOrder-fieldRow card-bulkOrder-qtyInCart">
                  <span class="card-bulkOrder-label">{{lang 'bulk_order.qty_in_cart'}}: </span>
@@ -382,7 +382,7 @@
                  <div class="card-bulkOrder-label">{{lang 'bulk_order.price'}}: </div>
                  <div class="card-bulkOrder-value">
                      <div class="card-text card-text--price" data-test-info-type="price">
-                         {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                         {{#or customer }}
                              {{#or price.with_tax price.without_tax}}
                                  <span
                                      data-bulkorder-price-id="{{id}}" 
@@ -408,7 +408,7 @@
                      </div>
              </div>
              <div class="card-bulkOrder-action">
-                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                 {{#or customer }}
                      {{#if show_cart_action}}
                          {{#if has_options}}
                              {{#all (unless hide_product_quick_view) theme_settings.show_product_quick_view theme_settings.ajax_add_to_cart}}

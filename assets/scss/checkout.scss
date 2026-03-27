@@ -5,5 +5,6 @@
 // This file is for checkout customizations for Default one-page checkout.
 //
 // -----------------------------------------------------------------------------
-
-
+.optimizedCheckout-header {
+      background-color: stencilColor("aoc_header_footer_bg_color") !important;
+}

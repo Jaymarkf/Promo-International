@@ -349,3 +349,44 @@
     }
 </script>
 {{!-- BundleB2B --}}
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    var x = document.querySelectorAll('.quickview');
+    x.forEach(function(){
+        this.addEventListener("click",function(){
+            document.querySelector('header.header').classList.add('is-sticky');
+        });
+    });
+});
+</script>
+{{#if (dashcase (lowercase template_file)) '==' 'pages-account-recent-items'}}
+<script>
+    document.addEventListener("DOMContentLoaded",function(){
+        document.addEventListener('click', function (e) {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+
+        const wrapper = btn.closest('[data-quantity-change]');
+        if (!wrapper) return;
+
+        const input = wrapper.querySelector('input');
+        if (!input) return;
+
+        let value = parseInt(input.value) || 0;
+
+        if (btn.dataset.action === 'inc') {
+            value++;
+        }
+
+        if (btn.dataset.action === 'dec') {
+            value = value > 0 ? value - 1 : 0;
+        }
+
+        input.value = value;
+
+        // trigger change event (important for some frameworks like BigCommerce)
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    });
+</script>
+{{/if}}

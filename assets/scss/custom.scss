@@ -5,15 +5,6 @@
     --bg-header: #ff1744;
 }
 /*font global styles*/
-.emthemesModez-header-userSection.emthemesModez-header-userSection--logo-left {
-    border-bottom: 1px solid stencilColor("aoc_header_footer_bg_color") !important;
-}
-.emthemesModez-header-userSection.emthemesModez-header-userSection--logo-left,
-#menu[data-menu],
-#menu[data-menu] .container nav.navPages,
-footer.main-footer {
-    background-color: stencilColor("aoc_header_footer_bg_color") !important;
-}
 .container {
     max-width: 1368px;
 }
@@ -762,16 +753,13 @@ li.product.px-0 .card .card-body h4 > a {
 
 // END OF WINE B-H CATEG
 // New Header Styles //
-.fa-phone.mr-2 {
-    margin-right: 5px !important;
-    font-size: 13px !important;
-}
+
 .papaSupermarket-style--modern .emthemesModez-header-topSection .navUser-item + .navUser-item {
     border-left: 1px solid #fff;
-    line-height: 8px !important;
+    line-height: 8px;
 }
 #my-quote-entry .quote-quantity.countPill {
-    display: block !important;
+    display: block;
     background: #fdd502;
     margin-left: 0.4rem;
     color: #333;
@@ -874,9 +862,7 @@ li#my-quote-entry .navUser-action {
 .papaSupermarket-page--pages-home .container {
     max-width: 100% !important;
 }
-.main-footer .container {
-    max-width: 100% !important;
-}
+
 .categories--container {
     display: flex;
     flex-flow: wrap;
@@ -1011,9 +997,8 @@ ul#navPages-page-111-12 {
     .navPage-subMenu.shopCateg.is-open {
         width: 100% !important;
         left: 0 !important;
-        padding: 1rem 4rem 1rem;
+        padding: 1rem 4rem 1rem !important;
     }
-
     div#navPages-page-111 {
         position: relative;
         width: 100%;
@@ -1035,6 +1020,7 @@ ul#navPages-page-111-12 {
     }
     .navPage-subMenu--standard .navPage-subMenu-list {
         max-height: 460px;
+        overflow-y: hidden;
         display: flex;
         justify-content: flex-start;
     }
@@ -1084,9 +1070,8 @@ ul#navPages-page-111-12 {
     .navPage-subMenu.shopCateg.is-open {
         width: 90% !important;
         left: 5% !important;
-        max-height: 510px;
+        max-height: 440px;
         overflow-y: auto;
-        height: 53vh;
     }
     li.navPages-item.shopcategory.health-beauty {
         width: 25%;
@@ -1096,21 +1081,14 @@ ul#navPages-page-111-12 {
 
 @media screen and (min-width: 1366px) {
     .navPage-subMenu.shopCateg.is-open {
-        padding: 1.5rem 4rem 1rem !important;
+        padding: 1.5rem 4rem 1.5rem !important;
     }
 }
-li.navPages-item.shopcategory .navPages-action {
-    padding-bottom: 0 !important;
-    padding-top: 0 !important;
-    margin-bottom: 4px !important;
-    margin-top: 4px !important;
-    margin-left: 8px;
-}
+
 @media screen and (min-width: 1401px) {
     .navPage-subMenu.shopCateg.is-open {
-        padding: 1.5rem 4rem 1rem !important;
-        max-height: 510px;
-        height: 100vh;
+        padding: 1.5rem 4rem 1.5rem !important;
+        max-height: 500px;
     }
 }
 
@@ -1120,16 +1098,6 @@ header.header .navPages-container .container .navPages {
     }
 }
 
-@media (max-width: 1199px) {
-    .navPage-subMenu.shopCateg {
-        padding-top: 0 !important;
-        padding-left: 30px !important;
-        padding-right: 30px !important;
-    }
-    li.navPages-item.shopcategory {
-        width: 30% !important;
-    }
-}
 header.header .navPages-container .container .navPages .header-nav {
     @media screen and (max-width: 1290px) {
         width: 100%;
@@ -1148,305 +1116,3 @@ header.header .navPages-container .container .navPages .header-nav {
 }
 
 // END OF NAVIGATION MENU
-
-.footer-payment-icons {
-    display: flex;
-    flex-wrap: wrap;
-}
-.brand-image-container.emthemesModez-brandPage-mainImage {
-    max-width: 100%;
-    width: 100%;
-    max-height: 250px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-        max-height: 250px;
-        width: max-content;
-        margin: 0 auto;
-    }
-}
-@media (min-width: 801px) {
-    .papaSupermarket-style--modern .navPage-subMenu--standard .navPage-subMenu-item {
-        border: 1px solid transparent;
-    }
-}
-.flex-payment .col-payment.flex-col.d-flex {
-    max-width: 260px;
-}
-
-.emthemesModez-categoryPage-mainImage {
-    background-color: white !important;
-}
-@media (min-width: 801px) {
-    #quickSearch {
-        display: none;
-        &.is-open {
-            display: block;
-        }
-        @media (min-width: 801px) {
-            position: sticky;
-            inset: 0 !important;
-            top: 200px !important;
-        }
-        .icon-label {
-            display: none !important;
-        }
-        .card-img-container::after {
-            padding-bottom: 50% !important;
-        }
-    }
-    @media (max-width: 1024px) {
-        .emthemesModez-header-topSection .container {
-            max-width: 97% !important;
-        }
-        [data-menu] {
-            .container {
-                padding: 0 !important;
-            }
-        }
-        .navPages-action {
-            padding: 0.75rem 0.8rem !important;
-        }
-    }
-    @media (max-width: 1022px) {
-        .emthemesModez-header-topSection .container {
-            max-width: 97% !important;
-        }
-    }
-    @media (max-width: 944px) {
-        .emthemesModez-header-topSection .container {
-            display: flex;
-            justify-content: space-between;
-            .navUser--storeInfo {
-                margin: 0;
-                span.text-white {
-                    font-size: 0;
-                    strong {
-                        font-size: 15px;
-                    }
-                }
-            }
-        }
-    }
-    @media (max-width: 945px) {
-        [data-prevent-quick-search-close] {
-            max-width: 50% !important;
-        }
-        .emthemesModez-header-userSection > .container .header-logo {
-            min-width: 25% !important;
-        }
-    }
-    @media (max-width: 958px) {
-        .navUser-item.navUser-item--account .navUser-action {
-            width: 80px;
-            display: flex;
-        }
-    }
-    @media (max-width: 1115px) {
-        header.header .emthemesModez-quickSearch .form-input {
-            padding: 1.8rem 1.1rem;
-        }
-        [data-prevent-quick-search-close] {
-            max-width: max-content;
-        }
-        .header-logo-image-container::after {
-            padding-bottom: 40px;
-        }
-        .header-logo.header-logo--left {
-            max-width: 150px;
-            padding-right: 0;
-        }
-        .emthemesModez-header-userSection.emthemesModez-header-userSection--logo-left .container {
-            max-width: 97% !important;
-        }
-        #validate-company {
-            width: 100px;
-        }
-    }
-    @media (max-width: 1045px) {
-        .emthemesModez-header-userSection > .container .header-logo {
-            min-width: 16%;
-        }
-        .navUser-item.navUser-item--account {
-            .navUser-action {
-                width: 100px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                .navUser-item-icon.navUser-item-accountIcon.emthemesModez-icon-linear-user {
-                    padding-right: 0;
-                }
-            }
-        }
-    }
-
-    .navPages-container--bg {
-        border-top: 1px solid #7b192d;
-    }
-}
-#menu[data-menu] .container nav.navPages {
-    margin: 0;
-    max-width: 100%;
-    width: 100%;
-}
-@media (min-width: 801px) and (max-width: 1200px) {
-    .navPage-subMenu--standard .navPage-subMenu-list {
-        max-height: 100% !important;
-    }
-}
-@media (max-width: 800px) {
-    header.header .emthemesModez-header-topSection {
-        border-bottom: none !important;
-    }
-}
-
-[template_file="pages-category"] {
-    .body {
-        @media (max-width: 800px) {
-            margin-top: 90px;
-        }
-    }
-}
-
-.sidebarBlock.sidebarBlock--banner {
-    background-color: transparent;
-}
-.navUser-item.navUser-item--cart {
-    position: relative;
-    .dropdown-menu.is-open {
-        background-color: white;
-    }
-}
-
-.has_customer {
-    .navUser-actions,
-    .navUser-action {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        flex-direction: column !important;
-    }
-    .emthemesModez-icon-linear-user {
-        padding-right: 0 !important;
-    }
-}
-
-.header-nav {
-    margin: 0 !important;
-    justify-content: space-between !important;
-    @media (max-width: 1480px) {
-        width: 100% !important;
-    }
-    @media (max-width: 962px) {
-        justify-content: center !important;
-    }
-}
-.navPages-socials {
-    display: none !important;
-}
-[data-menu] .container {
-    max-width: 99% !important;
-    margin: 0 !important;
-    nav.navPages {
-        margin: 0;
-    }
-}
-.body .container {
-    max-width: 100%;
-}
-@media (max-width: 1115px) {
-    [data-menu] {
-        .container {
-            padding: 0 5px;
-        }
-    }
-}
-nav.navPages {
-    max-width: 99%;
-    @media (max-width: 1680px) {
-        max-width: 93%;
-    }
-    @media (max-width: 1578px) {
-        max-width: 96.5%;
-    }
-    @media (max-width: 1115px) {
-        max-width: 100%;
-    }
-}
-
-.papaSupermarket-style--modern .navPages-action {
-    @media (max-width: 1150px) {
-        white-space: nowrap;
-    }
-    @media (max-width: 1045px) {
-        padding: 0 10px;
-    }
-    @media (max-width: 962px) {
-        padding-top: 0 !important;
-        padding-bottom: 0 !important;
-    }
-}
-@media (max-width: 916px) {
-    .shopCateg {
-        padding-top: 18px !important;
-        ul.navPage-subMenu-list {
-            li.navPage-subMenu-item {
-                margin-bottom: 6px !important;
-            }
-        }
-    }
-}
-footer .form-prefixPostfix.wrap {
-    @media (max-width: 1085px) {
-        flex-direction: column;
-        * {
-            border-radius: 0 !important;
-        }
-    }
-}
-[template_file^="pages-account"] {
-    .body {
-        min-height: 38.4vh;
-    }
-}
-.emthemesModez-categoryPage-mainImage {
-    max-width: 100% !important;
-}
-
-[template_file="pages-category"] {
-    .body .container {
-        max-width: 98% !important;
-    }
-}
-@media (min-width: 801px) {
-    .sidebarBlock .productList .listItem-buttons,
-    .productList--maxCol1 .listItem-buttons,
-    .productList--maxCol4 .listItem-buttons {
-        bottom: -1.375rem;
-    }
-}
-[template_file="pages-account-wishlist-details"] {
-    li.product form {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 12px;
-    }
-}
-
-.has-activeModal {
-    header.header {
-        position: fixed;
-        z-index: 50;
-    }
-}
-.has-activeModal .modal-background {
-    display: block !important;
-}
-@media (min-width: 801px) {
-    .sidebarBlock .emthemesModez-banner-figure img {
-        width: 98%;
-    }
-}

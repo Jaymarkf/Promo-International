@@ -35,7 +35,7 @@
     {{> components/amp/products/product-view-details}}
 
     <div class="productView-action">
-        {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+        {{#or customer }}
             <amp-iframe height="400" width="250"
                 layout="responsive"
                 sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals"

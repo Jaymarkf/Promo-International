@@ -9,7 +9,7 @@
                     {{#if product.call_for_price}}
                         <span class="price--call">{{product.call_for_price}}</span>
                     {{else}}
-                        {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                        {{#or customer }}
                             {{> components/products/price price=product.price schema_org=schema}}
                         {{else}}
                             {{> components/common/login-for-pricing}}

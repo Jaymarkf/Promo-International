@@ -174,6 +174,11 @@ export default class Auth extends PageManager {
         $createAccountForm.on('submit', event => {
             this.submitAction(event, createAccountValidator);
         });
+
+         /* BundleB2B */
+        window.createAccountValidator = createAccountValidator;
+        /* BundleB2B */
+
     }
 
     submitAction(event, validator) {

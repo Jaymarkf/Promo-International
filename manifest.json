@@ -47,9 +47,6 @@
         "name": "blog_post_bottom--global"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -136,9 +133,6 @@
         "name": "blog_bottom--global"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -196,9 +190,6 @@
       },
       {
         "name": "brand_below_content--global"
-      },
-      {
-        "name": "header_navigation_bottom--global"
       },
       {
         "name": "header_bottom--global"
@@ -287,9 +278,6 @@
         "name": "brands_below_content--global"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -337,9 +325,6 @@
     ],
     "pages/cart": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -380,9 +365,6 @@
       },
       {
         "name": "cart_below_content"
-      },
-      {
-        "name": "cart_below_totals"
       },
       {
         "name": "cart_below_total"
@@ -432,6 +414,33 @@
     ],
     "pages/category": [
       {
+        "name": "home_sidebar_top--global"
+      },
+      {
+        "name": "home_sidebar_top"
+      },
+      {
+        "name": "home_sidebar_below_menu--global"
+      },
+      {
+        "name": "home_sidebar_below_menu"
+      },
+      {
+        "name": "home_sidebar_below_brands--global"
+      },
+      {
+        "name": "home_sidebar_below_brands"
+      },
+      {
+        "name": "blog_post_body"
+      },
+      {
+        "name": "home_sidebar_bottom"
+      },
+      {
+        "name": "home_sidebar_bottom--global"
+      },
+      {
         "name": "category_below_header--global"
       },
       {
@@ -454,9 +463,6 @@
       },
       {
         "name": "category_sidebar2_bottom--global"
-      },
-      {
-        "name": "header_navigation_bottom--global"
       },
       {
         "name": "header_bottom--global"
@@ -507,9 +513,6 @@
     "pages/checkout": [],
     "pages/compare": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -556,9 +559,6 @@
       }
     ],
     "pages/contact-us": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -640,9 +640,6 @@
         "name": "home_below_carousel"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -689,9 +686,6 @@
       }
     ],
     "pages/order-complete": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -765,10 +759,8 @@
         "name": "footer_bottom--global"
       }
     ],
+    "pages/order-confirmation": [],
     "pages/page": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -856,9 +848,6 @@
     ],
     "pages/product": [
       {
-        "name": "product_below_price"
-      },
-      {
         "name": "home_sidebar_top--global"
       },
       {
@@ -890,9 +879,6 @@
       },
       {
         "name": "product_below_content"
-      },
-      {
-        "name": "header_navigation_bottom--global"
       },
       {
         "name": "header_bottom--global"
@@ -941,9 +927,6 @@
       }
     ],
     "pages/search": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1037,9 +1020,6 @@
     ],
     "pages/sitemap": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1112,11 +1092,7 @@
         "name": "footer_bottom--global"
       }
     ],
-    "pages/order-confirmation": [],
     "pages/subscribed": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1192,9 +1168,6 @@
     ],
     "pages/unsubscribe": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1267,160 +1240,10 @@
         "name": "footer_bottom--global"
       }
     ],
-    "pages/errors/403": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
-    "pages/errors/generic": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
-    "pages/errors/404": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
+    "pages/amp/category": [],
+    "pages/amp/product-options": [],
+    "pages/amp/product": [],
     "pages/auth/account-created": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1469,9 +1292,6 @@
     ],
     "pages/auth/create-account": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1518,9 +1338,6 @@
       }
     ],
     "pages/auth/forgot-password": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1569,9 +1386,6 @@
     ],
     "pages/auth/login": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1619,8 +1433,146 @@
     ],
     "pages/auth/new-password": [
       {
-        "name": "header_navigation_bottom--global"
+        "name": "header_bottom--global"
       },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/errors/403": [
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/errors/404": [
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/errors/generic": [
       {
         "name": "header_bottom--global"
       },
@@ -1668,9 +1620,6 @@
       }
     ],
     "pages/gift-certificate/balance": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1746,9 +1695,6 @@
     ],
     "pages/gift-certificate/purchase": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1822,9 +1768,6 @@
       }
     ],
     "pages/gift-certificate/redeem": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -1900,9 +1843,6 @@
     ],
     "pages/unavailable/hibernation": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -1951,8 +1891,52 @@
     "pages/unavailable/maintenance": [],
     "pages/account/add-address": [
       {
-        "name": "header_navigation_bottom--global"
+        "name": "header_bottom--global"
       },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/account/add-payment-method": [
       {
         "name": "header_bottom--global"
       },
@@ -2001,59 +1985,6 @@
     ],
     "pages/account/add-return": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
-    "pages/account/add-payment-method": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2100,59 +2031,6 @@
       }
     ],
     "pages/account/add-wishlist": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
-    "pages/account/addresses": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2201,8 +2079,52 @@
     ],
     "pages/account/download-item": [
       {
-        "name": "header_navigation_bottom--global"
+        "name": "header_bottom--global"
       },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/account/addresses": [
       {
         "name": "header_bottom--global"
       },
@@ -2251,9 +2173,6 @@
     ],
     "pages/account/edit-payment-method": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2300,9 +2219,6 @@
       }
     ],
     "pages/account/edit": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2351,9 +2267,6 @@
     ],
     "pages/account/inbox": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2400,9 +2313,6 @@
       }
     ],
     "pages/account/payment-methods": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2451,9 +2361,6 @@
     ],
     "pages/account/recent-items": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2500,9 +2407,6 @@
       }
     ],
     "pages/account/return-saved": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2551,9 +2455,6 @@
     ],
     "pages/account/returns": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2600,9 +2501,6 @@
       }
     ],
     "pages/account/wishlist-details": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2651,9 +2549,6 @@
     ],
     "pages/account/wishlists": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2700,9 +2595,6 @@
       }
     ],
     "pages/account/orders/all": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2751,9 +2643,6 @@
     ],
     "pages/account/orders/completed": [
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2800,9 +2689,6 @@
       }
     ],
     "pages/account/orders/details": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
       {
         "name": "header_bottom--global"
       },
@@ -2864,9 +2750,6 @@
         "name": "brand_below_content--global"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -2914,13 +2797,155 @@
     ],
     "pages/custom/category/bulk-order": [
       {
-        "name": "header_navigation_bottom--global"
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/custom/category/shop-by-categ": [
+      {
+        "name": "home_sidebar_top--global"
+      },
+      {
+        "name": "home_sidebar_top"
+      },
+      {
+        "name": "home_sidebar_below_menu--global"
+      },
+      {
+        "name": "home_sidebar_below_menu"
+      },
+      {
+        "name": "home_sidebar_below_brands--global"
+      },
+      {
+        "name": "home_sidebar_below_brands"
+      },
+      {
+        "name": "blog_post_body"
+      },
+      {
+        "name": "home_sidebar_bottom"
+      },
+      {
+        "name": "home_sidebar_bottom--global"
+      },
+      {
+        "name": "brands_below_header--global"
+      },
+      {
+        "name": "brands_below_header"
+      },
+      {
+        "name": "brands_below_content"
+      },
+      {
+        "name": "brands_below_content--global"
       },
       {
         "name": "header_bottom--global"
       },
       {
         "name": "header_bottom"
+      },
+      {
+        "name": "footer_before"
+      },
+      {
+        "name": "footer_before--global"
+      },
+      {
+        "name": "newsletter_below"
+      },
+      {
+        "name": "newsletter_below--global"
+      },
+      {
+        "name": "footer_before_logo--global"
+      },
+      {
+        "name": "footer_below_logo--global"
+      },
+      {
+        "name": "footer_below_contact--global"
+      },
+      {
+        "name": "footer_below_pages--global"
+      },
+      {
+        "name": "footer_below_categories--global"
+      },
+      {
+        "name": "footer_below_brands--global"
+      },
+      {
+        "name": "footer_below_columns--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_bottom--global"
+      }
+    ],
+    "pages/custom/page/fullwidth": [
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "page_builder_content--global"
+      },
+      {
+        "name": "page_builder_content"
+      },
+      {
+        "name": "page_builder_bottom"
+      },
+      {
+        "name": "page_builder_bottom--global"
       },
       {
         "name": "footer_before"
@@ -3015,9 +3040,6 @@
         "name": "product_below_content"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
@@ -3081,9 +3103,6 @@
       },
       {
         "name": "product_below_content"
-      },
-      {
-        "name": "header_navigation_bottom--global"
       },
       {
         "name": "header_bottom--global"
@@ -3178,75 +3197,10 @@
         "name": "product_below_content"
       },
       {
-        "name": "header_navigation_bottom--global"
-      },
-      {
         "name": "header_bottom--global"
       },
       {
         "name": "header_bottom"
-      },
-      {
-        "name": "footer_before"
-      },
-      {
-        "name": "footer_before--global"
-      },
-      {
-        "name": "newsletter_below"
-      },
-      {
-        "name": "newsletter_below--global"
-      },
-      {
-        "name": "footer_before_logo--global"
-      },
-      {
-        "name": "footer_below_logo--global"
-      },
-      {
-        "name": "footer_below_contact--global"
-      },
-      {
-        "name": "footer_below_pages--global"
-      },
-      {
-        "name": "footer_below_categories--global"
-      },
-      {
-        "name": "footer_below_brands--global"
-      },
-      {
-        "name": "footer_below_columns--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_bottom--global"
-      }
-    ],
-    "pages/custom/page/fullwidth": [
-      {
-        "name": "header_navigation_bottom--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "page_builder_content--global"
-      },
-      {
-        "name": "page_builder_content"
-      },
-      {
-        "name": "page_builder_bottom"
-      },
-      {
-        "name": "page_builder_bottom--global"
       },
       {
         "name": "footer_before"
@@ -3290,12 +3244,73 @@
     ]
   },
   "templates": [
+    "layout/amp-iframe",
+    "layout/amp",
     "layout/base",
     "layout/empty",
     "layout/instantload-base",
+    "pages/blog-post",
+    "pages/blog",
+    "pages/brand",
+    "pages/brands",
+    "pages/cart",
+    "pages/category",
+    "pages/checkout",
+    "pages/compare",
+    "pages/contact-us",
+    "pages/home",
+    "pages/order-complete",
+    "pages/order-confirmation",
+    "pages/page",
+    "pages/product",
+    "pages/search",
+    "pages/sitemap",
+    "pages/subscribed",
+    "pages/unsubscribe",
+    "pages/amp/category",
+    "pages/amp/product-options",
+    "pages/amp/product",
+    "pages/auth/account-created",
+    "pages/auth/create-account",
+    "pages/auth/forgot-password",
+    "pages/auth/login",
+    "pages/auth/new-password",
+    "pages/errors/403",
+    "pages/errors/404",
+    "pages/errors/generic",
+    "pages/gift-certificate/balance",
+    "pages/gift-certificate/purchase",
+    "pages/gift-certificate/redeem",
+    "pages/unavailable/hibernation",
+    "pages/unavailable/maintenance",
+    "pages/account/add-address",
+    "pages/account/add-payment-method",
+    "pages/account/add-return",
+    "pages/account/add-wishlist",
+    "pages/account/download-item",
+    "pages/account/addresses",
+    "pages/account/edit-payment-method",
+    "pages/account/edit",
+    "pages/account/inbox",
+    "pages/account/payment-methods",
+    "pages/account/recent-items",
+    "pages/account/return-saved",
+    "pages/account/returns",
+    "pages/account/wishlist-details",
+    "pages/account/wishlists",
+    "pages/account/orders/all",
+    "pages/account/orders/completed",
+    "pages/account/orders/details",
+    "pages/account/orders/invoice",
+    "pages/custom/brand/bulk-order",
+    "pages/custom/category/bulk-order",
+    "pages/custom/category/shop-by-categ",
+    "pages/custom/page/fullwidth",
+    "pages/custom/product/no-addtocart",
+    "pages/custom/product/no-sidebar",
+    "pages/custom/product/with-sidebar",
     "components/carousel-content",
     "components/carousel",
-    "components/blog/post",
     "components/account/add-wishlist",
     "components/account/address-list",
     "components/account/edit-account",
@@ -3308,20 +3323,21 @@
     "components/account/returns-list",
     "components/account/wishlist-item-list",
     "components/account/wishlist-list",
-    "components/category/grid-list",
-    "components/category/product-listing",
-    "components/category/products-per-page",
-    "components/category/show-more",
-    "components/category/sidebar",
-    "components/category/shop-by-price",
-    "components/category/sort-box",
+    "components/b3/b3json",
+    "components/blog/post",
+    "components/brand/product-listing",
     "components/brand/show-more",
     "components/brand/sidebar",
-    "components/brand/product-listing",
+    "components/category/grid-list",
+    "components/category/products-per-page",
+    "components/category/shop-by-price",
+    "components/category/product-listing",
+    "components/category/sidebar",
+    "components/category/show-more",
+    "components/category/sort-box",
+    "components/gift-certificate/navigation",
     "components/page/contact-us-form",
     "components/page/rss_feed",
-    "components/gift-certificate/navigation",
-    "components/sitemap/links",
     "components/search/advanced-search",
     "components/search/content-sort-box",
     "components/search/heading",
@@ -3330,9 +3346,24 @@
     "components/search/quick-results",
     "components/search/show-more",
     "components/search/sidebar",
+    "components/sitemap/links",
     "components/social/connect",
     "components/social/instagram",
     "components/social/twitter",
+    "components/cart/additional-checkout-buttons",
+    "components/cart/content",
+    "components/cart/coupon-input",
+    "components/cart/gift-certificate-input",
+    "components/cart/item-giftwrap",
+    "components/cart/item-options",
+    "components/cart/page-title",
+    "components/cart/preview",
+    "components/cart/shipping-estimator",
+    "components/cart/shipping-quotes",
+    "components/cart/status-messages",
+    "components/cart/totals",
+    "components/cart/modals/configure-product",
+    "components/cart/modals/gift-wrapping-form",
     "components/common/alert-error",
     "components/common/alert-generic",
     "components/common/alert-info",
@@ -3340,8 +3371,8 @@
     "components/common/alert-success",
     "components/common/body",
     "components/common/breadcrumbs",
-    "components/common/cookie",
     "components/common/cart-preview",
+    "components/common/cookie",
     "components/common/currency-selector",
     "components/common/footer",
     "components/common/geotrust-ssl-seal",
@@ -3351,23 +3382,24 @@
     "components/common/navigation-list-child",
     "components/common/navigation-list",
     "components/common/navigation-menu",
+    "components/common/navigation-page-list-custom",
     "components/common/navigation-top",
     "components/common/navigation-page-list",
-    "components/common/paginator",
     "components/common/navigation",
+    "components/common/paginator",
     "components/common/payment-icons",
-    "components/common/product-options",
     "components/common/polyfill-script",
+    "components/common/product-options",
     "components/common/quick-search",
-    "components/common/responsive-img",
     "components/common/responsive-img-url",
+    "components/common/responsive-img",
     "components/common/search-box",
-    "components/common/small-paginator",
     "components/common/share",
+    "components/common/small-paginator",
     "components/common/social-links",
+    "components/common/store-logo",
     "components/common/subscription-form",
     "components/common/wallet-buttons",
-    "components/common/store-logo",
     "components/common/wishlist-dropdown",
     "components/common/forms/checkbox",
     "components/common/forms/date-options",
@@ -3387,83 +3419,83 @@
     "components/emthemes-modez/blog/featured",
     "components/emthemes-modez/blog/sidebar",
     "components/emthemes-modez/blog/hotnews",
+    "components/emthemes-modez/brand/carousel",
     "components/emthemes-modez/common/footer-links-item",
     "components/emthemes-modez/common/footer-links",
     "components/emthemes-modez/common/product-loading",
-    "components/emthemes-modez/brand/carousel",
+    "components/emthemes-modez/instagram/carousel",
+    "components/emthemes-modez/instagram/grid",
     "components/emthemes-modez/newsletter/modal",
     "components/emthemes-modez/newsletter/popup-banner",
     "components/emthemes-modez/newsletter/section",
     "components/emthemes-modez/sections/section-categories-grid",
     "components/emthemes-modez/sections/section-special-products-tabs",
     "components/emthemes-modez/sections/section",
-    "components/cart/additional-checkout-buttons",
-    "components/cart/content",
-    "components/cart/coupon-input",
-    "components/cart/gift-certificate-input",
-    "components/cart/item-giftwrap",
-    "components/cart/item-options",
-    "components/cart/page-title",
-    "components/cart/preview",
-    "components/cart/shipping-estimator",
-    "components/cart/shipping-quotes",
-    "components/cart/status-messages",
-    "components/cart/totals",
-    "components/cart/modals/configure-product",
-    "components/cart/modals/gift-wrapping-form",
+    "components/faceted-search/index",
+    "components/faceted-search/selected-facets",
+    "components/faceted-search/show-more-facets",
+    "components/faceted-search/facets/hierarchy-children",
+    "components/faceted-search/facets/hierarchy",
+    "components/faceted-search/facets/multi",
+    "components/faceted-search/facets/range",
+    "components/faceted-search/facets/rating",
     "components/papa-supermarket/also-bought/also-bought",
     "components/papa-supermarket/also-bought/product-details",
     "components/papa-supermarket/also-bought/product-options",
     "components/papa-supermarket/also-bought/product-thumbnail",
-    "components/papa-supermarket/category/ajax-products-by-category-sorting-tabs-result",
-    "components/papa-supermarket/category/ajax-products-by-category-sorting-tabs",
     "components/papa-supermarket/banners/remote",
     "components/papa-supermarket/brands/brands-list",
-    "components/papa-supermarket/products/new",
+    "components/papa-supermarket/common/cssrelpreload",
     "components/papa-supermarket/common/global-vars",
     "components/papa-supermarket/common/load-scripts",
-    "components/papa-supermarket/common/cssrelpreload",
+    "components/papa-supermarket/category/ajax-products-by-category-sorting-tabs-result",
+    "components/papa-supermarket/category/ajax-products-by-category-sorting-tabs",
+    "components/papa-supermarket/category/products-featured",
     "components/papa-supermarket/home/content",
     "components/papa-supermarket/home/hero",
     "components/papa-supermarket/home/sidebar",
+    "components/papa-supermarket/products/new",
     "components/papa-supermarket/recently-viewed-products/customer-product-ids",
     "components/papa-supermarket/search-in-category/product-listing",
     "components/papa-supermarket/search-in-category/sidebar",
-    "components/papa-supermarket/special-products-tabs/products",
-    "components/papa-supermarket/special-products-tabs/section",
-    "components/papa-supermarket/products-by-category-sorting-tabs/products",
-    "components/papa-supermarket/products-by-category-sorting-tabs/section",
+    "components/papa-supermarket/sections/section-bc-banner",
+    "components/papa-supermarket/sections/section-categories-list",
+    "components/papa-supermarket/sections/section-special-products-columns",
     "components/papa-supermarket/sidebar/banner1",
-    "components/papa-supermarket/sidebar/blog",
     "components/papa-supermarket/sidebar/banner2",
+    "components/papa-supermarket/sidebar/beauty-health",
+    "components/papa-supermarket/sidebar/blog",
     "components/papa-supermarket/sidebar/brands",
-    "components/papa-supermarket/sidebar/recently-viewed-products",
-    "components/papa-supermarket/sidebar/facebook",
-    "components/papa-supermarket/sidebar/subcategories-menu-find",
     "components/papa-supermarket/sidebar/categories-menu",
+    "components/papa-supermarket/sidebar/facebook",
+    "components/papa-supermarket/sidebar/recently-viewed-products",
+    "components/papa-supermarket/sidebar/subcategories-menu-list",
+    "components/papa-supermarket/sidebar/subcategories-menu-find",
     "components/papa-supermarket/sidebar/subcategories-menu",
     "components/papa-supermarket/sidebar/subpages",
-    "components/papa-supermarket/sidebar/subcategories-menu-list",
-    "components/papa-supermarket/sections/section-bc-banner",
-    "components/papa-supermarket/sections/section-special-products-columns",
-    "components/papa-supermarket/sections/section-categories-list",
+    "components/papa-supermarket/sidebar/wines",
+    "components/papa-supermarket/products-by-category-sorting-tabs/products",
+    "components/papa-supermarket/products-by-category-sorting-tabs/section",
+    "components/papa-supermarket/special-products-tabs/products",
+    "components/papa-supermarket/special-products-tabs/section",
     "components/products/add-to-cart",
     "components/products/bulk-discount-rates",
     "components/products/card",
     "components/products/carousel",
-    "components/products/filter",
+    "components/products/custom-card",
     "components/products/featured",
+    "components/products/filter",
     "components/products/grid",
     "components/products/list-item",
     "components/products/list",
-    "components/products/preload-main-image",
     "components/products/new",
+    "components/products/preload-main-image",
     "components/products/price-range",
     "components/products/price",
     "components/products/product-page-no-sidebar",
     "components/products/product-page-with-sidebar",
-    "components/products/product-view",
     "components/products/product-view-no-addtocart",
+    "components/products/product-view",
     "components/products/quick-view",
     "components/products/ratings",
     "components/products/related",
@@ -3472,6 +3504,12 @@
     "components/products/tabs",
     "components/products/top",
     "components/products/videos",
+    "components/products/customizations/checkbox",
+    "components/products/customizations/file",
+    "components/products/customizations/select",
+    "components/products/customizations/text",
+    "components/products/customizations/textarea",
+    "components/products/modals/writeReview",
     "components/products/options/date",
     "components/products/options/input-checkbox",
     "components/products/options/input-file",
@@ -3483,75 +3521,46 @@
     "components/products/options/set-select",
     "components/products/options/swatch",
     "components/products/options/textarea",
-    "components/products/modals/writeReview",
-    "components/products/customizations/checkbox",
-    "components/products/customizations/file",
-    "components/products/customizations/select",
-    "components/products/customizations/text",
-    "components/products/customizations/textarea",
-    "components/faceted-search/index",
-    "components/faceted-search/show-more-facets",
-    "components/faceted-search/selected-facets",
-    "components/faceted-search/facets/hierarchy-children",
-    "components/faceted-search/facets/hierarchy",
-    "components/faceted-search/facets/range",
-    "components/faceted-search/facets/multi",
-    "components/faceted-search/facets/rating",
-    "pages/blog-post",
-    "pages/blog",
-    "pages/brand",
-    "pages/brands",
-    "pages/cart",
-    "pages/category",
-    "pages/checkout",
-    "pages/compare",
-    "pages/contact-us",
-    "pages/home",
-    "pages/order-complete",
-    "pages/page",
-    "pages/product",
-    "pages/search",
-    "pages/sitemap",
-    "pages/order-confirmation",
-    "pages/subscribed",
-    "pages/unsubscribe",
-    "pages/errors/403",
-    "pages/errors/generic",
-    "pages/errors/404",
-    "pages/auth/account-created",
-    "pages/auth/create-account",
-    "pages/auth/forgot-password",
-    "pages/auth/login",
-    "pages/auth/new-password",
-    "pages/gift-certificate/balance",
-    "pages/gift-certificate/purchase",
-    "pages/gift-certificate/redeem",
-    "pages/unavailable/hibernation",
-    "pages/unavailable/maintenance",
-    "pages/account/add-address",
-    "pages/account/add-return",
-    "pages/account/add-payment-method",
-    "pages/account/add-wishlist",
-    "pages/account/addresses",
-    "pages/account/download-item",
-    "pages/account/edit-payment-method",
-    "pages/account/edit",
-    "pages/account/inbox",
-    "pages/account/payment-methods",
-    "pages/account/recent-items",
-    "pages/account/return-saved",
-    "pages/account/returns",
-    "pages/account/wishlist-details",
-    "pages/account/wishlists",
-    "pages/account/orders/all",
-    "pages/account/orders/completed",
-    "pages/account/orders/details",
-    "pages/account/orders/invoice",
-    "pages/custom/brand/bulk-order",
-    "pages/custom/category/bulk-order",
-    "pages/custom/product/no-addtocart",
-    "pages/custom/product/no-sidebar",
-    "pages/custom/product/with-sidebar",
-    "pages/custom/page/fullwidth"
+    "components/amp/css/base",
+    "components/amp/css/footer",
+    "components/amp/css/category",
+    "components/amp/css/form",
+    "components/amp/css/header",
+    "components/amp/css/product-options",
+    "components/amp/css/product",
+    "components/amp/category/product-listing",
+    "components/amp/category/styles",
+    "components/amp/category/subcategories",
+    "components/amp/common/alert-error",
+    "components/amp/common/alert-success",
+    "components/amp/common/footer",
+    "components/amp/common/header",
+    "components/amp/common/icon-defs",
+    "components/amp/common/navigation-menu",
+    "components/amp/common/paginator",
+    "components/amp/common/quick-search",
+    "components/amp/common/share",
+    "components/amp/common/store-logo",
+    "components/amp/products/card",
+    "components/amp/products/grid",
+    "components/amp/products/list-item",
+    "components/amp/products/list",
+    "components/amp/products/product-options",
+    "components/amp/products/product-view-details",
+    "components/amp/products/product-view",
+    "components/amp/products/ratings",
+    "components/amp/products/reviews",
+    "components/amp/products/styles",
+    "components/amp/products/videos",
+    "components/amp/products/options/date",
+    "components/amp/products/options/input-checkbox",
+    "components/amp/products/options/input-file",
+    "components/amp/products/options/input-numbers",
+    "components/amp/products/options/input-text",
+    "components/amp/products/options/product-list",
+    "components/amp/products/options/set-rectangle",
+    "components/amp/products/options/set-radio",
+    "components/amp/products/options/swatch",
+    "components/amp/products/options/set-select"
   ]
 }

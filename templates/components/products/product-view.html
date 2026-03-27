@@ -174,7 +174,7 @@
                             {{/if}}
                         {{/if}}
                         {{#unless theme_settings.productpage_bulk_price_table}}
-                        {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                        {{#or customer }}
                         <div class="productView-info-bulkPricing">
                             {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
                         </div>
@@ -200,7 +200,7 @@
                     </dl>
 
                     {{#if theme_settings.productpage_bulk_price_table}}
-                    {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                    {{#or customer }}
                         <div class="productView-info-bulkPricing">
                             {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
                         </div>
@@ -336,7 +336,7 @@
                         {{#if product.call_for_price}}
                             <span class="price--call">{{product.call_for_price}}</span>
                         {{else}}
-                            {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                            {{#or customer }}
                                 {{> components/products/price price=product.price schema_org=schema}}
                             {{else}}
                                 {{> components/common/login-for-pricing}}
@@ -410,7 +410,7 @@
                             </div>
                             <p class="alertBox-column alertBox-message"></p>
                         </div>
-                        {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+                        {{#or customer }}
                             <div class="form-action _addToCartVisibility" id="add-to-cart-wrapper" {{#unless product.can_purchase}}style="display:none"{{/unless}}>
                                 <input id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit"
                                     value="{{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}">

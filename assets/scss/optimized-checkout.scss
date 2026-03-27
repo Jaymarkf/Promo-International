@@ -20,7 +20,7 @@
 }
 
 .optimizedCheckout-header {
-    background-color: stencilColor("optimizedCheckout-header-backgroundColor");
+    background-color: stencilColor("aoc_header_footer_bg_color");
     // stylelint-disable-next-line function-url-quotes
     background-image: url(stencilImage("optimizedCheckout-backgroundImage", "optimizedCheckout-backgroundImage-size"));
     background-size: cover;
