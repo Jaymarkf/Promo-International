@@ -578,6 +578,11 @@ li.product.px-0 .card .card-body h4 > a {
     color: #ff1744;
 }
 
+@media (min-width: 801px) {
+    .mobile-brand {
+        display: none;
+    }
+}
 /*brand page -in web page*/
 .brand-container-custom {
     display: flex;
@@ -1179,6 +1184,7 @@ header.header .navPages-container .container .navPages .header-nav {
 .emthemesModez-categoryPage-mainImage {
     background-color: white !important;
 }
+
 @media (min-width: 801px) {
     #quickSearch {
         display: none;
@@ -1186,9 +1192,15 @@ header.header .navPages-container .container .navPages .header-nav {
             display: block;
         }
         @media (min-width: 801px) {
-            position: sticky;
-            inset: 0 !important;
-            top: 200px !important;
+            // position: fixed;
+            // inset: 0 !important;
+            // top: 200px !important;
+            position: fixed !important;
+            transform: scale(0.8) !important;
+            z-index: 9999 !important;
+            top: 70px !important;
+            max-height: 600px;
+            overflow-y: auto;
         }
         .icon-label {
             display: none !important;
@@ -1448,5 +1460,121 @@ footer .form-prefixPostfix.wrap {
 @media (min-width: 801px) {
     .sidebarBlock .emthemesModez-banner-figure img {
         width: 98%;
+    }
+}
+nav.navUser {
+    z-index: 1 !important;
+}
+@media (max-width: 430px) {
+    .header-logo-image-container {
+        width: 165px;
+    }
+    .navUser-item.navUser-item--cart {
+        margin-left: 10px;
+        .emthemesModez-icon-linear-cart {
+            position: relative;
+            right: -8px;
+        }
+    }
+}
+@media (min-width: 801px) {
+    .emthemesModez-header-userSection.emthemesModez-header-userSection--logo-left {
+        z-index: 3;
+        position: relative;
+    }
+    .navPages-action.has-subMenu {
+        i {
+            display: none !important;
+        }
+    }
+    [data-menu] {
+        z-index: 2 !important;
+    }
+    .body .container {
+        z-index: 1;
+    }
+}
+.mobileMenu-toggle {
+    top: 24px;
+}
+@media (max-width: 400px) {
+    .navUser-action--cart {
+        right: -8px;
+    }
+    #cart-preview-dropdown {
+        width: 84vw !important;
+    }
+}
+.homepage--categories-section {
+    margin-bottom: 40px;
+    @media (min-width: 801px) {
+        margin-bottom: 10px;
+    }
+}
+.brand-container-custom {
+    align-items: flex-end !important;
+    justify-content: flex-start !important;
+    img {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .brand-parent.d-flex {
+        width: calc(100% / 3) !important;
+    }
+}
+@media (max-width: 650px) {
+    .brand-parent.d-flex {
+        width: calc(100% / 2) !important;
+    }
+}
+// adjust body magin top of every pages on 800 below screen
+@media (max-width: 800px) {
+    .dropdown--quickSearch.is-open {
+        z-index: 99;
+        top: 0;
+    }
+    .has-activeNavPages {
+        .quickSearchResults {
+            display: none !important;
+        }
+        .emthemesModez-quickSearch--mobileOnly {
+            form._loading::after {
+                display: none !important;
+                background: none !important;
+                background-image: none !important;
+            }
+        }
+    }
+    [template_file="pages-brand"],
+    [template_file="pages-compare"] {
+        .body {
+            margin-top: 140px;
+        }
+    }
+    [template_file="pages-gift-certificate-purchase"],
+    [template_file="pages-auth-create-account"],
+    [template_file="pages-auth-login"],
+    [template_file="pages-page"],
+    [template_file="pages-cart"],
+    [template_file="pages-search"] {
+        .body {
+            margin-top: 80px;
+        }
+    }
+
+    body.has-activeNavPages {
+        .emthemesModez-quickSearch--mobileOnly {
+            display: block !important;
+            z-index: 99 !important;
+            width: 90% !important;
+            margin: 0 auto;
+            margin-top: 14px;
+            background: stencilColor("aoc_header_footer_bg_color") !important;
+        }
+        .navPages-container--bg.is-open {
+            padding-top: 116px !important;
+        }
     }
 }

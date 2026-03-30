@@ -8,7 +8,7 @@
 
         <table class="compareTable">
             <tr class="compareTable-row">
-                <th class="compareTable-heading"></th>
+                <!-- <th class="compareTable-heading"></th> -->
                 {{#each comparisons}}
                 <th class="compareTable-product">
                     <article class="card">
@@ -50,7 +50,7 @@
                 {{/each}}
             </tr>
             <tr class="compareTable-row">
-                <th class="compareTable-heading"></th>
+                <!-- <th class="compareTable-heading"></th> -->
                 {{#each comparisons}}
                     <td class="compareTable-action">
                         {{#or ../customer (unless ../settings.hide_price_from_guests)}}

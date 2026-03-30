@@ -7,7 +7,7 @@
     data-collapsible-enabled-state="closed">
     {{#if name '===' 'Shop By Category'}} Groceries {{else}} {{name}} {{/if}} 
 
-
+<i class="fas fa-caret-down ml-2" aria-hidden="true"></i>
 </a>
 <div class="navPage-subMenu navPage-subMenu--standard" id="navPages-page-{{@index}}" aria-hidden="true" tabindex="-1">
     <ul class="navPage-subMenu-list">
@@ -15,7 +15,7 @@
             <li class="navPage-subMenu-item">
                 {{#if children}}
                     <a
-                        class="navPage-subMenu-action navPages-action has-subMenu"
+                        class="navPage-subMenu-action navPages-action has-subMenu hehe"
                         href="{{url}}"
                         data-instantload
                         data-collapsible="navPages-page-{{../../index}}-{{@index}}"
